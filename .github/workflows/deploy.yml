@@ -20,9 +20,9 @@ jobs:
       - name: Add VPS to known hosts
         run: |
           mkdir -p ~/.ssh
-          echo "88.223.92.155 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCbcjq3AXEP9UJhagnreawnklBquW6toI/w3ugYQKyIgQenU8X5eQrP2hDLUaJ85kJxTfBrWRT66SKK6SvhCI9ZzdaDIccx1vAonFc0zA1cIK/I9kvxQZavKlJ4hmw90OSV0UyN5E14LCP0HbMgVrrUVgaUmnZn81sVMwqVYYulzDsOfIB35VGih0pZtAemKn0dX21GVVPaUyxYbJ84ErXfKnw4kU2FowBtNZA4lSf4ZCXtUwbuNZMXsC9kajW0yfe9GduX+XCdUaJPs+FUKqeSJspC5qzEAQdqZJU26mDjBVfdfg3O9OhM9WDrIxjBEAJ9XnKS/9h5XJ1nBsHBUL3pMH5a12rkZWgTKkdF6Aj9GfsplhgIRKQxfobJGXj3YGdB8plQGu7I4mQueFapDWn//im6KometP/sUAQwif/egPhEvx6R5qVHast3CQyuaT7mYQusKYrNfdYGyT5xJC2tsu8ebTlcOjwSDhU+mgzUF2ixthnF6NB2PG/JaJ9vvIU=" >> ~/.ssh/known_hosts
-          echo "88.223.92.155 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBAq5znc5b3L2On3/Ka8bS3TVlNBGlqc0RseTuNTg/ACAOt7Vxlc/TPOv/f7IQhWGU1KB2KF9Z6ZCvG5pVu5X3MA=" >> ~/.ssh/known_hosts
-          echo "88.223.92.155 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKRKGskYQTVd0Cb0ex33UBbLwMvaVT2bPZDuKFh1UiSD" >> ~/.ssh/known_hosts
+          echo "${{ secrets.VPS_IP }} ssh-rsa ${{ secrets.SSH_RSA_KEY }}" >> ~/.ssh/known_hosts
+          echo "${{ secrets.VPS_IP }} ecdsa-sha2-nistp256 ${{ secrets.SSH_ECDSA_KEY }}" >> ~/.ssh/known_hosts
+          echo "${{ secrets.VPS_IP }} ssh-ed25519 ${{ secrets.SSH_ED25519_KEY }}" >> ~/.ssh/known_hosts
 
       - name: Copy files to VPS
         run: |
