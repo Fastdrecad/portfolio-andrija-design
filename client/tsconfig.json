@@ -15,6 +15,8 @@
     "strictNullChecks": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "outDir": "./dist", // This should output to the dist directory
+    "rootDir": "./src", // Adjust this based on your file structure
 
     /* Linting */
     "strict": true,

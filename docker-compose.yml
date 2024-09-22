@@ -1,0 +1,16 @@
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.client
+    ports:
+      - "4173:4173"
+
+  server:
+    build:
+      context: ./
+      dockerfile: Dockerfile.server # Reference your Dockerfile for server
+    ports:
+      - "5001:5000"
+    depends_on:
+      - client # Optional: Add this if server depends on client service
