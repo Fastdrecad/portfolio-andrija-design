@@ -23,6 +23,7 @@ jobs:
 
       - name: SSH Commands
         run: |
+          ssh-keyscan -H ${{ secrets.VPS_IP }} >> ~/.ssh/known_hosts
           ssh root@${{ secrets.VPS_IP }} << 'EOF'
           cd /var/www/portfolio-andrija-design
           docker-compose down
