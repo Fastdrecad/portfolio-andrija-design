@@ -1,0 +1,261 @@
+.about-section {
+  @include themify($themes) {
+    background-color: themed("background-color");
+    width: 100%;
+
+    &__container {
+      width: 80%;
+      margin: 0 auto 0;
+      position: relative;
+
+      @include media-breakpoint-down(xl) {
+        width: 90%;
+      }
+    }
+
+    &__part {
+      position: relative;
+    }
+
+    &__content {
+      width: 100%;
+      position: relative;
+      margin-top: 25rem;
+      z-index: 0;
+
+      @include media-breakpoint-down(xl) {
+        padding-left: 0;
+        margin-top: 150px;
+      }
+
+      @include media-breakpoint-down(lg) {
+        width: 100%;
+      }
+    }
+
+    &__text {
+      position: relative;
+      color: themed("text-color") !important;
+    }
+
+    &__title {
+      color: inherit !important;
+      font-size: 4.375rem !important;
+      font-weight: $font-weight-thin;
+      line-height: 6rem !important;
+      position: relative;
+      padding-bottom: 50px;
+      margin-bottom: 50px;
+      transform: translateX(-300px);
+      transition: all 1s ease;
+      opacity: 0;
+
+      @include media-breakpoint-down(md) {
+        font-size: 4rem !important;
+      }
+      @include media-breakpoint-down(sm) {
+        font-size: 4rem;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100px;
+        height: 20px;
+        background: url("/images/red-curved-line.png") no-repeat;
+        background-size: 100px auto;
+
+        @include media-breakpoint-down(md) {
+          background-size: 80px auto;
+        }
+      }
+
+      .bold-title {
+        overflow: hidden;
+        display: block;
+        font-weight: 500;
+
+        @include media-breakpoint-down(md) {
+          line-height: 5rem;
+        }
+        @include media-breakpoint-down(sm) {
+          font-size: 4rem;
+        }
+      }
+    }
+
+    &__desc {
+      color: themed("text-color") !important;
+      opacity: 0;
+      transform: translateX(-300px);
+      transition: all 1s ease;
+      position: relative;
+      z-index: 1;
+      font-size: 14px;
+      line-height: 2.6rem;
+
+      @include media-breakpoint-up(md) {
+        font-size: 16px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        font-size: 17px;
+      }
+
+      h2 {
+        color: themed("text-color") !important;
+        margin-bottom: 20px;
+      }
+
+      p {
+        color: inherit;
+        font-size: inherit;
+        line-height: 1.5;
+        padding-bottom: 0.5rem;
+
+        strong {
+          font-size: 1.65rem;
+        }
+
+        a {
+          color: red !important;
+          font-size: inherit !important;
+          font-weight: $font-weight-semibold;
+          text-decoration: underline !important;
+
+          &:hover {
+            color: rgba(201, 15, 15, 0.742) !important;
+          }
+        }
+      }
+
+      ul {
+        font-size: inherit;
+        line-height: inherit;
+        list-style: disc outside;
+
+        li {
+          padding-left: clamp(15px, 6vw, 30px);
+          padding-bottom: 15px;
+          line-height: 1.5;
+          list-style: none;
+          position: relative;
+
+          &::before {
+            content: "";
+            width: clamp(0.6rem, 2vw, 1rem);
+            height: clamp(0.6rem, 2vw, 1rem);
+            position: absolute;
+            background-color: $secondary-color;
+            left: 0;
+            top: 0.55rem;
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+
+    &__fixed-wrapper {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+    }
+
+    &__sticky-parent {
+      position: relative;
+      height: 100%;
+    }
+
+    &__pen-image {
+      background-color: themed("background-color");
+      position: absolute;
+      right: 0;
+      width: 40%;
+      top: -8%;
+
+      img {
+        width: 100%;
+        vertical-align: bottom;
+      }
+
+      @include media-breakpoint-down(md) {
+        position: sticky;
+        margin: auto;
+        top: 250px;
+        width: 100%;
+        opacity: 0.1;
+      }
+    }
+
+    &__signature {
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      width: 50%;
+      height: auto;
+
+      @include media-breakpoint-up(md) {
+        margin: 0 0 0 auto;
+        width: 35%;
+        justify-content: flex-end;
+      }
+
+      svg {
+        color: themed("text-color") !important;
+        width: 100%;
+        height: auto;
+
+        path {
+          stroke: themed("text-color") !important;
+        }
+      }
+    }
+  }
+}
+
+@keyframes curvedRedLine {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100px;
+  }
+}
+
+.about-section__title,
+.about-section__desc {
+  .fade-in {
+    transform: translateX(0) !important ;
+    opacity: 1 !important;
+  }
+}
+
+.fade-in {
+  transform: translateX(0) !important ;
+  opacity: 1 !important;
+
+  &.about-section__title {
+    &::after {
+      animation: curvedRedLine ease-in-out 1s;
+    }
+  }
+}
+
+.autograph__path {
+  opacity: 0;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+
+  .animated & {
+    opacity: 1;
+    animation-name: line;
+  }
+}
+
+@keyframes line {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}

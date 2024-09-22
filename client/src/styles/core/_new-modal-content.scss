@@ -1,0 +1,15 @@
+.new-modal-content {
+  &__fullscreen-wrapper {
+    position: fixed;
+    max-width: 1280px;
+    min-width: 600px;
+    min-height: min(720px, 90vh);
+    width: 85vw;
+    z-index: 5000;
+    background-color: white;
+    overflow: hidden;
+    // border-radius: 20px;
+    margin: auto;
+    // scrollbar-gutter: stable;
+  }
+}

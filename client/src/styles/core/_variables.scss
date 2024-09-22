@@ -1,0 +1,173 @@
+// sass variables
+// responsive breakpoints
+$breakpoints: (
+  xs: 0,
+  sm: 36em,
+  md: 48em,
+  lg: 62em,
+  xl: 75em,
+  xxl: 112.5em
+);
+
+$grid-gap: 20px; // Default grid gap
+$grid-padding: 40px; // Default grid padding
+
+$footerHeight: 220px;
+$footerColor: #909192;
+$navbarHeight: 70px;
+$navbarHeightFixed: 200px;
+$border: 10px solid #535455;
+$animation-timing: 300ms ease-in-out;
+$hero-image-transparent: 2%;
+
+// hamburger menu
+$foreground: #333;
+$bar-width: 25px;
+$bar-height: 2px;
+$hamburger-gap: 5px;
+$hamburger-margin: 10px;
+$animation-timing: 300ms ease-in-out;
+$hamburger-height: calc(($bar-height * 3) + ($hamburger-gap * 2));
+$x-width: calc($hamburger-height * 1.41421356237);
+
+// button color
+$buttonColor: #d4d4d4;
+
+// standard colors
+$blue: #20a8d8;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: rgb(237, 32, 36);
+$white: #fff;
+$orange: #fabb3d;
+$yellow: #ffc107 !default;
+$green: #79c447;
+$gray: #f6f6f6;
+$teal: #20c997 !default;
+$cyan: #67c2ef;
+$black: #303236;
+$zinc-950: #09090b;
+
+$backgroundBlack: #1e1e1e;
+
+$font-family: "Open Sans";
+$font-family-heading: "Open Sans";
+$font-family-body: "Open Sans";
+// $font-family: "NeueMontreal-Regular";
+// $font-family-heading: "NeueMontreal-Regular";
+// $font-family-body: "NeueMontreal-Regular";
+$font-size-xs: 12px;
+$font-size-small: 13px;
+$font-size-medium: 14px;
+$font-size-large: 15px;
+$font-size-x-large: 16px;
+$font-size-xx-large: 18px;
+$font-size-huge: 20px;
+$font-size-x-huge: 24px;
+$font-size-heading-xs: 14px;
+$font-size-heading-small: 16px;
+$font-size-heading-medium: 18px;
+$font-size-heading-large: 20px;
+$font-size-heading-x-large: 24px;
+$font-weight-thin: 200;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Theme colors
+$theme-green: #00acac;
+$theme-gray: #f8f9fa;
+$theme-bright-gray: #eceef3;
+$theme-dark-gray: #cccccc;
+$theme-athens-gray: #f1f1f2;
+$theme-blue: #2979ff;
+$theme-purple: #727cb6;
+$theme-white: #f6f7f8;
+$theme-light-white: #f0f0f0;
+$theme-light-blue-white: #e8f0fe;
+
+$theme-black: #222;
+$theme-light-black: #24292e;
+$theme-orange: #e4853f;
+$theme-yellow: #ffdd57;
+$theme-light-yellow: #fbeeca;
+$theme-pink: #ff3860;
+$theme-light-blue: #4a68aa;
+$theme-red: #b30606;
+
+$primary-color: #303236;
+$primary-bg: $black;
+
+$secondary-color: rgb(237, 32, 36);
+$secondary-bg: #f8f9fa;
+
+$danger-color: #fb0000;
+$danger-bg: #fb0000;
+$danger-hover-bg: #c3081a;
+
+$dark-bg: $theme-black;
+$dark-hover-bg: $black;
+
+$default-color: #758696;
+$default-bg: #758696;
+
+$logo-opacity: 0.08;
+$logo-opacity-white: 0.5;
+
+// layout variables
+
+$btn-bg: $black;
+$btn-bg-hover: $primary-bg;
+$font-color: $black;
+$font-light-color: #00000026;
+$font-custom-color: $theme-black;
+$font-subtext-color: $gray;
+$font-custom-hover-color: $theme-blue;
+$font-hover-color: $primary-color;
+$font-focus-color: $black;
+$font-heading-color: $black;
+$border-color-default: #e4e6eb;
+$border-color-primary: $theme-bright-gray;
+$border-hover-color: #ced9de;
+$border-focus-color: $black;
+$separator-color: #e6e5ea;
+$dark-overflow-bg: #0006;
+$transparent-bg: #3232321f;
+$transparent-gray-bg: #f1f3f4f5;
+$transparent-white-bg: #f1f1f170;
+$hover-bg: #e3e8ea;
+$badge: $red;
+$stars: #adb5bd;
+$stars-active: #ffe102;
+$disabled-bg: #d9dbdea1;
+
+$outline-color: #7aacfe;
+$validation-color: #dc3545;
+$outline-box-shadow: 0 0 0 3px #159ce466;
+$box-shadow: 0 0 10px 0 #e6e5ea;
+$box-shadow-custom: 0 10px 30px -10px #020c1bb3;
+$box-shadow-primary: 0 1px 2px #00000033;
+$box-shadow-secondary: 0 0 2px #00000033;
+$box-shadow-navigation: 0 1px 1px 0 rgba(65, 69, 73, 0.3),
+  0 1px 3px 1px rgba(65, 69, 73, 0.15);
+$border-radius-default: 0px;
+$border-radius-primary: 5px;
+$border-radius-circle: 50px;
+$line-height: 1.5;
+$letter-spacing: 0.5px;
+$border-default: 1px solid $black;
+$border-primary: 1px solid $border-color-primary;
+$layout-max-width: 1200px;
+$layout-transition-speed: 0.3s !default;
+$layout-transition-higher-speed: 0.6s !default;
+$backdrop-filter: blur(10px);
+
+// icons
+$pinterest: url("/images/social-icons/pinterest.svg");
+$instagram: url("/images/social-icons/instagram.svg");
+$facebook: url("/images/social-icons/facebook.svg");
+$close: url("/images/close.svg");
+$name: url("/andrija-signature.svg");

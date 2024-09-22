@@ -1,0 +1,15 @@
+.about-page {
+  @include themify($themes) {
+    position: relative;
+    flex: 1 1 0%;
+    background-color: themed("background-color");
+    color: themed("text-color");
+    margin-top: $navbarHeight;
+    display: flex;
+    flex-direction: column;
+
+    @include media-breakpoint-up(xl) {
+      margin-top: 200px;
+    }
+  }
+}

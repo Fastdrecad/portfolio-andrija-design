@@ -1,0 +1,177 @@
+.testimonial-list {
+  @include themify($themes) {
+    width: 100%;
+    position: relative;
+    padding-bottom: clamp(100px, 13.5vw, 200px);
+
+    &__btn {
+      position: absolute;
+      top: 15%;
+      transform: translateY(0);
+      outline: none;
+      background-color: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+      z-index: 99;
+
+      @include media-breakpoint-down(sm) {
+        top: 20%;
+      }
+
+      &--left {
+        left: 4.25rem;
+
+        @include media-breakpoint-down(md) {
+          left: 0;
+        }
+      }
+
+      &--right {
+        right: 4.25rem;
+
+        @include media-breakpoint-down(md) {
+          right: 0;
+        }
+      }
+    }
+
+    &__arrow {
+      font-size: 8rem !important;
+
+      @include media-breakpoint-down(md) {
+        font-size: 5rem !important;
+      }
+    }
+
+    &__container-list {
+      height: 100%;
+      display: flex;
+      list-style: none;
+    }
+
+    &__slide {
+      width: 100%;
+      height: 100%;
+      flex-shrink: 0;
+
+      .container-items {
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+        .content-items {
+          min-height: 400px;
+          width: 50%;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          color: $white !important;
+          padding: 2.5rem 4.15rem 0;
+
+          @include media-breakpoint-down(lg) {
+            min-height: 350px;
+            width: 70%;
+          }
+
+          @include media-breakpoint-down(md) {
+            min-height: 350px;
+            padding: 3rem 0 0;
+          }
+
+          @include media-breakpoint-down(sm) {
+            min-height: 400px;
+          }
+
+          &::before {
+            content: "";
+            position: absolute;
+            background-image: url("/images/quote-start.png");
+            background-repeat: no-repeat;
+            background-size: 4.15rem auto;
+            width: 4.15rem;
+            height: 3.65rem;
+            left: -7.5rem;
+
+            @include media-breakpoint-down(lg) {
+              background-size: 3rem auto;
+              left: -1.5rem;
+            }
+
+            @include media-breakpoint-down(md) {
+              left: -4rem;
+            }
+          }
+
+          &::after {
+            content: "";
+            background-image: url("/images/quote-start.png");
+            position: absolute;
+            background-repeat: no-repeat;
+            transform: rotateZ(180deg);
+            background-size: 4.15rem auto;
+            width: 4.15rem;
+            height: 3.65rem;
+            right: -7.5rem;
+
+            @include media-breakpoint-down(lg) {
+              background-size: 3rem auto;
+              right: -1.5rem;
+            }
+
+            @include media-breakpoint-down(md) {
+              right: -4rem;
+            }
+          }
+
+          em {
+            position: relative;
+            p {
+              font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+              text-align: center;
+              color: $white;
+            }
+          }
+
+          .person {
+            text-align: center;
+
+            h2 {
+              color: $white !important;
+              font-size: clamp(2rem, 1.9vw, 2.35rem) !important;
+              padding-bottom: clamp(1.2rem, 1.9vw, 1.25rem);
+            }
+
+            h4 {
+              color: $white !important;
+              font-size: clamp(1.2rem, 1.8vw, 1.8rem);
+            }
+          }
+        }
+      }
+    }
+
+    &__dots-container {
+      position: relative;
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      margin-top: 4.15rem;
+    }
+
+    &__dot {
+      margin: 0 0.65rem;
+      cursor: pointer;
+      color: $white;
+      font-size: clamp(8px, 0.9vw, 14px);
+
+      &--active {
+        color: red;
+      }
+    }
+  }
+}

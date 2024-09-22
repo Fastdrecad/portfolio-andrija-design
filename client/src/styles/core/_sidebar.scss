@@ -1,0 +1,78 @@
+.sidebar-container {
+  @include themify($themes) {
+    .sidebar {
+      height: 100vh;
+      height: calc(100dvh - $navbarHeight);
+      width: 100vw;
+      position: fixed;
+      top: $navbarHeight;
+      background-color: themed("background-color");
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      flex-direction: column;
+      transform: translateX(-100%);
+      transition: all $animation-timing;
+      z-index: 7;
+
+      @include media-breakpoint-up(md) {
+        display: none;
+      }
+
+      @include media-breakpoint-down(sm) {
+        gap: 50px;
+      }
+
+      &--show {
+        transform: translateX(0);
+      }
+
+      &__links {
+        margin-bottom: 10px;
+        list-style: none;
+        width: 100%;
+        transition: background-color 0.3s ease;
+
+        @include media-breakpoint-down(sm) {
+          margin-top: -50px;
+        }
+
+        .sidebar__link {
+          padding: 1rem;
+          transition: background-color 0.3s ease;
+        }
+
+        .sidebar__link--active {
+          background-color: #f0f0f0;
+          font-weight: bold !important;
+          color: red !important;
+        }
+      }
+
+      &__links a {
+        text-decoration: none;
+        display: block;
+        font-weight: 600;
+        text-align: center;
+        font-size: 20px;
+        text-transform: capitalize;
+        padding: 10px 15px;
+        color: themed("text-color") !important;
+        transition: $animation-timing ease-in-out;
+        letter-spacing: 1px;
+
+        &:hover {
+          background: themed("text-color-soft");
+          color: themed("background-color");
+        }
+
+        &:active {
+          background: #f6f6f6;
+          color: white !important;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,347 @@
+.hero {
+  @include themify($themes) {
+    background-color: themed("background-color");
+    position: relative;
+    margin-top: $navbarHeight;
+    height: calc(var(--vh, 1vh) * 100 - $navbarHeight);
+
+    @include media-breakpoint-up(xl) {
+      // height: calc(100dvh - $navbarHeightFixed);
+      height: calc(var(--vh, 1vh) * 100 - $navbarHeightFixed);
+      margin-top: $navbarHeightFixed;
+    }
+
+    &__wrapper {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: auto;
+      top: calc(-1 * calc($hero-image-transparent/2));
+    }
+
+    &__controller {
+      position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__content {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      z-index: 8;
+      flex: 1;
+    }
+
+    // todo: delete this .image-tras once you complete the task
+
+    .image-tras {
+      background-color: red;
+      height: $hero-image-transparent;
+    }
+
+    &__image {
+      height: 100%;
+      max-width: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: left;
+
+      @include media-breakpoint-down(md) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top left;
+      }
+    }
+
+    &__heading {
+      .heading-title {
+        color: themed("text-color") !important;
+        text-transform: capitalize;
+        font-size: clamp(4rem, 4.7vw, 6rem) !important;
+        font-weight: 300;
+        position: relative;
+        display: inline-block;
+        text-align: center;
+
+        @include media-breakpoint-up(xl) {
+          color: $font-color !important;
+        }
+
+        strong {
+          color: inherit;
+          font-size: inherit;
+          font-weight: 500;
+        }
+      }
+
+      .red-line-wrapper {
+        display: flex;
+        margin-top: 1.25rem;
+        margin-bottom: 4rem;
+        justify-content: center;
+
+        @include media-breakpoint-up(lg) {
+          margin-top: 2.25rem;
+        }
+
+        svg {
+          width: clamp(4em, 8vw, 8em);
+          height: auto;
+        }
+      }
+    }
+
+    &__text {
+      flex: 1;
+      z-index: 6;
+
+      @include media-breakpoint-up(xl) {
+        z-index: 8;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        width: 40vw;
+        height: 100%;
+        color: #303236;
+        align-self: flex-end;
+        padding-right: 5vw;
+      }
+
+      &-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: all 1s ease;
+        height: 100%;
+
+        p {
+          font-size: clamp(2rem, 2.9vw, 2.9rem);
+          font-weight: 500;
+          text-align: center;
+
+          @include media-breakpoint-down(lg) {
+            text-align: center;
+          }
+
+          span {
+            font-weight: inherit;
+            font-size: inherit;
+            color: $secondary-color;
+            display: inline-block;
+          }
+
+          @keyframes blink {
+            50% {
+              opacity: 1;
+            }
+            100% {
+              opacity: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .scroll-to-web {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      transform: rotate(90deg);
+      transform-origin: center;
+      padding: 0;
+      margin: 0;
+      position: absolute;
+      animation: bounce ease-in-out 1.2s infinite;
+      transition: all 2.1s ease-in;
+      right: -40px;
+      bottom: 120px;
+      display: block;
+      z-index: 6;
+
+      @include media-breakpoint-down(md) {
+        display: none;
+        z-index: 6;
+        right: -20px;
+        bottom: 120px;
+      }
+
+      a {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-decoration: none;
+        color: themed("text-color") !important;
+        transition: all 1.5s ease;
+
+        &:hover {
+          .scroll-to-web-arrow-wrapper {
+            transition: all 0.3s ease-in-out;
+
+            svg {
+              animation: bounce-2 1s ease-in-out infinite alternate;
+            }
+          }
+        }
+      }
+
+      .scroll-to-web-text {
+        margin-right: 10px;
+
+        p {
+          white-space: nowrap;
+          font-size: 14px;
+          color: themed("text-color") !important;
+          margin: 0;
+          padding: 0;
+          transform: scale(-1);
+        }
+      }
+
+      .scroll-to-web-arrow-wrapper {
+        border-radius: 50%;
+        border: 1px solid themed("text-color") !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+
+        .scroll-to-web-arrow {
+          font-size: 25px;
+          color: themed("text-color") !important;
+          rotate: 270deg;
+        }
+      }
+    }
+  }
+}
+
+@keyframes bounce {
+  0% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 15px;
+  }
+  100% {
+    translate: 0 0;
+  }
+}
+
+@keyframes bounce-2 {
+  50% {
+    transform: translateY(35%);
+    scale: 1.2;
+  }
+  100% {
+    opacity: 0.4;
+    transform: translateY(-65%);
+    scale: 0.85;
+  }
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  border: 0 !important;
+}
+
+@keyframes arrowAnimation {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(20px);
+    opacity: 1;
+  }
+}
+
+.side-in {
+  transform: translateX(0) !important;
+  opacity: 1 !important;
+
+  h1 {
+    &::after {
+      animation: curvedRedLine ease-in-out 1s;
+      animation-delay: 0.5s;
+    }
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .hero__wrapper {
+    top: calc(-1 * $hero-image-transparent) !important;
+  }
+
+  .hero__content {
+    &::before {
+      content: "";
+      position: absolute;
+      top: $hero-image-transparent;
+      left: 0;
+      width: 100%;
+      height: calc(100% - $hero-image-transparent);
+      background: linear-gradient(
+        to right,
+
+        rgba(255, 255, 255, 0) 33%,
+        rgba(255, 255, 255, 0.7) 70%,
+        rgba(255, 255, 255, 1) 100%
+      );
+      z-index: 7;
+    }
+  }
+
+  .hero__text {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 40vw;
+    height: 100%;
+    color: #303236;
+    z-index: 8 !important;
+    align-self: flex-end;
+    padding-right: 18vw;
+  }
+
+  .hero-text-content {
+    margin: 0 auto !important;
+    width: 100% !important;
+    justify-content: center;
+  }
+
+  .scroll-to-web {
+    z-index: 8 !important;
+  }
+}
+
+@media screen and (min-aspect-ratio: 9/10) and (max-aspect-ratio: 10/9) and (orientation: landscape) {
+  .hero__wrapper {
+    top: calc(-1 * $hero-image-transparent) !important;
+  }
+
+  .hero__text {
+    z-index: 8 !important;
+  }
+}

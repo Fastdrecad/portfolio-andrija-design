@@ -1,0 +1,39 @@
+{
+  "name": "andrija-design",
+  "version": "1.0.0",
+  "description": "Portfolio Website",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "server": "nodemon server/index.ts",
+    "build": "tsc && npm install --prefix client && npm run build --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "watch-ts": "ts-node-dev --respawn --transpile-only server/index.ts",
+    "client": "cd client && npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.5.5",
+    "@types/nodemailer": "^6.4.16",
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.21.0",
+    "imap": "^0.8.19",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.15",
+    "sharp": "^0.33.2",
+    "typescript": "^5.6.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/imap": "^0.8.40",
+    "chalk": "^4.1.2",
+    "concurrently": "^7.6.0",
+    "ts-node-dev": "^2.0.0"
+  }
+}

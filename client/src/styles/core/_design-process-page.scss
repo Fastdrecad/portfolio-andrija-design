@@ -1,0 +1,383 @@
+.design-process {
+  @include themify($themes) {
+    flex: 1 1 0%;
+    min-height: calc(100vh - $footerHeight - $navbarHeight);
+    width: 100%;
+    position: relative;
+    margin-top: $navbarHeight;
+    background-color: themed("background-color");
+    overflow: hidden;
+
+    @include media-breakpoint-up(xl) {
+      margin-top: 200px;
+    }
+
+    &__container {
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    &__heading {
+      width: 100%;
+      text-align: center;
+      padding-top: 125px;
+    }
+
+    &__section-title {
+      position: relative;
+      margin: 0 auto;
+      color: themed("text-color") !important;
+      line-height: 1.7;
+
+      @include media-breakpoint-down(lg) {
+        font-size: 4rem;
+      }
+
+      @include media-breakpoint-down(md) {
+        font-size: 3rem;
+        line-height: 5rem;
+      }
+
+      @include media-breakpoint-down(sm) {
+        font-size: 2.5rem;
+        line-height: 3rem;
+      }
+    }
+
+    &__title {
+      color: inherit !important;
+      font-size: clamp(2.75rem, 4.25vw, 4.25rem) !important;
+      position: relative;
+      font-weight: $font-weight-thin;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      padding-bottom: 50px;
+      transition: all 1s ease;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        margin-left: -50px;
+        background: url("/images/red-curved-line.png") no-repeat;
+        width: 100px;
+        height: 20px;
+        background-size: 100px auto;
+        mix-blend-mode: darken;
+        animation: curvedRedLine ease-in-out 1s;
+
+        @include media-breakpoint-down(lg) {
+          background-size: 90px auto;
+        }
+
+        @include media-breakpoint-down(md) {
+          background-size: 80px auto;
+          margin-left: -40px;
+        }
+      }
+
+      strong {
+        display: block;
+        text-transform: initial;
+        font-weight: $font-weight-medium;
+        font-size: clamp(1.95rem, 4.25vw, 4.25rem) !important;
+      }
+    }
+
+    &__sub-title {
+      color: themed("text-color") !important;
+      font-size: 2.5rem !important;
+      font-weight: normal;
+      padding-top: 80px;
+
+      &--highlight {
+        font-size: inherit;
+        display: inline;
+        font-weight: bold;
+      }
+    }
+
+    .design-process-part {
+      position: relative;
+      padding: 250px 0;
+      margin-top: 30px;
+      background-image: url("/images/testimonial-bg.jpg");
+      background-repeat: repeat;
+      clip-path: polygon(
+        0 calc(100% - (100% / tan(46.5deg))),
+        100% 0,
+        100% 100%,
+        0 100%
+      );
+
+      @include media-breakpoint-down(md) {
+        clip-path: polygon(
+          0 calc(100% - (100% / tan(45.6deg))),
+          100% 0,
+          100% 100%,
+          0 100%
+        );
+
+        padding: 10rem 0;
+      }
+
+      &::after {
+        content: "";
+        height: 90px;
+        width: 100%;
+        background: #313131;
+        position: absolute;
+        left: 0;
+        top: 1%;
+        transform: skewY(354deg);
+        z-index: 3;
+
+        @include media-breakpoint-down(md) {
+          top: -1%;
+        }
+      }
+
+      .design-process-content {
+        max-width: 1500px;
+        margin: 0 auto;
+        padding: 0;
+        position: relative;
+
+        @include media-breakpoint-down(md) {
+          padding: 20px;
+        }
+
+        .design-process-part-inner {
+          width: 100%;
+          padding: 70px 0;
+          position: relative;
+
+          .design-process-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: row;
+            margin-bottom: 4.15rem;
+
+            @include media-breakpoint-down(md) {
+              flex-direction: column;
+              align-items: flex-start;
+              margin-bottom: 0;
+            }
+
+            .design-process-img {
+              width: 30%;
+              position: relative;
+
+              .design-process-image-container {
+                width: 270px;
+                height: 270px;
+                border-radius: 50%;
+                border: $border;
+                margin: 0 auto;
+                overflow: hidden;
+
+                img {
+                  width: 100%;
+                  display: block;
+                }
+
+                @include media-breakpoint-down(xl) {
+                  width: 200px;
+                  height: 200px;
+                }
+              }
+
+              &::before {
+                content: "";
+                position: absolute;
+                background: url("/images/design-process-arrow.png") no-repeat;
+                width: 37px;
+                height: 140px;
+                right: 50px;
+                top: 230px;
+
+                @include media-breakpoint-down(xl) {
+                  top: 160px;
+                  right: 20px;
+                }
+              }
+
+              @include media-breakpoint-down(lg) {
+                margin: 0;
+              }
+
+              @include media-breakpoint-down(md) {
+                display: none;
+              }
+            }
+
+            .process-num {
+              width: 35%;
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              color: $footerColor;
+
+              .num {
+                position: relative;
+                left: 50px;
+                font-size: 17rem;
+                font-weight: 900;
+
+                @include media-breakpoint-down(md) {
+                  font-size: 10rem;
+                  left: 0;
+                }
+              }
+
+              h4 {
+                color: $white !important;
+                text-transform: capitalize;
+                font-size: 5rem !important;
+                font-weight: normal;
+                z-index: 1;
+                white-space: nowrap;
+
+                @include media-breakpoint-down(xl) {
+                  font-size: 3.5rem !important;
+                }
+
+                @include media-breakpoint-down(md) {
+                  margin-left: -40px;
+                }
+              }
+
+              @include media-breakpoint-down(md) {
+                width: 100%;
+              }
+            }
+
+            .process-desc {
+              width: 35%;
+              color: #c5c7c0;
+              user-select: none;
+
+              p {
+                color: inherit;
+                padding-right: 4.15rem;
+                font-size: 1.5rem;
+                line-height: 2.25rem;
+                font-weight: $font-weight-thin;
+
+                @include media-breakpoint-down(xl) {
+                  padding: 0;
+                }
+              }
+
+              @include media-breakpoint-down(md) {
+                width: 100%;
+              }
+            }
+
+            &:nth-child(even) {
+              flex-direction: row-reverse;
+              align-items: center;
+              justify-content: start;
+
+              @include media-breakpoint-down(md) {
+                flex-direction: column;
+                align-items: flex-end;
+              }
+
+              .design-process-img {
+                &::before {
+                  transform: rotateY(180deg);
+                  right: auto;
+                  left: 30px;
+                }
+              }
+
+              .process-num {
+                flex-direction: row-reverse;
+                text-align: right;
+
+                .num {
+                  left: auto;
+                  right: 50px;
+
+                  @include media-breakpoint-down(md) {
+                    right: 0;
+                  }
+                }
+
+                h4 {
+                  @include media-breakpoint-down(md) {
+                    margin-left: 0;
+                    margin-right: -40px;
+                  }
+                }
+              }
+
+              .process-desc {
+                text-align: right;
+
+                p {
+                  font-size: 1.5rem;
+                  padding-right: 0;
+                  padding-left: 50px;
+                  line-height: 2.25rem;
+                  font-weight: $font-weight-thin;
+
+                  @include media-breakpoint-down(xl) {
+                    padding: 0;
+                  }
+                }
+              }
+
+              &::before {
+                transform: rotateY(180deg);
+              }
+            }
+
+            &:last-child {
+              .design-process-img {
+                &::before {
+                  display: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @keyframes curvedRedLine {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100px;
+    }
+  }
+
+  .design-process-img {
+    &::before {
+      opacity: 0;
+    }
+  }
+
+  .animate-arrow {
+    &::before {
+      opacity: 1 !important;
+      animation: arrowMove 3s;
+    }
+  }
+
+  @keyframes arrowMove {
+    from {
+      height: 0;
+    }
+    to {
+      height: 140px;
+    }
+  }
+}

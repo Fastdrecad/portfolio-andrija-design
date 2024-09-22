@@ -1,0 +1,9 @@
+.home-sections {
+  @include themify($themes) {
+    width: 100%;
+    position: relative;
+    color: themed(text-color);
+    background-color: themed("background-color");
+    overflow: hidden;
+  }
+}

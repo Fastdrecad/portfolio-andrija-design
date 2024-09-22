@@ -1,0 +1,53 @@
+#scroll-to-top {
+  padding: 6px;
+  box-sizing: border-box;
+  appearance: none;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 40px 40px $red inset, 0 0 0 0 $red;
+  border-color: $buttonColor;
+  border: 2px;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 150ms ease-in-out;
+  z-index: 1;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+
+  @include media-breakpoint-up(md) {
+    width: 55px;
+    height: 55px;
+    bottom: 60px;
+    right: 60px;
+  }
+
+  .icon-position {
+    font-size: 45px;
+    color: $white;
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+
+  &:hover {
+    outline: none;
+    border-color: $secondary-color;
+    box-shadow: 0 0 10px 0 $buttonColor inset, 0 0 10px 4px $buttonColor;
+    background-color: white;
+  }
+}
+
+#scroll-to-top.show {
+  transition: all 150ms ease-in-out;
+  opacity: 1;
+  visibility: visible;
+}

@@ -1,0 +1,64 @@
+.footer {
+  @include themify($themes) {
+    width: 100%;
+    display: flex;
+    margin-top: auto;
+    position: relative;
+    height: $footerHeight;
+    background-color: themed("header-footer-background") !important;
+    overflow: hidden;
+
+    &__ellipses {
+      width: 100%;
+      height: 120px;
+      background-color: rgba(0, 0, 0, 0);
+      position: absolute;
+      left: 50%;
+      top: -63%;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.5);
+
+      &::after {
+        content: "";
+        width: 105%;
+        height: 300px;
+        background-color: themed("background-color");
+        position: absolute;
+        left: 50%;
+        top: -180px;
+        transform: translateX(-50%);
+      }
+    }
+
+    &__container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 2rem auto;
+    }
+
+    &__copyright {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: $font-weight-medium;
+      font-size: clamp(12px, 3vw, 14px);
+
+      a {
+        font-size: inherit !important;
+        font-weight: $font-weight-semibold !important;
+        letter-spacing: 0.5px !important;
+
+        p {
+          color: themed("text-color") !important;
+          transition: all 0.3s ease;
+
+          &:hover {
+            color: $red !important;
+          }
+        }
+      }
+    }
+  }
+}

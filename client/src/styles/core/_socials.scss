@@ -1,0 +1,31 @@
+.social-icons {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+
+  > a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    font-size: clamp(20px, 4vw, 24px);
+    width: 42px;
+    height: 42px;
+    color: $footerColor !important;
+    transition: all 0.3s ease;
+    border: 1.5px solid $footerColor !important;
+    border-radius: 50%;
+
+    &:hover {
+      color: $secondary-color !important;
+      background-color: #b4b5b6;
+      border: 1.5px solid $black;
+    }
+
+    .icon-style {
+      display: flex;
+    }
+  }
+}

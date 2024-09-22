@@ -1,0 +1,7 @@
+.dot-load {
+  width: clamp(4px, 1vw, 6px);
+  height: clamp(4px, 1vw, 6px);
+  border-radius: 50%;
+  background-color: $white;
+  margin: 0 clamp(3px, 1vw, 5px);
+}

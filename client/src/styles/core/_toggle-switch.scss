@@ -1,0 +1,23 @@
+.toggle-switch {
+  @include themify($themes) {
+    width: 38px;
+    height: 19px;
+    border: 1.5px solid themed('text-color');
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1px;
+    position: relative;
+    cursor: pointer;
+    background-color: themed('toggle-background');
+
+    &__ball {
+      width: 15px;
+      height: 15px;
+      background-color: themed('text-color');
+      position: absolute;
+      border-radius: 50%;
+    }
+  }
+}

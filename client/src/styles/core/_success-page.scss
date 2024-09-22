@@ -1,0 +1,61 @@
+.success {
+  position: relative;
+  flex: 1 1 0%;
+  height: calc(100vh - $footerHeight);
+  background-color: rgb(47, 47, 47);
+  overflow: hidden;
+
+  &__wrapper {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 25vh;
+  }
+
+  &__message {
+    border-radius: 7px;
+    padding: 1.5rem 6rem 1.5rem 1.5rem;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+  }
+
+  &__title {
+    margin-bottom: 1rem;
+    font-size: 2rem !important;
+
+    p {
+      margin-bottom: 30px;
+      font-size: 1.25rem;
+    }
+  }
+
+  &__back-to {
+    color: gray;
+    font-weight: 600;
+    font-size: 1.5rem;
+    transition: all 0.3s ease !important;
+    margin-top: 30px;
+
+    span {
+      text-decoration: none;
+      transition: all 0.3s ease !important;
+      font-size: 1.5rem;
+    }
+
+    &:hover {
+      color: $red !important;
+    }
+
+    &:hover span {
+      color: $red !important;
+    }
+  }
+}

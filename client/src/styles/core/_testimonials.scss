@@ -1,0 +1,118 @@
+.testimonials {
+  @include themify($themes) {
+    position: relative;
+    background-color: themed("background-color");
+    overflow-x: hidden;
+
+    &__bg {
+      position: relative;
+      background-image: url("/images/testimonial-bg.jpg");
+      background-repeat: repeat;
+      clip-path: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - (100% / tan(83deg))),
+        0 100%
+      );
+
+      @include media-breakpoint-down(sm) {
+        clip-path: polygon(
+          0 0,
+          100% 0,
+          100% calc(100% - (100% / tan(87deg))),
+          0 100%
+        );
+      }
+
+      &::after {
+        content: "";
+        height: 60px;
+        width: 100%;
+        background: #313131;
+        position: absolute;
+        left: 0;
+        bottom: calc(100vw * 0.0225);
+        transform: skewY(356.75deg);
+        z-index: 3;
+      }
+    }
+
+    &__header {
+      display: flex;
+      flex-direction: column;
+
+      h2 {
+        color: $white !important;
+        font-size: clamp(2rem, 9.2vw, 4rem) !important;
+        position: relative;
+        text-align: center;
+        padding-top: clamp(2rem, 10vw, 10rem);
+        font-weight: normal;
+
+        @include media-breakpoint-down(md) {
+          margin-bottom: 0;
+        }
+      }
+
+      .red-line-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 1.25rem;
+        margin-bottom: 10rem;
+
+        @include media-breakpoint-up(lg) {
+          margin-top: 2.25rem;
+          margin-bottom: 15rem;
+        }
+
+        svg {
+          width: clamp(4em, 8vw, 8em);
+          height: auto;
+        }
+      }
+    }
+
+    &__slider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      transition: all 0.5s ease-out;
+    }
+
+    &__bottom-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin: 20rem 0 3rem;
+      color: themed("text-color");
+
+      h3 {
+        font-size: clamp(14px, 2vw, 2rem) !important;
+        font-weight: $font-weight-normal;
+        text-align: center;
+        padding: 0 10px;
+        color: themed("text-color") !important;
+
+        .red-line-wrapper-2 {
+          font-size: 13px !important;
+          display: flex;
+          justify-content: center;
+          margin-top: 1.25rem;
+          margin-bottom: 10rem;
+
+          @include media-breakpoint-up(lg) {
+            margin-top: 2.25rem;
+            margin-bottom: 15rem;
+          }
+
+          svg {
+            width: clamp(4em, 8vw, 8em) !important;
+            height: auto;
+          }
+        }
+      }
+    }
+  }
+}

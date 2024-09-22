@@ -1,0 +1,25 @@
+.portfolio-list {
+  white-space: nowrap;
+  font-size: 14px;
+  margin: 10px 3px;
+  padding: 5px 15px;
+  border-radius: 30px;
+  font-weight: 500;
+  text-transform: capitalize;
+  cursor: pointer;
+  background-color: #e4e4e4;
+
+  @include media-breakpoint-down(md) {
+    margin: 5px 5px;
+    padding: 5px 15px;
+  }
+
+  &:hover {
+    background-color: rgb(193, 193, 193);
+  }
+
+  &.active {
+    background-color: $primary-color;
+    color: $white;
+  }
+}
