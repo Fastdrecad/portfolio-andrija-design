@@ -59,9 +59,11 @@
       height: 100%;
       width: 100%;
       z-index: 8;
-      flex: 1;
       user-select: none;
-      background-color: #f6f6f6;
+
+      @include media-breakpoint-up(md) {
+        left: 0;
+      }
     }
 
     // todo: delete this .image-tras once you complete the task
@@ -118,7 +120,7 @@
     }
 
     &__text {
-      flex: 1;
+      min-height: 50vh;
       z-index: 6;
 
       @include media-breakpoint-up(xl) {
@@ -176,10 +178,6 @@
     }
 
     .scroll-to-web {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
       transform: rotate(90deg);
       transform-origin: center;
       padding: 0;
@@ -187,17 +185,25 @@
       position: absolute;
       animation: bounce ease-in-out 1.2s infinite;
       transition: all 2.1s ease-in;
-      right: -20px;
-      bottom: 120px;
       display: block;
       z-index: 6;
+      height: fit-content;
+      user-select: none;
+      right: -20px;
+      bottom: 120px;
 
       @include media-breakpoint-down(md) {
-        display: none;
+        left: 50%;
+        transform: translate(-50%) rotate(90deg);
+        bottom: -5%;
+      }
+      @include media-breakpoint-up(lg) {
+        right: -20px !important;
+        bottom: 120px !important;
       }
 
       a {
-        display: flex;
+        display: inline-flex;
         flex-direction: row;
         align-items: center;
         text-decoration: none;
@@ -217,6 +223,10 @@
 
       .scroll-to-web-text {
         margin-right: 10px;
+
+        @include media-breakpoint-down(md) {
+          display: none;
+        }
 
         p {
           white-space: nowrap;
@@ -333,5 +343,7 @@
 
   .scroll-to-web {
     z-index: 8 !important;
+    right: -40px !important;
+    bottom: 100px !important;
   }
 }
