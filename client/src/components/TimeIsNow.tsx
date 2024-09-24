@@ -74,9 +74,7 @@ const TimeIsNow: React.FC = () => {
             </div>
           </motion.div>
         </div>
-        <p>
-          Take the first step toward success by scheduling free consultation.
-        </p>
+        <p>Get in Touch</p>
         <motion.div
           ref={buttonRef}
           initial={{ y: 100, opacity: 0 }}

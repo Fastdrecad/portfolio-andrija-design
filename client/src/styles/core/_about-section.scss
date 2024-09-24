@@ -119,11 +119,35 @@
           font-size: 1.65rem;
         }
 
+        .underline {
+          display: inline-block;
+          position: relative;
+          text-decoration: none;
+
+          &::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            border-radius: 5px;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: currentcolor;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+          }
+
+          &:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+          }
+        }
+
         a {
-          color: red !important;
+          color: $red !important;
           font-size: inherit !important;
           font-weight: $font-weight-semibold;
-          text-decoration: underline !important;
 
           &:hover {
             color: rgba(201, 15, 15, 0.742) !important;

@@ -3,12 +3,35 @@
     background-color: themed("background-color");
     position: relative;
     margin-top: $navbarHeight;
-    height: calc(var(--vh, 1vh) * 100 - $navbarHeight);
+    min-height: calc(var(--vh, 1vh) * 100 - $navbarHeight);
+    width: 100vw;
 
     @include media-breakpoint-up(xl) {
-      // height: calc(100dvh - $navbarHeightFixed);
-      height: calc(var(--vh, 1vh) * 100 - $navbarHeightFixed);
+      min-height: calc(100vh - $navbarHeightFixed);
       margin-top: $navbarHeightFixed;
+    }
+
+    &__content {
+      &::before {
+        content: "";
+        position: absolute;
+        top: $hero-image-transparent;
+        left: 0;
+        width: 100%;
+        min-height: calc(100% - $hero-image-transparent);
+        background: linear-gradient(
+          to right,
+
+          rgba(255, 255, 255, 0) 53%,
+          rgba(255, 255, 255, 0.7) 90%,
+          rgba(255, 255, 255, 1) 100%
+        );
+        z-index: 7;
+
+        @include media-breakpoint-down(md) {
+          background: transparent;
+        }
+      }
     }
 
     &__wrapper {
@@ -18,6 +41,10 @@
       width: 100%;
       height: auto;
       top: calc(-1 * calc($hero-image-transparent/2));
+
+      @include media-breakpoint-up(xl) {
+        top: calc(-1 * calc($hero-image-transparent));
+      }
     }
 
     &__controller {
@@ -33,31 +60,23 @@
       width: 100%;
       z-index: 8;
       flex: 1;
+      user-select: none;
+      background-color: #f6f6f6;
     }
 
     // todo: delete this .image-tras once you complete the task
-
     .image-tras {
       background-color: red;
       height: $hero-image-transparent;
     }
 
     &__image {
+      position: absolute;
       height: 100%;
-      max-width: 100%;
+      width: auto;
       display: block;
       object-fit: cover;
       object-position: left;
-
-      @include media-breakpoint-down(md) {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: top left;
-      }
     }
 
     &__heading {
@@ -123,7 +142,10 @@
         justify-content: center;
         align-items: center;
         transition: all 1s ease;
-        height: 100%;
+        height: fit-content;
+        padding: 30px;
+        border-radius: 30px;
+        background-color: $white-transparent;
 
         p {
           font-size: clamp(2rem, 2.9vw, 2.9rem);
@@ -165,16 +187,13 @@
       position: absolute;
       animation: bounce ease-in-out 1.2s infinite;
       transition: all 2.1s ease-in;
-      right: -40px;
+      right: -20px;
       bottom: 120px;
       display: block;
       z-index: 6;
 
       @include media-breakpoint-down(md) {
         display: none;
-        z-index: 6;
-        right: -20px;
-        bottom: 120px;
       }
 
       a {
@@ -291,25 +310,6 @@
     top: calc(-1 * $hero-image-transparent) !important;
   }
 
-  .hero__content {
-    &::before {
-      content: "";
-      position: absolute;
-      top: $hero-image-transparent;
-      left: 0;
-      width: 100%;
-      height: calc(100% - $hero-image-transparent);
-      background: linear-gradient(
-        to right,
-
-        rgba(255, 255, 255, 0) 33%,
-        rgba(255, 255, 255, 0.7) 70%,
-        rgba(255, 255, 255, 1) 100%
-      );
-      z-index: 7;
-    }
-  }
-
   .hero__text {
     position: absolute;
     display: flex;
@@ -332,16 +332,6 @@
   }
 
   .scroll-to-web {
-    z-index: 8 !important;
-  }
-}
-
-@media screen and (min-aspect-ratio: 9/10) and (max-aspect-ratio: 10/9) and (orientation: landscape) {
-  .hero__wrapper {
-    top: calc(-1 * $hero-image-transparent) !important;
-  }
-
-  .hero__text {
     z-index: 8 !important;
   }
 }

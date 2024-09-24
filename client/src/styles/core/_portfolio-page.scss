@@ -44,6 +44,14 @@
       font-weight: $font-weight-medium;
     }
 
+    &__work {
+      font-size: clamp(1.95rem, 4.25vw, 3rem) !important;
+      font-weight: $font-weight-light;
+      display: block;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
     &__tabs {
       user-select: none;
       display: flex;

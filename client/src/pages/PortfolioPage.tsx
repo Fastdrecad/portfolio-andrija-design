@@ -169,6 +169,9 @@ const PortfolioPage: React.FC = () => {
               {isTitleInView && <RedLineIcon />}
             </motion.div>
           </motion.div>
+          <h3 className="portfolio-page__work">
+            Creating next-level digital products with precision and creativity.
+          </h3>
           <ul className="portfolio-page__tabs">
             {list.map((item, i) => (
               <PortfolioList

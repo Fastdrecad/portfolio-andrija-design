@@ -49,15 +49,18 @@ const AboutSection: React.FC = () => {
                   Welcome to the world of innovative design
                 </h2>
                 <p>
-                  I help clients transform their ideas into reality by
-                  specializing in Furniture & Product Design, 3D Modeling, 3D
-                  Rendering, and 2D/3D CAD, ensuring both precision and
-                  creativity in every project. With over two decades of
-                  experience and expertise in SOLIDWORKS, Inventor, AutoCAD, 3ds
-                  Max, and V-Ray, I deliver high-quality, photorealistic
-                  renderings for interiors, exteriors, and product
-                  visualizations, as well as detailed 3D models and 2D technical
-                  drawings tailored to your needs.
+                  I provide tailor-made solutions to companies across the globe,
+                  ensuring each project sets a new benchmark. With every design,
+                  I push boundaries and always put quality first, delivering
+                  results that speak for themselves.
+                  <hr />I help clients transform their ideas into reality by
+                  offering innovative design solutions in Furniture & Product
+                  Design, 3D Modeling, Rendering, and 2D/3D CAD. With over two
+                  decades of experience, I push boundaries and deliver
+                  high-quality, photorealistic renderings, detailed 3D models,
+                  and technical drawings. My expertise in Inventor, SOLIDWORKS,
+                  AutoCAD, 3ds Max, and V-Ray ensures that every project is
+                  completed with both precision and creativity—and more.
                 </p>
                 <hr style={{ margin: "3.5rem 0" }} />
 
@@ -155,6 +158,7 @@ const AboutSection: React.FC = () => {
                 <p>
                   Please check the{" "}
                   <Link
+                    className="underline"
                     to="/design-process"
                     onClick={() => handleNavLinkClick("/design-process")}
                   >
@@ -179,7 +183,10 @@ const AboutSection: React.FC = () => {
                   Ready to get started?
                 </h2>
                 <p>
-                  <a href="mailto:andrija@andrijadesign.com?subject=Project%20Inquiry&body=Contact%20me%20to%20share%20a%20brief%20description%20of%20your%20project%2C%20and%20let's%20make%20your%20vision%20a%20reality.">
+                  <a
+                    className="underline"
+                    href="mailto:andrija@andrijadesign.com?subject=Project%20Inquiry&body=Contact%20me%20to%20share%20a%20brief%20description%20of%20your%20project%2C%20and%20let's%20make%20your%20vision%20a%20reality."
+                  >
                     Contact me
                   </a>{" "}
                   to share a brief description of your project, and let's make

@@ -23,7 +23,7 @@ const LatestWorks: React.FC<LatestWorksProps> = () => {
   return (
     <section className="latest-works" id="latest-works">
       <h3 className="latest-works__title">
-        latest<span>works</span>
+        recent<span>work</span>
       </h3>
       <ul
         className={`latest-works__image-gallery ${

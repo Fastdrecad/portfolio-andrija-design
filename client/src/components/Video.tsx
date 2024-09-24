@@ -29,7 +29,11 @@ const Video: React.FC = () => {
             {isVideoTitleInView && <RedLineIcon />}
           </motion.div>
         </motion.div>
-        <p>Embark on your project journey with confidence</p>
+        <p>
+          I help brands stand out with innovative design solutions. Together, we
+          create what’s next. No noise, just results. Always on the cutting edge
+          of design and technology.
+        </p>
       </div>
 
       <div className="video__content">

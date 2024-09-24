@@ -9,18 +9,18 @@ const HeroSection: React.FC = () => {
       <div className="hero-section__profile-image">
         <div className="hero-section__profile-image-inner">
           {/* <img
-            src={myImage1200}
+            src={"/images/andrija-about.png"}
             alt="Andrija Designer"
             loading="lazy"
-            srcSet={`
-                  ${myImage480} 480w,
-                  ${myImage800} 800w,
-                  ${myImage1200} 1200w
-                `}
+            // srcSet={`
+            //       ${myImage480} 480w,
+            //       ${myImage800} 800w,
+            //       ${myImage1200} 1200w
+            //     `}
             sizes="(max-width: 600px) 480px, (max-width: 900px) 800px, 1200px"
           /> */}
           <ImageKit
-            path="/images/andrija-about.png"
+            path="/images/andrija-about-page.png"
             alt="Andrija Mićunović, Furniture Design Engineer and 3D Modeling Expert"
             transformation={[{ width: "900" }, { height: "900" }]}
           />

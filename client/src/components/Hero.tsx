@@ -33,7 +33,9 @@ const Hero: React.FC = () => {
 
   return (
     <section className="hero" id="hero">
-      <div style={{ height: "100%" }}>
+      <div
+      // style={{ height: "100%" }}
+      >
         <div className="hero__wrapper">
           <div className="hero__controller">
             <div className="hero__content" ref={heroContentRef}>

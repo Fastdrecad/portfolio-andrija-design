@@ -131,9 +131,7 @@ const ContactPage: React.FC = () => {
                   </div>
                 </motion.div>
               </div>
-              <p className="contact-page__form-subtitle">
-                Share more about your company and future business goals.
-              </p>
+              <p className="contact-page__form-subtitle">Let’s work together</p>
             </div>
           </motion.div>
 

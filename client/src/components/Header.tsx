@@ -66,6 +66,18 @@ const Header: React.FC = () => {
       </nav>
 
       <nav className="header__desktop-fixed">
+        <div
+          className=""
+          style={{
+            position: "absolute",
+            width: "60px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            left: "50px"
+          }}
+        >
+          <MainLogo />
+        </div>
         <div className="header__switch">
           <ToggleSwitch />
         </div>
