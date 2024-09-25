@@ -5,7 +5,8 @@
   border: none;
   width: calc(100% / 4 - 7.5px);
   aspect-ratio: 1.6 / 1;
-  transition: opacity 2000ms ease-in-out, transform 2000ms ease-in-out;
+  transform: translateY(30px);
+  transition: opacity 1000ms ease-in-out, transform 1000ms ease-in-out;
 
   @include media-breakpoint-down(xl) {
     width: calc(100% / 3 - 7px);
@@ -16,7 +17,7 @@
   }
 
   @include media-breakpoint-down(sm) {
-    width: calc(100%);
+    width: 100%;
   }
 
   img {
@@ -61,11 +62,6 @@
     transition: all 0.5s ease;
     text-transform: capitalize;
   }
-
-  // Animation for appearing with fade and movement
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1000ms ease-in-out, transform 1000ms ease-in-out;
 }
 
 .fadeInnn .portfolio-item {

@@ -18,11 +18,6 @@ html {
     font-size: 62.5%; // 1 rem = 8px, 8/16 = 50%
   }
 
-  // asks if  width < 600px?
-  // @include media-breakpoint-down(sm) {
-  //   font-size: 30%; // 1rem = 4.8px
-  // }
-
   // asks if width > 1800px?
   @include media-breakpoint-up(xxl) {
     font-size: 75%; // 1 rem = 12px, 12/16 = 75%

@@ -1,12 +1,9 @@
 // Import utilities
-@import 'core/utils/fonts';
-@import 'core/utils/reset';
-
-// Vendors
-@import 'node_modules/locomotive-scroll/dist/locomotive-scroll';
+@import "core/utils/fonts";
+@import "core/utils/reset";
 
 // Import core styles
-@import 'core/core';
+@import "core/core";
 
 // Import custom styles
-@import 'custom';
+@import "custom";

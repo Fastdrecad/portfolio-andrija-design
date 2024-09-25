@@ -17,8 +17,6 @@
     "andrija-design": "file:..",
     "axios": "^1.7.7",
     "framer-motion": "^11.0.27",
-    "imagekitio-react": "^4.2.0",
-    "locomotive-scroll": "^5.0.0-beta.11",
     "react": "^18.2.0",
     "react-calendly": "^4.3.1",
     "react-confetti": "^6.1.0",
@@ -30,7 +28,6 @@
     "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
-    "@types/locomotive-scroll": "^4.1.3",
     "@types/node": "^20.12.7",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
