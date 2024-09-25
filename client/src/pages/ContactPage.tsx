@@ -1,4 +1,10 @@
-import { useEffect, useRef, useState, FormEvent, ChangeEvent } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  FormEvent,
+  ChangeEvent
+} from "react";
 import { motion, useInView } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import pageTransition from "@components/pageTransition";
@@ -8,8 +14,8 @@ import axios from "axios";
 import FormInput from "@components/FormInput";
 import { inputs } from "../utils/constants";
 import { RedLineIcon } from "@components/RedLine";
-import ImageKit from "@components/ImageKit";
 import { AmLogo } from "@components/AmLogo";
+import Image from "@components/Image";
 
 interface FormValues {
   firstName: string;
@@ -186,9 +192,11 @@ const ContactPage: React.FC = () => {
         <div className="contact-page__footer">
           <div className="contact-page__image-container">
             <div className="contact-page__background-image">
-              <ImageKit
-                path="/images/contact-hero.jpg"
+              <Image
+                src="/images/contact-hero.jpg"
                 alt="Sketches of furniture designs highlighting Furniture Design, CAD, and 3D Rendering services."
+                srcSet="/images/contact-hero480.jpg 480w, /images/contact-hero800.jpg 800w, /images/contact-hero.jpg 1200w"
+                sizes="(max-width: 600px) 480px, (max-width: 900px) 800px, 1200px"
               />
             </div>
             <motion.div

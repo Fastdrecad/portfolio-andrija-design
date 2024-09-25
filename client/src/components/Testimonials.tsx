@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import TestimonialItems from "./TestimonialItems";
 import { testimonials } from "../data";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { RedLineIcon } from "./RedLine";
 
 const Testimonials: React.FC = () => {
@@ -15,22 +15,28 @@ const Testimonials: React.FC = () => {
     once: true
   });
 
-  const [offsetY, setOffsetY] = useState(0);
-  const handleScroll = () => setOffsetY(window.scrollY);
+  // const [offsetY, setOffsetY] = useState(0);
+  // const handleScroll = () => setOffsetY(window.scrollY);
 
-  useEffect(() => {
-    const parallax = document.getElementById("parallax");
-    window.addEventListener("scroll", handleScroll);
-    if (parallax) {
-      parallax.style.backgroundPositionY = `${offsetY * 0.5}px`;
-    }
+  // useEffect(() => {
+  //   const parallax = document.getElementById("parallax");
+  //   window.addEventListener("scroll", handleScroll);
+  //   if (parallax) {
+  //     parallax.style.backgroundPositionY = `${offsetY * 0.5}px`;
+  //   }
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [offsetY]);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [offsetY]);
+
+  const parallaxRef = useRef<HTMLDivElement>(null);
 
   return (
     <section className="testimonials" id="testimonials">
-      <div className="testimonials__bg" id="parallax">
+      <div className="testimonials__bg">
+        <div className="shadow"></div>
+        <motion.div className="image-wrapper" id="parallax" ref={parallaxRef}>
+          <img src="/images/testimonial-bg.jpg" alt="Parallax background" />
+        </motion.div>
         <div className="testimonials__header">
           <h2>Testimonials</h2>
           <motion.div

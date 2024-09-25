@@ -13,7 +13,8 @@ $themes: (
     header-footer-box-shadow: $box-shadow-custom,
     text-color-soft: #585858,
     hamburger: $black,
-    logo-opacity: $logo-opacity
+    logo-opacity: $logo-opacity,
+    background-title: $white-transparent
   ),
 
   dark: (
@@ -29,7 +30,8 @@ $themes: (
     header-footer-background-fixed: #161616,
     text-color-soft: rgb(139, 138, 138),
     hamburger: $red,
-    logo-opacity: $logo-opacity-white
+    logo-opacity: $logo-opacity-white,
+    background-title: $black-transparent
   )
 );
 

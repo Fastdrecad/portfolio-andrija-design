@@ -91,10 +91,6 @@
         display: inline-block;
         text-align: center;
 
-        @include media-breakpoint-up(xl) {
-          color: $font-color !important;
-        }
-
         strong {
           color: inherit;
           font-size: inherit;
@@ -120,8 +116,16 @@
     }
 
     &__text {
-      min-height: 50vh;
+      min-height: 45vh;
       z-index: 6;
+
+      @include media-breakpoint-down(sm) {
+        min-height: 45vh;
+      }
+
+      @include media-breakpoint-down(md) {
+        min-height: 45vh;
+      }
 
       @include media-breakpoint-up(xl) {
         z-index: 8;
@@ -131,11 +135,15 @@
         justify-content: center;
         align-items: center;
         margin: auto;
-        width: 40vw;
-        height: 100%;
-        color: #303236;
+        width: 50vw;
+        color: $black;
         align-self: flex-end;
-        padding-right: 5vw;
+        padding-right: 8vw;
+      }
+
+      @include media-breakpoint-down(xl) {
+        height: fit-content;
+        bottom: 0;
       }
 
       &-wrapper {
@@ -143,11 +151,22 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        transition: all 1s ease;
         height: fit-content;
         padding: 30px;
         border-radius: 30px;
-        background-color: $white-transparent;
+        background-color: themed("background-title");
+
+        @include media-breakpoint-up(lg) {
+          height: 100%;
+        }
+
+        @include media-breakpoint-down(lg) {
+          height: 100%;
+        }
+
+        @include media-breakpoint-down(md) {
+          height: fit-content;
+        }
 
         p {
           font-size: clamp(2rem, 2.9vw, 2.9rem);
@@ -184,19 +203,20 @@
       margin: 0;
       position: absolute;
       animation: bounce ease-in-out 1.2s infinite;
-      transition: all 2.1s ease-in;
       display: block;
       z-index: 6;
       height: fit-content;
       user-select: none;
       right: -20px;
       bottom: 120px;
+      color: themed("text-color");
 
       @include media-breakpoint-down(md) {
         left: 50%;
         transform: translate(-50%) rotate(90deg);
         bottom: -5%;
       }
+
       @include media-breakpoint-up(lg) {
         right: -20px !important;
         bottom: 120px !important;
@@ -207,8 +227,8 @@
         flex-direction: row;
         align-items: center;
         text-decoration: none;
-        color: themed("text-color") !important;
         transition: all 1.5s ease;
+        color: inherit !important;
 
         &:hover {
           .scroll-to-web-arrow-wrapper {
@@ -223,6 +243,7 @@
 
       .scroll-to-web-text {
         margin-right: 10px;
+        color: inherit;
 
         @include media-breakpoint-down(md) {
           display: none;
@@ -231,7 +252,7 @@
         p {
           white-space: nowrap;
           font-size: 14px;
-          color: themed("text-color") !important;
+          color: inherit;
           margin: 0;
           padding: 0;
           transform: scale(-1);
@@ -240,16 +261,16 @@
 
       .scroll-to-web-arrow-wrapper {
         border-radius: 50%;
-        border: 1px solid themed("text-color") !important;
+        border: 1px solid;
         display: flex;
         align-items: center;
         justify-content: center;
         width: 50px;
         height: 50px;
+        color: inherit;
 
         .scroll-to-web-arrow {
           font-size: 25px;
-          color: themed("text-color") !important;
           rotate: 270deg;
         }
       }
@@ -327,15 +348,19 @@
     justify-content: center;
     align-items: center;
     margin: auto;
-    width: 40vw;
+    width: 50vw;
     height: 100%;
-    color: #303236;
+    color: $black;
     z-index: 8 !important;
     align-self: flex-end;
     padding-right: 18vw;
   }
 
-  .hero-text-content {
+  .hero__text-wrapper {
+    height: fit-content !important;
+  }
+
+  .hero__text-content {
     margin: 0 auto !important;
     width: 100% !important;
     justify-content: center;
@@ -345,5 +370,6 @@
     z-index: 8 !important;
     right: -40px !important;
     bottom: 100px !important;
+    color: $black !important;
   }
 }

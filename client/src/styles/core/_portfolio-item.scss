@@ -3,11 +3,12 @@
   cursor: pointer;
   overflow: hidden;
   border: none;
-  width: calc(100% / 4 - 15px);
+  width: calc(100% / 4 - 7.5px);
+  aspect-ratio: 1.6 / 1;
   transition: opacity 2000ms ease-in-out, transform 2000ms ease-in-out;
 
-  @include media-breakpoint-down(lg) {
-    width: calc(100% / 3 - 15px);
+  @include media-breakpoint-down(xl) {
+    width: calc(100% / 3 - 7px);
   }
 
   @include media-breakpoint-down(md) {
@@ -15,7 +16,7 @@
   }
 
   @include media-breakpoint-down(sm) {
-    width: calc(100% - 20px);
+    width: calc(100%);
   }
 
   img {

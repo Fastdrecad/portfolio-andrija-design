@@ -5,6 +5,7 @@ import { RedLineIcon } from "./RedLine";
 import ScrollToWeb from "./ScrollToWeb ";
 import { MenuContext } from "../context/navContext";
 import useViewportHeight from "../hooks/useViewportHeight";
+import Image from "./Image";
 
 const Hero: React.FC = () => {
   useViewportHeight();
@@ -38,10 +39,10 @@ const Hero: React.FC = () => {
           <div className="hero__controller">
             <div className="hero__content" ref={heroContentRef}>
               {/* <div className="image-tras"></div> */}
-              <img
-                src="/images/Header-Image.png"
+              <Image
+                src={"/images/Header-Image.png"}
                 alt="Andrija Mićunović at the workplace"
-                className="hero__image"
+                className="hero__image top"
               />
             </div>
 

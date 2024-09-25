@@ -1,13 +1,17 @@
 .time-is-now {
   @include themify($themes) {
     min-height: 100dvh;
-    height: calc(var(--vh, 1vh) * 100);
+    height: calc(var(--vh, 1vh) * 100) !important;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: themed("header-footer-background");
     overflow: hidden;
+
+    @include media-breakpoint-up(lg) {
+      min-height: 100vh !important;
+    }
 
     &__ellipses {
       width: 100%;

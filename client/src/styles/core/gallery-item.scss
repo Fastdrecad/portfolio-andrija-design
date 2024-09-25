@@ -120,11 +120,14 @@
     flex-direction: column;
     margin-bottom: 50px;
     gap: 10px;
+    position: relative;
+    min-height: 350px;
+    max-height: 100%;
   }
 
   &__image {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
   }
 

@@ -2,8 +2,8 @@ import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCurrentRoute } from "../redux/routeSlice";
-import ImageKit from "./ImageKit";
 import { SignatureSvg } from "@components/SignatureSvg";
+import Image from "./Image";
 
 const AboutSection: React.FC = () => {
   const { ref: ref1, inView: titleIsVisible } = useInView();
@@ -22,8 +22,8 @@ const AboutSection: React.FC = () => {
             <div className="about-section__fixed-wrapper">
               <div className="about-section__sticky-parent">
                 <div className="about-section__pen-image">
-                  <ImageKit
-                    path="/images/pen-image.png"
+                  <Image
+                    src={"/images/pen-image.png"}
                     alt="Digital drawing pen and holder, typically used with graphic tablets for design work."
                   />
                 </div>

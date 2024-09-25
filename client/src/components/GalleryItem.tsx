@@ -2,6 +2,7 @@ import { CSSProperties, MutableRefObject, useEffect, useState } from "react";
 import { portfolio } from "../data";
 
 import { forwardRef } from "react";
+import Image from "./Image";
 
 interface GalleryItemProps {
   projectId: number;
@@ -99,11 +100,16 @@ const GalleryItem = forwardRef<HTMLDivElement, GalleryItemProps>(
               <div className="gallery-item__images">
                 {project.items.map((item, index) => (
                   <div key={index} className="gallery-item__image-container">
-                    <img
+                    <Image
                       src={item.url}
                       alt={item.alt || "Portfolio image"}
                       className="gallery-item__image"
                     />
+                    {/* <img
+                      src={item.url}
+                      alt={item.alt || "Portfolio image"}
+                      className="gallery-item__image"
+                    /> */}
                     <p className="gallery-item__image-description">
                       {item.desc}
                     </p>

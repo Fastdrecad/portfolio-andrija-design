@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-// import { LogoIcon } from "./common/Icons";
 import { setCurrentRoute } from "../redux/routeSlice";
-import ImageKit from "./ImageKit";
+import Image from "./Image";
 
 const MainLogo: React.FC = () => {
   const dispatch = useDispatch();
@@ -14,11 +13,10 @@ const MainLogo: React.FC = () => {
   return (
     <Link to="/" onClick={() => handleNavLinkClick("/")}>
       <div className="main-logo__icon-wrapper">
-        {/* <LogoIcon /> */}
-        <ImageKit
-          path="/images/am-3d-logo.gif"
+        <Image
+          src={"/images/am-3d-logo.gif"}
           alt="Andrija Mićunović, Furniture Design Engineer and 3D Modeling Expert"
-          transformation={[{ width: "900" }, { height: "900" }]}
+          className=""
         />
       </div>
     </Link>

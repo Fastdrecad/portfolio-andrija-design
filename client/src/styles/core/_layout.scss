@@ -145,9 +145,8 @@ h6,
 .h6 {
   color: $font-heading-color !important;
   font-family: $font-family-heading;
-  font-size: $font-size-heading-medium !important;
+  font-size: $font-size-heading-medium;
   line-height: $line-height !important;
-  // text-transform: capitalize;
 }
 
 h1,
@@ -158,7 +157,7 @@ h1,
 
 h2,
 .h2 {
-  font-size: 1.4em !important;
+  font-size: 1.4em;
   font-weight: $font-weight-semibold;
 }
 

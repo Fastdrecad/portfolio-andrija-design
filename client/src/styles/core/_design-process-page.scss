@@ -99,44 +99,33 @@
       }
     }
 
+    .design-process-part-wrapper {
+      position: relative;
+
+      .design-process-part-gradient {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        background: $gradient;
+        clip-path: polygon(0 5%, 100% 1%, 100% 100%, 0 100%);
+      }
+    }
+
     .design-process-part {
       position: relative;
-      padding: 250px 0;
-      margin-top: 30px;
+      padding: 250px 0 100px;
+      // margin-top: 30px;
       background-image: url("/images/testimonial-bg.jpg");
       background-repeat: repeat;
-      clip-path: polygon(
-        0 calc(100% - (100% / tan(46.5deg))),
-        100% 0,
-        100% 100%,
-        0 100%
-      );
+      clip-path: polygon(0 8%, 100% 2%, 100% 100%, 0 100%);
 
       @include media-breakpoint-down(md) {
-        clip-path: polygon(
-          0 calc(100% - (100% / tan(45.6deg))),
-          100% 0,
-          100% 100%,
-          0 100%
-        );
-
-        padding: 10rem 0;
-      }
-
-      &::after {
-        content: "";
-        height: 90px;
-        width: 100%;
-        background: #313131;
-        position: absolute;
-        left: 0;
-        top: 1%;
-        transform: skewY(354deg);
-        z-index: 3;
-
-        @include media-breakpoint-down(md) {
-          top: -1%;
-        }
+        clip-path: polygon(0 7%, 100% 2%, 100% 100%, 0 100%);
+        padding: 12rem 0 6rem;
       }
 
       .design-process-content {
@@ -151,7 +140,7 @@
 
         .design-process-part-inner {
           width: 100%;
-          padding: 70px 0;
+          padding: 70px 15px;
           position: relative;
 
           .design-process-box {
@@ -178,6 +167,7 @@
                 border: $border;
                 margin: 0 auto;
                 overflow: hidden;
+                position: relative;
 
                 img {
                   width: 100%;

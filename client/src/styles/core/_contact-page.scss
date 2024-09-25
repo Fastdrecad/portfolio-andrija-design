@@ -90,7 +90,7 @@
       h2 {
         color: inherit !important;
         font-weight: 600;
-        font-size: clamp(3rem, 4.25vw, 4rem) !important;
+        font-size: clamp(3rem, 4.25vw, 4rem);
         text-align: center;
         text-transform: uppercase;
       }
@@ -236,7 +236,7 @@
       margin-top: -60px;
 
       @include media-breakpoint-down(xxl) {
-        margin-top: -80px;
+        margin-top: -100px;
       }
       @include media-breakpoint-down(lg) {
         margin-top: -80px;
@@ -249,17 +249,32 @@
 
     &__footer {
       position: relative;
+      height: 100%;
     }
 
     &__image-container {
       overflow: hidden;
       z-index: 1;
       position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: clamp(250px, 40vh, 550px);
-      height: clamp(250px, calc(var(--vh, 1vh) * 40), 550px);
+      height: 30vh;
+      margin-top: -10px;
+
+      @include media-breakpoint-up(md) {
+        height: 40vh;
+        margin-top: -80px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        height: 100% !important;
+      }
+
+      @include media-breakpoint-up(xl) {
+        margin-top: -20px;
+      }
+
+      @include media-breakpoint-up(xxl) {
+        margin-top: -80px;
+      }
 
       &::after {
         content: "";
@@ -269,45 +284,44 @@
     }
 
     &__background-image {
-      background-color: #454545;
+      background: $gradient;
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
       left: 0;
-      z-index: 0;
-      clip-path: polygon(
-        0 0,
-        100% calc(100% - (100% / tan(50deg))),
-        100% 100%,
-        0 100%
-      );
+      clip-path: polygon(0 1%, 100% 30%, 100% 100%, 0 100%);
 
-      &::after {
-        content: "";
-        height: 70px;
-        width: 100%;
-        float: left;
-        background: #313131;
-        position: absolute;
-        left: 0;
-        bottom: 80%;
-        transform: skewY(3.5deg);
-        z-index: 3;
+      @include media-breakpoint-up(md) {
       }
 
       img {
+        position: absolute;
+        object-fit: cover;
         width: 100%;
         height: 100%;
-        object-fit: cover;
-        mix-blend-mode: multiply;
+        object-position: left;
+        clip-path: polygon(0 20%, 100% 40%, 100% 100%, 0 100%);
+        filter: brightness(0.45);
+
+        @include media-breakpoint-up(md) {
+          object-position: center;
+        }
       }
     }
 
     &__footer-front-title {
-      margin-top: 9rem;
+      margin-top: 6rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: fit-content;
+      transform: translate(-50%, -50%);
 
-      @include media-breakpoint-up(lg) {
+      @include media-breakpoint-up(md) {
         margin-top: 6rem;
       }
     }
@@ -316,7 +330,7 @@
       color: $white !important;
       text-align: center;
       text-transform: capitalize;
-      font-size: clamp(1.8rem, 2.9vw, 3.5rem) !important;
+      font-size: clamp(1.8rem, 4vw, 3.5rem);
       font-weight: $font-weight-light;
       display: block;
       transition: all 1s ease;
@@ -368,5 +382,16 @@
     font-size: 16px;
     text-align: left;
     font-weight: $font-weight-semibold;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .contact-page__image-container {
+    height: 100vh !important;
+    margin-top: -100px;
+  }
+
+  .contact-page__footer-front-text {
+    font-size: 4rem !important;
   }
 }

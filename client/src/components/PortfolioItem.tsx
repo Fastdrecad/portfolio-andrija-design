@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Modal from "./Modal";
-import ImageKit from "./ImageKit";
+import Image from "./Image";
 
 interface PortfolioItemProps {
   id: number;
@@ -9,7 +9,8 @@ interface PortfolioItemProps {
   projectName: string;
   url: string;
   category: string;
-  items: { url: string; desc: string }[];
+  alt?: string;
+  items: { url: string; desc: string; alt?: string }[];
   className?: string;
   index: number;
   newlyLoadedStartIndex?: number;
@@ -22,7 +23,8 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({
   url,
   className,
   newlyLoadedStartIndex = 0,
-  index
+  index,
+  alt
 }) => {
   const [isModalOpen, setIsModalOpen] = useState<number | null>(null);
 
@@ -46,8 +48,7 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({
         ref={portfolioItemRef}
         onClick={() => openModal(id)}
       >
-        <ImageKit path={url} alt="" loading="lazy" />
-
+        <Image src={url} loading="lazy" alt={alt} />
         <div className="portfolio-item__overlay">
           <h4 className="portfolio-item__project-name">{projectName}</h4>
           <p className="portfolio-item__title">{title}</p>

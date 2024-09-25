@@ -9,6 +9,7 @@ export const portfolio = [
     category: "Product Design",
     client: "Ray Taft",
     clientUrl: "",
+    alt: "",
     myRole: "Furniture Designer, 3D Modeler, CAD Specialist",
     description: `This project involved the restoration and modernization of a traditional card catalog cabinet, originally passed down as a family heirloom. The restoration process included both preserving the integrity of the original design while incorporating new functional and aesthetic elements.
     Key features such as the sliding table mechanism, crown molding, and cabinet legs were completely redesigned to enhance both the cabinet's functionality and visual appeal. The project required a deep understanding of woodworking, furniture design, and 3D modeling to achieve a seamless blend of the old and the new. The final design not only restored the cabinet's original beauty but also introduced modern features that make it more functional for contemporary use.`,
@@ -76,6 +77,7 @@ export const portfolio = [
     category: "3D Rendering",
     client: "https://atlantisbeds.se/",
     clientUrl: "",
+    alt: "",
     myRole: "3D Modeler, Rendering Specialist, Interior Designer",
     description: `This project focused on the 3D modeling and rendering of the Atlantis Bed for a Swedish furniture brand. The bed was showcased in both studio and interior settings, with an emphasis on highlighting the product's design, fabric, and color variations for use on the brand’s website and promotional materials. The high-quality renders were aimed at presenting the product in a realistic manner while emphasizing its modern appeal, comfort, and craftsmanship.`,
     tags: [
@@ -119,6 +121,7 @@ export const portfolio = [
     category: "Product Design",
     client: "Client Name Here",
     clientUrl: "",
+    alt: "",
     myRole: "Product Designer, CAD Specialist, 3D Modeler",
     description: `This project involved the design and development of a functional boot tray, created for a modern home interior. The boot tray was designed to combine functionality with aesthetic appeal, ensuring it fits seamlessly in various home environments. The design features a raised grate for drainage and a sturdy base. The detailed CAD drawings provide insight into the product’s dimensions and construction specifications.`,
     tags: [
@@ -173,6 +176,7 @@ export const portfolio = [
     category: "Product Design",
     client: "Premium Spirits Brand",
     clientUrl: "",
+    alt: "",
     myRole: "Product Designer, 3D Modeler, Rendering Specialist",
     description: `This project involved the creation of a modern, custom rum bottle design for a premium spirits brand. The goal was to develop a striking and elegant bottle that would stand out on the shelves while reflecting the high-end nature of the product.
   The design features smooth curves, a matte finish, and intricate gold branding. My role was to develop the bottle's 3D model, ensuring that it met manufacturing requirements while maintaining its aesthetic appeal. High-quality renders were produced for marketing and packaging purposes.`,
@@ -217,6 +221,7 @@ export const portfolio = [
     category: "CAD",
     client: "Client Name Here",
     clientUrl: "",
+    alt: "",
     myRole: "Product Designer, CAD Specialist",
     description: `This project involved the design and development of a custom bowed window. The design combines modern aesthetics with traditional craftsmanship to create a window that enhances the architectural appeal of the client's home. The CAD drawings provide detailed measurements and material specifications required for accurate manufacturing.`,
     tags: [
@@ -351,6 +356,7 @@ export const portfolio = [
     category: "Product Design",
     client: "John Doe",
     clientUrl: "",
+    alt: "",
     myRole: "Furniture Designer, 3D Modeler, CAD Specialist",
     description: `This project involved the design and development of a modern rocking chair with a focus on ergonomic comfort and aesthetic appeal. The design aimed to combine traditional rocking chair elements with a sleek, contemporary look. The final result features a carefully sculpted seat with plush upholstery, set on a chrome steel frame. The project required detailed CAD modeling and 3D rendering to ensure that the form and function of the chair would meet both the client's expectations and manufacturing requirements.`,
     tags: [
@@ -421,6 +427,7 @@ export const portfolio = [
     myRole: "3D Modeling and 3D Rendering",
     client: "John Doe",
     clientUrl: "",
+    alt: "",
     description:
       "This personal project involved the design and 3D modeling of the Husk Sofa for sale on the 3ddd Sky platform. The design emphasizes comfort with plush cushioning and a modern aesthetic, making it suitable for contemporary interior designs. The project was developed with high-quality 3D models for use in architectural visualization and other design applications.",
     tags: [
@@ -467,6 +474,7 @@ export const portfolio = [
     category: "3D Animation",
     client: "WellnessPro",
     clientUrl: "https://www.wellnesspro.com",
+    alt: "",
     myRole: "3D Modeler and 3D Renderer",
     description:
       "This project involved 3D modeling and rendering of a handheld massager for marketing purposes. The design highlights the product's sleek and ergonomic form, with attention to detail for both aesthetic appeal and functionality. The renders were used for promotional materials, giving the client high-quality visual content for advertisements and product listings.",

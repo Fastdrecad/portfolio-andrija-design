@@ -41,6 +41,7 @@ $pink: #e83e8c !default;
 $red: rgb(237, 32, 36);
 $white: #fff;
 $white-transparent: #ffffffc2;
+$black-transparent: #1e1e1ea9;
 $orange: #fabb3d;
 $yellow: #ffc107 !default;
 $green: #79c447;
@@ -51,6 +52,8 @@ $black: #303236;
 $zinc-950: #09090b;
 
 $backgroundBlack: #1e1e1e;
+
+$gradient: linear-gradient(to right, #464646, #3b3b3b, #2e2e2e, #000000);
 
 $font-family: "Open Sans";
 $font-family-heading: "Open Sans";

@@ -6,35 +6,43 @@
 
     &__bg {
       position: relative;
-      background-image: url("/images/testimonial-bg.jpg");
-      background-repeat: repeat;
-      clip-path: polygon(
-        0 0,
-        100% 0,
-        100% calc(100% - (100% / tan(83deg))),
-        0 100%
-      );
+      min-height: 125vh;
 
-      @include media-breakpoint-down(sm) {
-        clip-path: polygon(
-          0 0,
-          100% 0,
-          100% calc(100% - (100% / tan(87deg))),
-          0 100%
-        );
+      @include media-breakpoint-up(lg) {
+        min-height: 105vh;
       }
 
-      &::after {
-        content: "";
-        height: 60px;
-        width: 100%;
-        background: #313131;
+      .image-wrapper {
         position: absolute;
+        top: 0;
         left: 0;
-        bottom: calc(100vw * 0.0225);
-        transform: skewY(356.75deg);
-        z-index: 3;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+
+        img {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: top center;
+          clip-path: polygon(0 0, 100% 0, 100% 78%, 0 92%);
+        }
       }
+    }
+
+    .shadow {
+      background: $gradient;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      clip-path: polygon(0 0, 100% 0, 100% 81%, 0 100%);
     }
 
     &__header {
@@ -46,7 +54,7 @@
         font-size: clamp(2rem, 9.2vw, 4rem) !important;
         position: relative;
         text-align: center;
-        padding-top: clamp(2rem, 10vw, 10rem);
+        padding-top: clamp(6rem, 10vw, 10rem);
         font-weight: normal;
 
         @include media-breakpoint-down(md) {
@@ -59,6 +67,7 @@
         justify-content: center;
         margin-top: 1.25rem;
         margin-bottom: 10rem;
+        z-index: 1;
 
         @include media-breakpoint-up(lg) {
           margin-top: 2.25rem;

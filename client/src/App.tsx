@@ -17,11 +17,6 @@ function App() {
   const [loaded, setLoaded] = useState(true);
 
   useEffect(() => {
-    // (async () => {
-    //   const LocomotiveScroll = (await import("locomotive-scroll")).default;
-    //   new LocomotiveScroll();
-
-    // })();
     setTimeout(() => {
       setLoaded(false);
       document.body.style.cursor = "default";

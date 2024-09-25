@@ -3,6 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { designProcess } from "../data";
 import pageTransition from "@components/pageTransition";
 import ImageKit from "@components/ImageKit";
+import Image from "@components/Image";
 
 interface DesignProcessItem {
   id: number;
@@ -32,7 +33,7 @@ const DesignProcessPage: React.FC = () => {
     const parallax = document.getElementById("parallax");
     window.addEventListener("scroll", handleScroll);
     if (parallax) {
-      parallax.style.backgroundPositionY = `${offsetY * 0.5}px`;
+      parallax.style.backgroundPositionY = `${offsetY * 0.35}px`;
     }
 
     return () => window.removeEventListener("scroll", handleScroll);
@@ -67,12 +68,24 @@ const DesignProcessPage: React.FC = () => {
         </div>
       </div>
 
-      <div className="design-process-part" id="parallax">
+      {/* <div className="design-process-part" id="parallax">
         <div className="design-process-content">
           <div className="design-process-part-inner">
             {designProcess.map((item, i) => (
               <DesignProcessBox key={i} index={i} item={item} />
             ))}
+          </div>
+        </div>
+      </div> */}
+      <div className="design-process-part-wrapper">
+        <div className="design-process-part-gradient"></div>
+        <div className="design-process-part" id="parallax">
+          <div className="design-process-content">
+            <div className="design-process-part-inner">
+              {designProcess.map((item, i) => (
+                <DesignProcessBox key={i} index={i} item={item} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -116,7 +129,7 @@ const DesignProcessImage: React.FC<DesignProcessImageProps> = ({ item }) => {
       className={`design-process-img ${isInView ? "animate-arrow" : ""}`}
     >
       <div className="design-process-image-container">
-        <ImageKit path={item.img} alt={item.alt} />
+        <Image src={item.img} alt={item.alt} />
       </div>
     </motion.div>
   );

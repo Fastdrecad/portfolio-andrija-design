@@ -4,6 +4,7 @@ import VideoSection from "./VideoSection";
 import { RedLineIcon } from "./RedLine";
 import ImageKit from "./ImageKit";
 import useViewportHeight from "../hooks/useViewportHeight";
+import Image from "./Image";
 
 const Video: React.FC = () => {
   useViewportHeight();
@@ -37,8 +38,8 @@ const Video: React.FC = () => {
       </div>
 
       <div className="video__content">
-        <ImageKit
-          path="/images/home-video-img.jpg"
+        <Image
+          src="/images/home-video-img.jpg"
           alt="Architectural interior with a play button and the text 'Imagination Creates Reality."
         />
         <div className="video__banner">

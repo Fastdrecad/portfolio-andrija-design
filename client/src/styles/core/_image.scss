@@ -1,0 +1,40 @@
+@keyframes placeholderShimmer {
+  0% {
+    background-position: -100vw 0;
+  }
+  100% {
+    background-position: 100vw 0;
+  }
+}
+
+.image-loading {
+  opacity: 1;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeholderShimmer;
+  animation-timing-function: linear;
+  background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
+  background-size: 800px 104px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  &.top {
+    top: 2.2%;
+    height: 97.8% !important;
+  }
+}
+
+.image-loaded {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  will-change: opacity;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: opacity 0.25s ease-in-out;
+}
