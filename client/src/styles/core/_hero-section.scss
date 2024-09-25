@@ -51,7 +51,6 @@
 
       @include media-breakpoint-down(md) {
         height: 22vh;
-        height: calc(var(--vh, 1vh) * 22);
       }
     }
 
@@ -65,12 +64,16 @@
       background: $gradient;
 
       img {
-        position: relative;
+        position: absolute;
         object-fit: cover;
-        width: 100%;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
         height: 100%;
+        width: auto;
         object-position: top center;
-        clip-path: polygon(0 0, 100% 0, 100% 68%, 0 80%);
+        clip-path: polygon(0 0, 100% 0, 100% 66%, 0 79%);
         filter: brightness(0.45);
       }
     }
