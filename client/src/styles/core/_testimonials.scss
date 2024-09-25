@@ -6,43 +6,28 @@
 
     &__bg {
       position: relative;
-      min-height: 125vh;
-
-      @include media-breakpoint-up(lg) {
-        min-height: 105vh;
-      }
-
-      .image-wrapper {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        overflow: hidden;
-
-        img {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: top center;
-          clip-path: polygon(0 0, 100% 0, 100% 78%, 0 92%);
-        }
-      }
+      background-image: url("/images/testimonial-bg.jpg");
+      background-repeat: repeat;
+      clip-path: polygon(0 0, 100% 0%, 100% 82%, 0% 93%);
     }
 
-    .shadow {
-      background: $gradient;
+    &__bg--wrapper {
+      position: relative;
+    }
+
+    &__bg--gradient {
       position: absolute;
       top: 0;
-      right: 0;
-      bottom: 0;
       left: 0;
-      clip-path: polygon(0 0, 100% 0, 100% 81%, 0 100%);
+      bottom: 0;
+      right: 0;
+      background: $gradient;
+
+      clip-path: polygon(0 0, 100% 0%, 100% 85%, 0% 100%);
+
+      @include media-breakpoint-down(sm) {
+        clip-path: polygon(0 0, 100% 0%, 100% 85%, 0% 100%);
+      }
     }
 
     &__header {
@@ -54,7 +39,7 @@
         font-size: clamp(2rem, 9.2vw, 4rem) !important;
         position: relative;
         text-align: center;
-        padding-top: clamp(6rem, 10vw, 10rem);
+        padding-top: clamp(2rem, 10vw, 10rem);
         font-weight: normal;
 
         @include media-breakpoint-down(md) {
@@ -67,7 +52,6 @@
         justify-content: center;
         margin-top: 1.25rem;
         margin-bottom: 10rem;
-        z-index: 1;
 
         @include media-breakpoint-up(lg) {
           margin-top: 2.25rem;
@@ -87,6 +71,7 @@
       justify-content: center;
       width: 100%;
       transition: all 0.5s ease-out;
+      padding: 0 0 100px 0;
     }
 
     &__bottom-section {

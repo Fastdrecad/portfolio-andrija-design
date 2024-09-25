@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import TestimonialItems from "./TestimonialItems";
 import { testimonials } from "../data";
 import { motion, useInView } from "framer-motion";
@@ -15,59 +15,57 @@ const Testimonials: React.FC = () => {
     once: true
   });
 
-  // const [offsetY, setOffsetY] = useState(0);
-  // const handleScroll = () => setOffsetY(window.scrollY);
+  const [offsetY, setOffsetY] = useState(0);
+  const handleScroll = () => setOffsetY(window.scrollY);
 
-  // useEffect(() => {
-  //   const parallax = document.getElementById("parallax");
-  //   window.addEventListener("scroll", handleScroll);
-  //   if (parallax) {
-  //     parallax.style.backgroundPositionY = `${offsetY * 0.5}px`;
-  //   }
+  useEffect(() => {
+    const parallax = document.getElementById("parallax");
+    window.addEventListener("scroll", handleScroll);
+    if (parallax) {
+      parallax.style.backgroundPositionY = `${offsetY * 0.5}px`;
+    }
 
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, [offsetY]);
-
-  const parallaxRef = useRef<HTMLDivElement>(null);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [offsetY]);
 
   return (
     <section className="testimonials" id="testimonials">
-      <div className="testimonials__bg">
-        <div className="shadow"></div>
-        <motion.div className="image-wrapper" id="parallax" ref={parallaxRef}>
-          <img src="/images/testimonial-bg.jpg" alt="Parallax background" />
-        </motion.div>
-        <div className="testimonials__header">
-          <h2>Testimonials</h2>
-          <motion.div
-            className="red-line-wrapper"
-            ref={contentRef}
-            initial={{ opacity: 0 }}
-            animate={isContentInView ? { y: 0, opacity: 1 } : {}}
-          >
-            <div className="red-line-placeholder">
-              {isContentInView && <RedLineIcon />}
-            </div>
-          </motion.div>
-        </div>
-        <div className="testimonials__slider">
-          <TestimonialItems>
-            {testimonials.map((item, i: number) => (
-              <div className="container-items" key={i}>
-                <div className="content-items">
-                  <em>
-                    <p>{item.review}</p>
-                  </em>
-                  <div className="person">
-                    <h2>{item.name}</h2>
-                    <h4>{item.position}</h4>
+      <div className="testimonials__bg--wrapper">
+        <div className="testimonials__bg--gradient"></div>
+        <div className="testimonials__bg" id="parallax">
+          <div className="testimonials__header">
+            <h2>Testimonials</h2>
+            <motion.div
+              className="red-line-wrapper"
+              ref={contentRef}
+              initial={{ opacity: 0 }}
+              animate={isContentInView ? { y: 0, opacity: 1 } : {}}
+            >
+              <div className="red-line-placeholder">
+                {isContentInView && <RedLineIcon />}
+              </div>
+            </motion.div>
+          </div>
+          <div className="testimonials__slider">
+            <TestimonialItems>
+              {testimonials.map((item, i: number) => (
+                <div className="container-items" key={i}>
+                  <div className="content-items">
+                    <em>
+                      <p>{item.review}</p>
+                    </em>
+                    <div className="person">
+                      <h2>{item.name}</h2>
+                      <h4>{item.position}</h4>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </TestimonialItems>
+              ))}
+            </TestimonialItems>
+          </div>
         </div>
       </div>
+
       <div className="testimonials__bottom-section">
         <h3>
           Let&rsquo;s work together to achieve your goals and elevate your
