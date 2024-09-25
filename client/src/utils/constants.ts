@@ -1,6 +1,3 @@
-// required parameter to fetch images
-export const urlEndpoint = "https://ik.imagekit.io/2o7xtkfrs";
-
 import {
   FaLinkedinIn,
   FaBehance,

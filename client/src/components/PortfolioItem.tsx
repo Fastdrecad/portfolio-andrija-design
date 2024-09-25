@@ -48,7 +48,7 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({
         ref={portfolioItemRef}
         onClick={() => openModal(id)}
       >
-        <Image src={url} loading="lazy" alt={alt} />
+        <Image src={url} loading="lazy" alt={alt || "Portfolio item"} />
         <div className="portfolio-item__overlay">
           <h4 className="portfolio-item__project-name">{projectName}</h4>
           <p className="portfolio-item__title">{title}</p>

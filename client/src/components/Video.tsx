@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import VideoSection from "./VideoSection";
 import { RedLineIcon } from "./RedLine";
-import ImageKit from "./ImageKit";
 import useViewportHeight from "../hooks/useViewportHeight";
 import Image from "./Image";
 

@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { designProcess } from "../data";
 import pageTransition from "@components/pageTransition";
-import ImageKit from "@components/ImageKit";
 import Image from "@components/Image";
 
 interface DesignProcessItem {

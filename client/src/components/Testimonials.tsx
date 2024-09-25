@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import TestimonialItems from "./TestimonialItems";
 import { testimonials } from "../data";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { RedLineIcon } from "./RedLine";
 
 const Testimonials: React.FC = () => {
