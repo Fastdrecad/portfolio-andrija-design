@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { MenuContext } from "../context/navContext";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { setCurrentRoute } from "../redux/routeSlice";
-import { useDispatch } from "react-redux";
 import ToggleSwitch from "./ToggleSwitch";
 import Navigation from "./Navigation";
 import MainLogo from "./MainLogo";
@@ -11,12 +11,22 @@ const Header: React.FC = () => {
   const { toggle, isChecked } = useContext(MenuContext);
   const dispatch = useDispatch();
 
-  const [navClass, setNavClass] = useState("top");
+  const [navClass, setNavClass] = useState("hidden");
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1200);
+
+  const handleResize = () => {
+    setIsDesktop(window.innerWidth > 1200);
+  };
 
   const handleNavLinkClick = (url: string) => {
     dispatch(setCurrentRoute(url));
   };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +42,7 @@ const Header: React.FC = () => {
         setNavClass("hidden");
       } else {
         // Show navbar when scrolling up
+
         setNavClass("scrolled-up");
       }
 
@@ -44,8 +55,13 @@ const Header: React.FC = () => {
   }, [lastScrollY, navClass]);
 
   return (
-    <header className={`header ${navClass === "hidden" ? "hidden" : ""}`}>
-      <nav className={`header__main ${navClass}`}>
+    <header className="header">
+      {/* Main navigation for all screen sizes */}
+      <nav
+        className={`header__main ${navClass} ${
+          isDesktop && navClass === "top" ? "hidden" : ""
+        }`}
+      >
         <div className="header__container">
           <MainLogo />
           <div className="header__nav-content">
@@ -65,34 +81,36 @@ const Header: React.FC = () => {
         </div>
       </nav>
 
-      <nav className="header__desktop-fixed">
-        <div
-          className=""
-          style={{
-            position: "absolute",
-            width: "60px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            left: "50px"
-          }}
-        >
-          <MainLogo />
-        </div>
-        <div className="header__switch">
-          <ToggleSwitch />
-        </div>
-        <div className="header__link-name">
-          <Link to="/" onClick={() => handleNavLinkClick("/")}>
-            <h2 className="header__link-name-main">
-              Andrija<span>Mićunović</span>
-            </h2>
-          </Link>
-        </div>
-        <h1 className="header__subtitle">
-          Furniture & Product Design | 2D/3D CAD | Rendering
-        </h1>
-        <Navigation />
-      </nav>
+      {/* Fixed desktop header for screens larger than 1200px */}
+      {isDesktop && (
+        <nav className={`header__desktop-fixed ${navClass}`}>
+          <div
+            style={{
+              position: "absolute",
+              width: "60px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              left: "50px"
+            }}
+          >
+            <MainLogo />
+          </div>
+          <div className="header__switch">
+            <ToggleSwitch />
+          </div>
+          <div className="header__link-name">
+            <Link to="/" onClick={() => handleNavLinkClick("/")}>
+              <h2 className="header__link-name-main">
+                Andrija<span>Mićunović</span>
+              </h2>
+            </Link>
+          </div>
+          <h1 className="header__subtitle">
+            Furniture & Product Design | 2D/3D CAD | Rendering
+          </h1>
+          <Navigation />
+        </nav>
+      )}
     </header>
   );
 };
