@@ -7,18 +7,20 @@ interface CalendlyProps {
 
 const Calendly: React.FC<CalendlyProps> = ({ onClose }) => {
   return (
-    <div className="calendly-wrapper">
-      <button className="calendly-close-button" onClick={onClose}>
-        <BsXLg />
-      </button>
-      <InlineWidget
-        url="https://calendly.com/andrijas-micun/zakazite-sastanak-1"
-        styles={{
-          minWidth: "320px",
-          width: "100%",
-          border: "none"
-        }}
-      />
+    <div className="calendly">
+      <div className="calendly__close-btn-container">
+        <button className="calendly__close-button" onClick={onClose}>
+          <BsXLg />
+        </button>
+      </div>
+      <div className="calendly__modal">
+        <div className="calendly__modal-wrapper">
+          <InlineWidget
+            url="https://calendly.com/andrijas-micun/zakazite-sastanak-1"
+            styles={{}}
+          />
+        </div>
+      </div>
     </div>
   );
 };

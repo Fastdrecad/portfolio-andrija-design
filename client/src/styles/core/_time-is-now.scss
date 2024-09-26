@@ -147,43 +147,6 @@
         opacity: themed("logo-opacity");
       }
     }
-
-    .calendly-wrapper {
-      position: fixed;
-      inset: 0;
-      background-color: themed("background-color");
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      scroll-behavior: smooth;
-      min-height: 100vh;
-      z-index: -1;
-      @include media-breakpoint-up(sm) {
-        // align-items: center;
-      }
-
-      .calendly-close-button {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        padding: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #f00;
-        color: white;
-        border: none;
-        cursor: pointer;
-        font-size: 2.5rem !important;
-        cursor: pointer;
-      }
-
-      .calendly-inline-widget {
-        min-height: -webkit-fill-available;
-        flex-grow: 1;
-      }
-    }
   }
 }
 
