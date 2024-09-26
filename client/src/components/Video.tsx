@@ -1,14 +1,28 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import VideoSection from "./VideoSection";
 import { RedLineIcon } from "./RedLine";
 import useViewportHeight from "../hooks/useViewportHeight";
 import Image from "./Image";
+import Modal from "./Modal";
+import { AiOutlinePlayCircle } from "react-icons/ai";
 
 const Video: React.FC = () => {
   useViewportHeight();
   const videoTitleRef = useRef<HTMLDivElement>(null);
   const isVideoTitleInView = useInView(videoTitleRef);
+
+  const videoIconRef = useRef<HTMLDivElement>(null);
+  const isVideoIconInView = useInView(videoIconRef);
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleClick = () => {
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   return (
     <section id="video" className="video">
@@ -42,11 +56,28 @@ const Video: React.FC = () => {
           alt="Architectural interior with a play button and the text 'Imagination Creates Reality."
         />
         <div className="video__banner">
-          <VideoSection />
+          <motion.div
+            ref={videoIconRef}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={
+              isVideoIconInView ? { scale: [1, 1.4, 1], opacity: 1 } : {}
+            }
+            transition={{ duration: 0.85 }}
+          >
+            <button onClick={handleClick} className="video__play-btn">
+              <AiOutlinePlayCircle className="video__play-icon" />
+            </button>
+          </motion.div>
           <span>imagination creates reality</span>
         </div>
-        <div className="video__popup-media" />
       </div>
+      {isOpen && (
+        <Modal
+          onClose={handleClose}
+          modalType="youtube"
+          videoId="MzTkNCEDeLM" // The YouTube video ID
+        />
+      )}
     </section>
   );
 };

@@ -1,12 +1,14 @@
 .backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  height: 100dvh;
-  width: 100vw;
-  z-index: 1005;
-  background-color: rgb(16, 16, 16);
-  backface-visibility: hidden;
-  scroll-behavior: unset;
+  @include themify($themes) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    height: 100dvh;
+    width: 100vw;
+    z-index: 1005;
+    background-color: themed("background-color");
+    backface-visibility: hidden;
+    scroll-behavior: unset;
+  }
 }

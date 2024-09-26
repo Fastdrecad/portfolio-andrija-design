@@ -66,12 +66,6 @@
       }
     }
 
-    // todo: delete this .image-tras once you complete the task
-    .image-tras {
-      background-color: red;
-      height: $hero-image-transparent;
-    }
-
     &__image {
       position: absolute;
       height: 100%;
@@ -233,11 +227,18 @@
         &:hover {
           .scroll-to-web-arrow-wrapper {
             transition: all 0.3s ease-in-out;
+            background-color: transparent;
 
             svg {
               animation: bounce-2 1s ease-in-out infinite alternate;
             }
           }
+        }
+
+        &:focus,
+        &:active {
+          outline: none;
+          cursor: pointer;
         }
       }
 

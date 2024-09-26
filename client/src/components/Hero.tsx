@@ -38,7 +38,6 @@ const Hero: React.FC = () => {
         <div className="hero__wrapper">
           <div className="hero__controller">
             <div className="hero__content" ref={heroContentRef}>
-              {/* <div className="image-tras"></div> */}
               <Image
                 src={"/images/Header-Image.png"}
                 alt="Andrija Mićunović at the workplace"

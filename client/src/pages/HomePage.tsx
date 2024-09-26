@@ -92,12 +92,6 @@ const HomePage: React.FC = () => {
         <LatestWorks />
         <TimeIsNow />
         <Testimonials />
-        {/*
-      TODO: Remove this later
-      <div style={{ width: "100vw", height: "600px" }}>
-      <h3>Video Kit</h3>
-      <VideoKit path="it-bridge-loop.mp4" width="500" height="300" cont  lazy="loading" />
-      </div> */}
       </main>
     </>
   );

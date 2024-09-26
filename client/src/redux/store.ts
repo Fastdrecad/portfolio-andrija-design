@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit';
-import routeReducer from './routeSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import routeReducer from "./routeSlice";
 
 export type RootState = ReturnType<typeof store.getState>;
 

@@ -5,7 +5,6 @@ import {
   // BsChevronRight,
   BsXLg
 } from "react-icons/bs";
-// import GalleryItem from "./GalleryItem";
 import GalleryItem from "@components/GalleryItem";
 import { portfolio } from "../data";
 import { useEffect, useRef, useState } from "react";
@@ -169,7 +168,6 @@ const ModalContent: React.FC<ModalContentProps> = ({ onClose, projectId }) => {
                 <BsArrowsFullscreen />
               </button>
             </div>
-            {/* <h2 className="">Gallery Project - {projectId}</h2> */}
             <h2 className="project-title">{project.title}</h2>
             <div className="modal-content__fullscreen-nav">
               <button

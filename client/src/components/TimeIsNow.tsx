@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { RedLineIcon } from "./RedLine";
-import { InlineWidget } from "react-calendly";
 import { AmLogo } from "./AmLogo";
-import { BsXLg } from "react-icons/bs";
 import useViewportHeight from "../hooks/useViewportHeight";
+import Modal from "./Modal";
 
 const TimeIsNow: React.FC = () => {
   useViewportHeight();
@@ -92,23 +91,7 @@ const TimeIsNow: React.FC = () => {
         <>
           {/* Calendly Widget Embed */}
           {isCalendlyOpen && (
-            <div className="calendly-wrapper">
-              <button className="calendly-close-button" onClick={handleClose}>
-                <BsXLg />
-              </button>
-
-              <div ref={widgetRef} className="calendly-content">
-                <InlineWidget
-                  url="https://calendly.com/andrijas-micun/zakazite-sastanak-1"
-                  styles={{
-                    minWidth: "320px",
-                    height: "700px",
-                    width: "100%",
-                    border: "none"
-                  }}
-                />
-              </div>
-            </div>
+            <Modal onClose={handleClose} modalType="calendly" />
           )}
         </>
       </div>

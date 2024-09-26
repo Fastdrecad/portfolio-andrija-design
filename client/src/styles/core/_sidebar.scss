@@ -60,12 +60,12 @@
         text-transform: capitalize;
         padding: 10px 15px;
         color: themed("text-color") !important;
-        transition: $animation-timing ease-in-out;
+        transition: all $animation-timing ease-in-out;
         letter-spacing: 1px;
 
         &:hover {
           background: themed("text-color-soft");
-          color: themed("background-color");
+          color: white !important;
         }
 
         &:active {
