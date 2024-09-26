@@ -1,14 +1,17 @@
 import { useCallback, useEffect } from "react";
-import Backdrop from "./Backdrop";
-import ModalContent from "./ModalContent";
-import YoutubeEmbed from "./YoutubeEmbed";
-import Calendly from "./Calendly";
+import { useDispatch } from "react-redux";
+
+import { closeModal, openModal, ModalPayload } from "@/redux/modalSlice";
+import Backdrop from "@/components/Backdrop";
+import ModalContent from "@/components/ModalContent";
+import YoutubeEmbed from "@/components/YoutubeEmbed";
+import Calendly from "@/components/Calendly";
 
 interface ModalProps {
   onClose: () => void;
   children?: React.ReactNode;
   id?: number;
-  modalType?: "project" | "youtube" | "calendly";
+  modalType: "project" | "youtube" | "calendly";
   videoId?: string;
 }
 
@@ -16,9 +19,11 @@ const Modal: React.FC<ModalProps> = ({
   onClose,
   children,
   id,
-  modalType = "project",
+  modalType,
   videoId
 }) => {
+  const dispatch = useDispatch();
+
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -27,22 +32,25 @@ const Modal: React.FC<ModalProps> = ({
     },
     [onClose]
   );
-
   useEffect(() => {
-    // Disable body scroll when modal is open
+    // Conditionally dispatch based on modal type
+    if (modalType === "project" && id !== undefined) {
+      dispatch(openModal({ modalType: "project", projectId: id }));
+    } else {
+      dispatch(openModal({ modalType } as ModalPayload)); // No projectId for youtube/calendly
+    }
+
     document.body.style.overflow = "hidden";
 
-    // Add keydown event listener to handle 'Esc' key
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      // Restore body scroll when modal is closed
+      dispatch(closeModal(modalType));
       document.body.style.overflow = "auto";
 
-      // Clean up keydown event listener
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [handleKeyDown]);
+  }, [handleKeyDown, dispatch, modalType, id]);
 
   return (
     <Backdrop onClick={onClose}>

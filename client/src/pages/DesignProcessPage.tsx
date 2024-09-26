@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { designProcess } from "../data";
-import pageTransition from "@components/pageTransition";
-import Image from "@components/Image";
+
+import { designProcess } from "@/constants/data";
+import pageTransition from "@/components/pageTransition";
+import Image from "@/components/Image";
 
 interface DesignProcessItem {
   id: number;

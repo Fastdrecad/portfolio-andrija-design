@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import routeReducer from "./routeSlice";
+import modalReducer from "@/redux/modalSlice";
+import routeReducer from "@/redux/routeSlice";
 
-export type RootState = ReturnType<typeof store.getState>;
-
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    route: routeReducer
+    route: routeReducer,
+    modal: modalReducer
   }
 });
 
-export default store;
+export type RootState = ReturnType<typeof store.getState>;

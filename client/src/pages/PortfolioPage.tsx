@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { list, portfolio } from "../data";
-import PortfolioItem from "@components/PortfolioItem";
-import PortfolioList from "@components/PortfolioList";
-import pageTransition from "@components/pageTransition";
-import { RedLineIcon } from "@components/RedLine";
 import { motion, useInView } from "framer-motion";
-import useViewportHeight from "../hooks/useViewportHeight";
+
+import useViewportHeight from "@/hooks/useViewportHeight";
+import { RedLineIcon } from "@/components/RedLine";
+import PortfolioList from "@/components/PortfolioList";
+import PortfolioItem from "@/components/PortfolioItem";
+import pageTransition from "@/components/pageTransition";
+import { list, portfolio } from "@/constants/data";
 
 interface PortfolioItem {
   id: number;
@@ -67,13 +68,6 @@ const PortfolioPage: React.FC = () => {
       setData(filterPortfolioByCategory(newCategory));
     }, 50);
   };
-
-  // const handleMoreImages = useCallback(() => {
-  //   const currentLength = next;
-  //   setNewlyLoadedStartIndex(currentLength);
-  //   setNext((prevNext) => prevNext + imagesPerRow);
-  //   resetAnimation();
-  // }, [next]);
 
   const handleMoreImages = useCallback(() => {
     const currentLength = next;

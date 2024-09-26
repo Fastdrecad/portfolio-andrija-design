@@ -1,3 +1,8 @@
+import { motion, useInView } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+
 import React, {
   useEffect,
   useRef,
@@ -5,17 +10,13 @@ import React, {
   FormEvent,
   ChangeEvent
 } from "react";
-import { motion, useInView } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import pageTransition from "@components/pageTransition";
-import { useDispatch } from "react-redux";
-import { setCurrentRoute } from "../redux/routeSlice";
-import axios from "axios";
-import FormInput from "@components/FormInput";
-import { inputs } from "../utils/constants";
-import { RedLineIcon } from "@components/RedLine";
-import { AmLogo } from "@components/AmLogo";
-import Image from "@components/Image";
+import { setCurrentRoute } from "@/redux/routeSlice";
+import { AmLogo } from "@/components/AmLogo";
+import { RedLineIcon } from "@/components/RedLine";
+import { inputs } from "@/utils/constants";
+import FormInput from "@/components/FormInput";
+import Image from "@/components/Image";
+import pageTransition from "@/components/pageTransition";
 
 interface FormValues {
   firstName: string;

@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { links } from "../utils/constants";
-import { MenuContext } from "../context/navContext";
-import { setCurrentRoute } from "../redux/routeSlice";
-import Socials from "./Socials";
+
+import Socials from "@/components/Socials";
+import { MenuContext } from "@/context/navContext";
+import { setCurrentRoute } from "@/redux/routeSlice";
+import { links } from "@/utils/constants";
 
 const Sidebar: React.FC = () => {
   const { toggle, menuOpen } = useContext(MenuContext);

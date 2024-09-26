@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import TestimonialItems from "./TestimonialItems";
-import { testimonials } from "../data";
 import { motion, useInView } from "framer-motion";
-import { RedLineIcon } from "./RedLine";
+
+import { RedLineIcon } from "@/components/RedLine";
+import TestimonialItems from "@/components/TestimonialItems";
+import { testimonials } from "@/constants/data";
 
 const Testimonials: React.FC = () => {
   const lineRef = useRef<HTMLDivElement>(null);

@@ -1,4 +1,4 @@
-import { socialLinks } from '../utils/constants';
+import { socialLinks } from "@/utils/constants";
 
 interface SocialsProps {
   containerStyles: string;

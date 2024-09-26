@@ -1,7 +1,11 @@
-import React, { useRef, useState } from "react";
+import { useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Modal from "./Modal";
-import Image from "./Image";
+import { useDispatch, useSelector } from "react-redux";
+
+import Image from "@/components/Image";
+import Modal from "@/components/Modal";
+import { RootState } from "@/redux/store";
+import { closeModal, openModal } from "@/redux/modalSlice";
 
 interface PortfolioItemProps {
   id: number;
@@ -26,14 +30,21 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({
   index,
   alt
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState<number | null>(null);
-
-  const closeModal = () => setIsModalOpen(null);
-  const openModal = (projectId: number) => setIsModalOpen(projectId);
+  const dispatch = useDispatch();
+  const isModalOpen = useSelector(
+    (state: RootState) => state.modal.project === id
+  );
 
   const portfolioItemRef = useRef<HTMLLIElement>(null);
-
   const isNewItem = index >= newlyLoadedStartIndex;
+
+  const handleOpenModal = () => {
+    dispatch(openModal({ modalType: "project", projectId: id })); // Only pass projectId when modalType is 'project'
+  };
+
+  const handleCloseModal = () => {
+    dispatch(closeModal("project")); // Close the project modal
+  };
 
   return (
     <>
@@ -46,7 +57,7 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({
             : `${index * 100 + 100}ms`
         }}
         ref={portfolioItemRef}
-        onClick={() => openModal(id)}
+        onClick={handleOpenModal}
       >
         <Image src={url} loading="lazy" alt={alt || "Portfolio item"} />
         <div className="portfolio-item__overlay">
@@ -56,7 +67,9 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({
       </motion.li>
 
       <AnimatePresence initial={false} onExitComplete={() => null} mode="wait">
-        {isModalOpen && <Modal onClose={closeModal} id={id} />}
+        {isModalOpen && (
+          <Modal modalType="project" onClose={handleCloseModal} id={id} />
+        )}
       </AnimatePresence>
     </>
   );

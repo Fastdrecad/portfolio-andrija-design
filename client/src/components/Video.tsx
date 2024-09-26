@@ -1,12 +1,17 @@
-import React, { useRef, useState } from "react";
+import { useCallback, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { RedLineIcon } from "./RedLine";
-import useViewportHeight from "../hooks/useViewportHeight";
-import Image from "./Image";
-import Modal from "./Modal";
+import { useDispatch, useSelector } from "react-redux";
+
 import { AiOutlinePlayCircle } from "react-icons/ai";
+import useViewportHeight from "@/hooks/useViewportHeight";
+import { RedLineIcon } from "@/components/RedLine";
+import Image from "@/components/Image";
+import Modal from "@/components/Modal";
+import { closeModal, openModal } from "@/redux/modalSlice";
+import { RootState } from "@/redux/store";
 
 const Video: React.FC = () => {
+  const dispatch = useDispatch();
   useViewportHeight();
   const videoTitleRef = useRef<HTMLDivElement>(null);
   const isVideoTitleInView = useInView(videoTitleRef);
@@ -14,15 +19,15 @@ const Video: React.FC = () => {
   const videoIconRef = useRef<HTMLDivElement>(null);
   const isVideoIconInView = useInView(videoIconRef);
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const isYoutubeOpen = useSelector((state: RootState) => state.modal.youtube);
 
-  const handleClick = () => {
-    setIsOpen(true);
-  };
+  const handleClick = useCallback(() => {
+    dispatch(openModal({ modalType: "youtube" }));
+  }, [dispatch]);
 
-  const handleClose = () => {
-    setIsOpen(false);
-  };
+  const handleClose = useCallback(() => {
+    dispatch(closeModal("youtube"));
+  }, [dispatch]);
 
   return (
     <section id="video" className="video">
@@ -71,7 +76,7 @@ const Video: React.FC = () => {
           <span>imagination creates reality</span>
         </div>
       </div>
-      {isOpen && (
+      {isYoutubeOpen && (
         <Modal
           onClose={handleClose}
           modalType="youtube"

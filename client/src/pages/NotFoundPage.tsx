@@ -1,8 +1,9 @@
-import pageTransition from "@components/pageTransition";
-import { useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { setCurrentRoute } from "../redux/routeSlice";
 import { useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { setCurrentRoute } from "@/redux/routeSlice";
+import pageTransition from "@/components/pageTransition";
 
 const NotFound = () => {
   useEffect(() => {

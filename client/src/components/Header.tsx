@@ -1,17 +1,24 @@
 import { useState, useEffect, useContext } from "react";
-import { MenuContext } from "../context/navContext";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { setCurrentRoute } from "../redux/routeSlice";
-import ToggleSwitch from "./ToggleSwitch";
-import Navigation from "./Navigation";
-import MainLogo from "./MainLogo";
+
+import { setCurrentRoute } from "@/redux/routeSlice";
+import { MenuContext } from "@/context/navContext";
+import MainLogo from "@/components/MainLogo";
+import Navigation from "@/components/Navigation";
+import ToggleSwitch from "@/components/ToggleSwitch";
+import { RootState } from "@/redux/store";
 
 const Header: React.FC = () => {
   const { toggle, isChecked } = useContext(MenuContext);
   const dispatch = useDispatch();
+  const { calendly, youtube, project } = useSelector(
+    (state: RootState) => state.modal
+  );
 
-  const [navClass, setNavClass] = useState("hidden");
+  const isAnyModalOpen = calendly || youtube || project !== null;
+
+  const [navClass, setNavClass] = useState("");
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1200);
 
@@ -53,6 +60,10 @@ const Header: React.FC = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY, navClass]);
+
+  if (isAnyModalOpen) {
+    return null;
+  }
 
   return (
     <header className="header">

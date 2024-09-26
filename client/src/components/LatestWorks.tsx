@@ -1,10 +1,11 @@
 import React, { useRef } from "react";
 import { useInView } from "framer-motion";
-import { useDispatch } from "react-redux";
-import { setCurrentRoute } from "../redux/routeSlice";
-import { portfolio } from "../data";
 import { NavLink } from "react-router-dom";
-import PortfolioItem from "./PortfolioItem";
+import { useDispatch } from "react-redux";
+
+import { setCurrentRoute } from "@/redux/routeSlice";
+import PortfolioItem from "@/components/PortfolioItem";
+import { portfolio } from "@/constants/data";
 
 interface LatestWorksProps {
   className?: string;

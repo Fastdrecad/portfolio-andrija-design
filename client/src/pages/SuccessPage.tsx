@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import Confetti from "react-confetti";
-import pageTransition from "@components/pageTransition";
 import { useDispatch } from "react-redux";
-import { setCurrentRoute } from "../redux/routeSlice";
+import Confetti from "react-confetti";
+import pageTransition from "@/components/pageTransition";
+import { setCurrentRoute } from "@/redux/routeSlice";
 
 const SuccessPage: React.FC = () => {
   useEffect(() => {

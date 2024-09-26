@@ -1,8 +1,9 @@
-import { motion } from 'framer-motion';
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { RootState } from '../redux/store';
-import AnimatedDots from './AnimatedDots';
+import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+
+import { RootState } from "@/redux/store";
+import AnimatedDots from "@/components/AnimatedDots";
 
 const pageTransition = (OriginalComponent: React.FC) => {
   const PageTransitionComponent: React.FC = () => {
@@ -15,7 +16,7 @@ const pageTransition = (OriginalComponent: React.FC) => {
     return (
       <>
         <motion.div
-          className='slide-in-red'
+          className="slide-in-red"
           initial={{ scaleX: 0 }}
           animate={{
             scaleX: 0
@@ -24,7 +25,7 @@ const pageTransition = (OriginalComponent: React.FC) => {
           transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
         >
           <motion.div
-            className='slide-page-name'
+            className="slide-page-name"
             initial={{ opacity: 0 }}
             animate={{
               opacity: 1
@@ -34,7 +35,7 @@ const pageTransition = (OriginalComponent: React.FC) => {
             }}
             transition={{ delay: 0.5, duration: 0.6 }}
           >
-            <div className='page-slide-title-content'>
+            <div className="page-slide-title-content">
               <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                 {currentRoute.slice(1)}
               </motion.p>
@@ -42,10 +43,10 @@ const pageTransition = (OriginalComponent: React.FC) => {
             </div>
           </motion.div>
           <motion.div
-            className='slide-in-black'
-            initial={{ x: '-100%', scaleX: 1 }}
+            className="slide-in-black"
+            initial={{ x: "-100%", scaleX: 1 }}
             animate={{
-              x: '0%',
+              x: "0%",
               scaleX: [1, 0.0015]
             }}
             transition={{
@@ -57,7 +58,7 @@ const pageTransition = (OriginalComponent: React.FC) => {
           ></motion.div>
         </motion.div>
         <motion.div
-          className='slide-out-black'
+          className="slide-out-black"
           initial={{ scaleX: 1 }}
           animate={{
             scaleX: 0

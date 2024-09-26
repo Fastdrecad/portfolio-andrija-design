@@ -1,9 +1,10 @@
 import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setCurrentRoute } from "../redux/routeSlice";
-import { SignatureSvg } from "@components/SignatureSvg";
-import Image from "./Image";
+
+import { setCurrentRoute } from "@/redux/routeSlice";
+import Image from "@/components/Image";
+import { SignatureSvg } from "@/components/SignatureSvg";
 
 const AboutSection: React.FC = () => {
   const { ref: ref1, inView: titleIsVisible } = useInView();
@@ -53,14 +54,17 @@ const AboutSection: React.FC = () => {
                   ensuring each project sets a new benchmark. With every design,
                   I push boundaries and always put quality first, delivering
                   results that speak for themselves.
-                  <hr />I help clients transform their ideas into reality by
-                  offering innovative design solutions in Furniture & Product
-                  Design, 3D Modeling, Rendering, and 2D/3D CAD. With over two
-                  decades of experience, I push boundaries and deliver
-                  high-quality, photorealistic renderings, detailed 3D models,
-                  and technical drawings. My expertise in Inventor, SOLIDWORKS,
-                  AutoCAD, 3ds Max, and V-Ray ensures that every project is
-                  completed with both precision and creativity—and more.
+                </p>
+                <hr style={{ margin: "1.5rem 0" }} />
+                <p>
+                  I help clients transform their ideas into reality by offering
+                  innovative design solutions in Furniture & Product Design, 3D
+                  Modeling, Rendering, and 2D/3D CAD. With over two decades of
+                  experience, I push boundaries and deliver high-quality,
+                  photorealistic renderings, detailed 3D models, and technical
+                  drawings. My expertise in Inventor, SOLIDWORKS, AutoCAD, 3ds
+                  Max, and V-Ray ensures that every project is completed with
+                  both precision and creativity—and more.
                 </p>
                 <hr style={{ margin: "3.5rem 0" }} />
 

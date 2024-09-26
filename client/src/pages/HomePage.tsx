@@ -1,11 +1,11 @@
 import { Helmet } from "react-helmet-async";
-import Hero from "@components/Hero";
-import LatestWorks from "@components/LatestWorks";
-import Testimonials from "@components/Testimonials";
-import TimeIsNow from "@components/TimeIsNow";
-import Video from "@components/Video";
-import pageTransition from "@components/pageTransition";
-// import VideoKit from "@components/VideoKit";
+
+import Hero from "@/components/Hero";
+import LatestWorks from "@/components/LatestWorks";
+import Testimonials from "@/components/Testimonials";
+import TimeIsNow from "@/components/TimeIsNow";
+import Video from "@/components/Video";
+import pageTransition from "@/components/pageTransition";
 
 const HomePage: React.FC = () => {
   return (

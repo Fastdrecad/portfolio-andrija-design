@@ -1,13 +1,9 @@
-import { motion } from "framer-motion";
-import {
-  BsArrowsFullscreen,
-  // BsChevronLeft,
-  // BsChevronRight,
-  BsXLg
-} from "react-icons/bs";
-import GalleryItem from "@components/GalleryItem";
-import { portfolio } from "../data";
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+
+import { BsArrowsFullscreen, BsXLg } from "react-icons/bs";
+import { portfolio } from "@/constants/data";
+import GalleryItem from "@/components/GalleryItem";
 
 interface ModalContentProps {
   onClose: () => void;
@@ -147,7 +143,7 @@ const ModalContent: React.FC<ModalContentProps> = ({ onClose, projectId }) => {
         }
       }}
     >
-      <div className="">
+      <div>
         <div className="modal-content__fullscreen-view">
           <div
             ref={navbarRef}

@@ -16,15 +16,7 @@ export default defineConfig({
   plugins: [react(), inspect()],
   resolve: {
     alias: {
-      "@components": resolve(__dirname, "./src/components"),
-      "@constants": resolve(__dirname, "./src/constants"),
-      "@context": resolve(__dirname, "./src/context"),
-      "@hooks": resolve(__dirname, "./src/hooks"),
-      "@pages": resolve(__dirname, "./src/pages"),
-      "@redux": resolve(__dirname, "./src/redux"),
-      "@routes": resolve(__dirname, "./src/routes"),
-      "@styles": resolve(__dirname, "./src/styles"),
-      "@utils": resolve(__dirname, "./src/utils")
+      "@": "/src"
     }
   }
 });

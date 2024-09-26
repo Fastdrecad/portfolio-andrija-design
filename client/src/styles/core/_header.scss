@@ -1,4 +1,8 @@
 .header {
+  &.hidden {
+    display: none;
+  }
+
   @include themify($themes) {
     &__desktop-fixed {
       width: 100%;

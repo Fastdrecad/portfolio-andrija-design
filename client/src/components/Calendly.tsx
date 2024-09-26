@@ -15,10 +15,7 @@ const Calendly: React.FC<CalendlyProps> = ({ onClose }) => {
       </div>
       <div className="calendly__modal">
         <div className="calendly__modal-wrapper">
-          <InlineWidget
-            url="https://calendly.com/andrijas-micun/zakazite-sastanak-1"
-            styles={{}}
-          />
+          <InlineWidget url="https://calendly.com/andrijas-micun/zakazite-sastanak-1" />
         </div>
       </div>
     </div>

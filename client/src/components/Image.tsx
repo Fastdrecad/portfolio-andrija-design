@@ -25,12 +25,6 @@ const Image: React.FC<ImageProps> = ({
 }) => {
   const { imageSrc, loaded } = useImageLoader({ src });
 
-  // Debug: Log when component renders
-  console.log(`Rendering Image Component, Loaded: ${loaded}`);
-  console.log(`Current src: ${loaded ? imageSrc : placeholder}`);
-  console.log(`Current srcSet: ${srcSet}`);
-  console.log(`Current sizes: ${sizes}`);
-
   const finalClassName = `${loaded ? "image-loaded" : "image-loading"} ${
     className || ""
   }`;
@@ -54,9 +48,6 @@ const Image: React.FC<ImageProps> = ({
         alt={alt}
         className={finalClassName}
         style={{ opacity: loaded ? 1 : 0 }}
-        onLoad={() => {
-          console.log(`Image loaded: ${src}`);
-        }}
       />
     </div>
   );

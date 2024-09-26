@@ -1,8 +1,8 @@
 import { CSSProperties, MutableRefObject, useEffect, useState } from "react";
-import { portfolio } from "../data";
 
 import { forwardRef } from "react";
 import Image from "./Image";
+import { portfolio } from "@/constants/data";
 
 interface GalleryItemProps {
   projectId: number;

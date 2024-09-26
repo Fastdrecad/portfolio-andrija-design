@@ -7,7 +7,8 @@ import {
   useEffect,
   useCallback
 } from "react";
-import { testimonials } from "../data";
+
+import { testimonials } from "@/constants/data";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 interface TestimonialItemsProps {

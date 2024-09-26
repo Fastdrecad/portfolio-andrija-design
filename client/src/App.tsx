@@ -1,15 +1,15 @@
 import { BrowserRouter as Router } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import { DarkModeContext } from "./context/darkModeContext";
-import RoutesConfig from "./routes/routes";
-import Header from "@components/Header";
-import Footer from "@components/Footer";
-import ScrollToTop from "@components/ScrollToTop";
-import NavigateToTop from "@components/NavigateToTop";
-import VisibilityControl from "@components/VisibilityControl";
-import Sidebar from "@components/Sidebar";
-import Loader from "@components/Loader";
+import { DarkModeContext } from "@/context/darkModeContext";
+import RoutesConfig from "@/routes/routes";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
+import NavigateToTop from "@/components/NavigateToTop";
+import Sidebar from "@/components/Sidebar";
+import Loader from "@/components/Loader";
+import VisibilityControl from "@/components/layout/VisibilityControl";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);

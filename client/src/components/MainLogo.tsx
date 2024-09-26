@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setCurrentRoute } from "../redux/routeSlice";
-import Image from "./Image";
+
+import { setCurrentRoute } from "@/redux/routeSlice";
+import Image from "@/components/Image";
 
 const MainLogo: React.FC = () => {
   const dispatch = useDispatch();

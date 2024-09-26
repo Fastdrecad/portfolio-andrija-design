@@ -147,5 +147,10 @@
         color: $black;
       }
     }
+
+    &.fadeInnn .portfolio-item {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }

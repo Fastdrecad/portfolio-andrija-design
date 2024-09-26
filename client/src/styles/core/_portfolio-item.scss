@@ -5,7 +5,6 @@
   border: none;
   width: calc(100% / 4 - 7.5px);
   aspect-ratio: 1.6 / 1;
-  transform: translateY(30px);
   transition: opacity 1000ms ease-in-out, transform 1000ms ease-in-out;
 
   @include media-breakpoint-down(xl) {
@@ -66,5 +65,5 @@
 
 .fadeInnn .portfolio-item {
   opacity: 1;
-  transform: translateY(0);
+  // transform: translateY(0);
 }
