@@ -1,0 +1,10 @@
+# robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /404
+Disallow: /not-found
+Disallow: /admin
+Disallow: /private
+
+Sitemap: https://www.portfolio.andrijadesign.com/sitemap.xml

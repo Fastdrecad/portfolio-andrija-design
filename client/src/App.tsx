@@ -1,32 +1,30 @@
-import { BrowserRouter as Router } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { AnimatePresence } from "framer-motion";
-import { DarkModeContext } from "@/context/darkModeContext";
-import RoutesConfig from "@/routes/routes";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import ScrollToTop from "@/components/ScrollToTop";
-import NavigateToTop from "@/components/NavigateToTop";
-import Sidebar from "@/components/Sidebar";
-import Loader from "@/components/Loader";
-import VisibilityControl from "@/components/layout/VisibilityControl";
+import { useContext } from "react";
 
-function App() {
+import { BrowserRouter } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+
+import { DarkModeContext } from "@/context/darkModeContext";
+
+import useLoading from "@/hooks/useLoader";
+
+import Router from "@/routes/Router";
+
+import Header from "@/components/layout/Header/Header";
+import Footer from "@/components/layout/Footer/Footer";
+import ScrollToTop from "@/components/app/ScrollToTop";
+import NavigateToTop from "@/components/app/NavigateToTop";
+import Sidebar from "@/components/layout/Sidebar";
+import Loader from "@/components/animations/Loader";
+import VisibilityControl from "@/components/app/VisibilityControl";
+
+const App: React.FC = () => {
   const { darkMode } = useContext(DarkModeContext);
 
-  const [loaded, setLoaded] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoaded(false);
-      document.body.style.cursor = "default";
-      window.scrollTo(0, 0);
-    }, 2000);
-  }, []);
+  const loaded = useLoading(true, 2000); // Hook managing the loader state
 
   return (
     <div className={`theme-${darkMode ? "dark" : "light"} app`}>
-      <Router>
+      <BrowserRouter>
         <NavigateToTop />
         <AnimatePresence mode="wait">
           {loaded && <Loader active={loaded} />}
@@ -35,14 +33,14 @@ function App() {
           <Header />
           <Sidebar />
         </VisibilityControl>
-        <RoutesConfig />
+        <Router />
         <VisibilityControl>
           <Footer />
         </VisibilityControl>
         <ScrollToTop />
-      </Router>
+      </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;

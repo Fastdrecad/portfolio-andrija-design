@@ -1,0 +1,20 @@
+.redline-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  margin-bottom: 5rem;
+
+  .redline-content {
+    margin-bottom: 0.5rem;
+  }
+
+  .redline-placeholder {
+    display: flex;
+    width: 100px;
+    height: 17px;
+  }
+
+  .redline-svg {
+    width: 100px;
+    height: auto;
+  }
+}

@@ -57,7 +57,8 @@
         font-weight: $font-weight-light;
         white-space: nowrap;
         font-size: 6rem !important;
-        line-height: 6.5rem !important;
+        line-height: 1.25 !important;
+        margin-bottom: 2.5rem;
         text-transform: uppercase;
         color: themed("text-color") !important;
 
@@ -108,28 +109,6 @@
       h3 {
         font-size: 2rem !important;
         color: themed("text-color") !important;
-      }
-    }
-
-    &__schedule-meeting {
-      appearance: none;
-      text-transform: uppercase;
-      border: none;
-      border-radius: 50px;
-      letter-spacing: 1px !important;
-      font-size: clamp(16px, 3vw, 20px) !important;
-      padding: clamp(6px, 3.7vw, 15px) clamp(30px, 4.4vw, 25px);
-      font-weight: $font-weight-medium !important;
-      transition: all 150ms ease-in-out;
-      white-space: nowrap;
-      color: themed("text-color-opposite") !important;
-      background-color: themed("text-color") !important;
-
-      &:hover,
-      &:active {
-        border-color: $secondary-color;
-        box-shadow: 0 0 10px 0 $secondary-color inset,
-          0 0 10px 4px $secondary-color;
       }
     }
 

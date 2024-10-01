@@ -1,0 +1,85 @@
+.contact-header {
+  @include themify($themes) {
+    margin-bottom: 30px;
+
+    @include media-breakpoint-up(md) {
+    }
+
+    &__title-container {
+      color: themed("text-color") !important;
+
+      h2 {
+        font-weight: 600;
+        font-size: clamp(3rem, 4.25vw, 4rem);
+        text-align: center;
+        text-transform: uppercase;
+        color: inherit !important;
+      }
+
+      p {
+        @include media-breakpoint-up(lg) {
+          display: block;
+        }
+      }
+    }
+
+    &__title-content {
+      display: flex;
+      flex-direction: column;
+
+      .red-line-wrapper {
+        display: flex;
+        margin-top: 1.25rem;
+        margin-bottom: 3rem;
+        justify-content: center;
+
+        @include media-breakpoint-up(lg) {
+          margin-bottom: 4rem;
+        }
+
+        svg {
+          width: clamp(4em, 8vw, 8em);
+          height: auto;
+        }
+      }
+    }
+
+    &__red-line-wrapper {
+      display: flex;
+      margin-top: 1.25rem;
+      margin-bottom: 3rem;
+      justify-content: center;
+
+      @include media-breakpoint-up(lg) {
+        margin-bottom: 4rem;
+      }
+
+      svg {
+        width: clamp(4em, 8vw, 8em);
+        height: auto;
+      }
+    }
+
+    &__red-line-placeholder {
+      min-width: 97px;
+      min-height: 17px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__form-subtitle {
+      color: inherit;
+      text-align: center;
+      max-width: 400px;
+      font-size: clamp(1.5rem, 2.7vw, 2.1rem);
+      text-transform: none;
+      margin-inline: auto;
+      padding: 20px;
+
+      @include media-breakpoint-up(md) {
+        width: 550px;
+      }
+    }
+  }
+}

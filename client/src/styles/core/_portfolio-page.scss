@@ -12,12 +12,13 @@
     &__container {
       @include center();
       flex-direction: column;
-      // margin-inline: auto;
+      // margin-bottom: 300px;
     }
 
     &__title-content {
       display: flex;
       flex-direction: column;
+      margin-bottom: 3rem;
 
       .red-line-wrapper {
         display: flex;
@@ -40,7 +41,6 @@
       color: themed("text-color") !important;
       margin: 60px 0 0;
       font-size: clamp(3rem, 4.25vw, 4rem) !important;
-      text-transform: uppercase;
       font-weight: $font-weight-medium;
     }
 
@@ -71,23 +71,15 @@
       }
     }
 
-    &__gallery-container {
-      padding: 0 5rem;
-
-      @include media-breakpoint-down(lg) {
-        padding: 0 3rem;
-      }
-
-      @include media-breakpoint-down(md) {
-        padding: 0;
-      }
-    }
-
     &__image-gallery {
+      padding: 5rem;
+      min-height: 65vh;
+      margin-bottom: 100px;
       width: 100%;
-
-      @include center();
       flex-wrap: wrap;
+      align-items: flex-start;
+
+      @include flex();
 
       @include media-breakpoint-up(sm) {
         gap: 10px;
@@ -99,6 +91,19 @@
 
       @include media-breakpoint-up(xl) {
         justify-content: center;
+      }
+
+      /* Initially hide portfolio items */
+      .portfolio-item {
+        opacity: 0;
+
+        transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+      }
+
+      /* When the section is in view, fade in the items */
+      &.fadeInnn .portfolio-item {
+        opacity: 1;
+        transform: translateY(0);
       }
 
       li {
@@ -124,28 +129,7 @@
     }
 
     &__load-more {
-      display: block;
       margin: 100px auto 20px;
-      background-color: themed("text-color");
-      font-size: clamp(16px, 5vw, 20px);
-      font-weight: 400;
-      text-transform: uppercase;
-      cursor: pointer;
-      color: themed("text-color-opposite");
-      border: none;
-      padding: 15px 30px;
-      border-radius: 60px;
-      transition: all 150ms ease-in-out;
-      border-color: $black;
-
-      &:hover {
-        outline: none;
-        border-color: $secondary-color;
-        box-shadow: 0 0 10px 0 $secondary-color inset,
-          0 0 10px 4px $secondary-color;
-        background-color: white;
-        color: $black;
-      }
     }
 
     &.fadeInnn .portfolio-item {

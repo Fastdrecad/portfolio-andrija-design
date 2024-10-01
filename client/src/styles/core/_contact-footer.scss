@@ -1,0 +1,145 @@
+.contact-footer {
+  @include themify($themes) {
+    &__container {
+      width: 100%;
+      margin-top: -60px;
+
+      @include media-breakpoint-down(xxl) {
+        margin-top: -100px;
+      }
+      @include media-breakpoint-down(lg) {
+        margin-top: -80px;
+      }
+
+      @include media-breakpoint-down(sm) {
+        margin-top: -20px;
+      }
+    }
+
+    &__content {
+      position: relative;
+      height: 100%;
+    }
+
+    &__image-container {
+      overflow: hidden;
+      position: relative;
+      height: 30vh;
+      margin-top: -10px;
+
+      @include media-breakpoint-up(md) {
+        height: 40vh;
+        margin-top: -80px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        height: 100% !important;
+      }
+
+      @include media-breakpoint-up(xl) {
+        margin-top: -20px;
+      }
+
+      @include media-breakpoint-up(xxl) {
+        margin-top: -80px;
+      }
+
+      &::after {
+        content: "";
+        display: block;
+        aspect-ratio: 4 / 1;
+      }
+    }
+  }
+
+  &__background-image {
+    background: $gradient;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    clip-path: polygon(0 1%, 100% 30%, 100% 100%, 0 100%);
+
+    @include media-breakpoint-up(md) {
+    }
+
+    img {
+      position: absolute;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      object-position: left;
+      clip-path: polygon(0 20%, 100% 40%, 100% 100%, 0 100%);
+      filter: brightness(0.45);
+
+      @include media-breakpoint-up(md) {
+        object-position: center;
+      }
+    }
+  }
+
+  &__front-title {
+    margin-top: 6rem;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: fit-content;
+    transform: translate(-50%, -50%);
+
+    @include media-breakpoint-up(md) {
+      margin-top: 6rem;
+    }
+  }
+
+  &__front-text {
+    color: $white !important;
+    text-align: center;
+    text-transform: capitalize;
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
+    font-weight: $font-weight-light;
+    display: block;
+    transition: all 1s ease;
+  }
+
+  &__red-line-wrap {
+    margin: 20px 0;
+
+    .red-line {
+      opacity: 0;
+      background: url("@/assets/images/red-curved-line.png") no-repeat;
+      width: 100px;
+      height: 20px;
+      background-size: 100px auto;
+      text-align: center;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-left: -4.15rem;
+      position: relative;
+      display: inline-block;
+      animation: curvedRedLine ease-in-out 1.5s;
+
+      @include media-breakpoint-down(sm) {
+        background-size: 60px auto;
+      }
+    }
+
+    @keyframes curvedRedLine {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100px;
+      }
+    }
+
+    .side-in {
+      transform: translateX(0) !important ;
+      opacity: 1 !important;
+    }
+  }
+}

@@ -1,0 +1,122 @@
+.mobile-header {
+  @include themify($themes) {
+    height: $navbarHeight;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    box-shadow: $box-shadow-navigation;
+    z-index: 8;
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    transition: transform 0.4s ease, visibility 0.4s ease;
+    background-color: themed("header-footer-background");
+    backdrop-filter: $backdrop-filter;
+
+    &.hidden {
+      transform: translateY(-#{$navbarHeight});
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+    }
+
+    &.scrolled-up {
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+      transition: transform 0.7s cubic-bezier(0.77, 0, 0.18, 1);
+    }
+
+    &__container {
+      @include flex();
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(20px, 7vw, 250px);
+      height: 100%;
+
+      a {
+        .main-logo__icon-wrapper {
+          width: 100%;
+          max-width: 60px;
+          line-height: 0;
+
+          svg {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(3px 3px 2px rgb(0 0 0 / 0.6));
+            fill: themed("logo-color");
+          }
+        }
+      }
+    }
+
+    &__nav-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    &__hamburger-menu {
+      display: none;
+    }
+
+    @include media-breakpoint-down(md) {
+      &__hamburger-menu {
+        &:has(input:focus-visible)::before,
+        &:has(input:focus-visible)::after,
+        & input:focus-visible {
+          border: 1px solid white;
+        }
+
+        & {
+          display: flex;
+          flex-direction: column;
+          gap: $hamburger-gap;
+          width: max-content;
+          cursor: pointer;
+        }
+
+        & input,
+        &::before,
+        &::after {
+          position: relative;
+          z-index: 9999;
+          content: "";
+          width: $bar-width;
+          height: $bar-height;
+          background-color: themed("hamburger");
+          transform-origin: left center;
+          border-radius: 9px;
+          transition: opacity $animation-timing, width $animation-timing,
+            rotate $animation-timing, translate $animation-timing,
+            background-color $animation-timing;
+        }
+
+        &:has(input:checked)::before {
+          rotate: 45deg;
+          width: $x-width;
+          translate: 0 calc($bar-height / -2);
+        }
+
+        &:has(input:checked)::after {
+          rotate: -45deg;
+          width: $x-width;
+          translate: 0 calc($bar-height / 2);
+        }
+
+        & input {
+          appearance: none;
+          padding: 0;
+          margin: 0;
+          outline: none;
+          pointer-events: none;
+        }
+
+        & input:checked {
+          opacity: 0;
+          width: 0;
+        }
+      }
+    }
+  }
+}

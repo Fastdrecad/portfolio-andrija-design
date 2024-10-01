@@ -1,0 +1,59 @@
+.desktop-header {
+  @include themify($themes) {
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    top: 0;
+    background-color: themed("header-footer-background-fixed");
+    color: themed("text-color");
+    z-index: 8;
+    user-select: none;
+
+    @include media-breakpoint-down(xl) {
+      display: none;
+    }
+
+    &__logo-container {
+      position: absolute;
+      width: 60px;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 50px;
+    }
+
+    &__switch {
+      position: absolute;
+      right: 50px;
+      top: 100px;
+    }
+
+    &__link-name {
+      @include center();
+    }
+
+    &__link-name-main {
+      text-align: center;
+      font-size: 7rem !important;
+      text-transform: uppercase;
+      font-weight: 300;
+      line-height: 1.3 !important;
+      text-shadow: themed("text-shadow-light");
+      color: themed("text-color-opposite") !important;
+
+      span {
+        font-weight: $font-weight-bold;
+        font-size: inherit;
+        color: inherit;
+      }
+    }
+
+    &__subtitle {
+      line-height: 1.75 !important;
+      font-size: 1.7rem !important;
+      text-align: center;
+      font-weight: 300;
+      color: themed("text-color-soft") !important;
+      padding-bottom: 10px;
+    }
+  }
+}

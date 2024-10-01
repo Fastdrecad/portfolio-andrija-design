@@ -1,0 +1,71 @@
+.form-input {
+  @include themify($themes) {
+    &__row {
+      margin-bottom: 3px;
+      line-height: 1;
+    }
+
+    &__label {
+      font-size: 12px;
+      color: themed("text-color") !important;
+
+      &::after {
+        content: "*";
+        display: inline-block;
+        color: $red;
+        font-size: 1.25rem;
+        font-weight: $font-weight-light;
+        margin-left: 0.25rem;
+      }
+    }
+
+    &__textarea {
+      width: 100%;
+      min-height: 5lh;
+      padding: 8px;
+      line-height: 1.5;
+      field-sizing: content;
+      resize: none;
+      overflow: hidden;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+      font-size: clamp(16px, 3.6vw, 1.35rem);
+
+      &:invalid[data-focused="true"] ~ span {
+        display: block;
+      }
+    }
+
+    &__input {
+      width: 100%;
+      background-color: rgba($white, 0.9);
+      outline: none;
+      font-size: clamp(16px, 3.6vw, 1.35rem);
+      padding: clamp(9px, 1.6vw, 12px);
+      margin: clamp(5px, 1.6vw, 8px) auto;
+      border-radius: 6px;
+      border: 1px solid;
+      resize: vertical;
+      font-weight: normal;
+
+      &:focus {
+        background-color: $white;
+      }
+
+      &:invalid[data-focused="true"] {
+        border: 1px solid $red;
+      }
+
+      &:invalid[data-focused="true"] ~ span {
+        display: block;
+      }
+    }
+
+    &__error-message {
+      color: $red;
+      font-size: 14px;
+      text-align: left;
+      font-weight: $font-weight-medium;
+    }
+  }
+}

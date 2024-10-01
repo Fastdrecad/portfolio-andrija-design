@@ -44,32 +44,14 @@
       font-weight: $font-weight-thin;
       line-height: 6rem !important;
       position: relative;
-      padding-bottom: 50px;
-      margin-bottom: 50px;
-      transform: translateX(-300px);
+      margin-bottom: 20px;
       transition: all 1s ease;
-      opacity: 0;
 
       @include media-breakpoint-down(md) {
         font-size: 4rem !important;
       }
       @include media-breakpoint-down(sm) {
         font-size: 4rem;
-      }
-
-      &::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100px;
-        height: 20px;
-        background: url("/images/red-curved-line.png") no-repeat;
-        background-size: 100px auto;
-
-        @include media-breakpoint-down(md) {
-          background-size: 80px auto;
-        }
       }
 
       .bold-title {
@@ -148,10 +130,6 @@
           color: $red !important;
           font-size: inherit !important;
           font-weight: $font-weight-semibold;
-
-          &:hover {
-            color: rgba(201, 15, 15, 0.742) !important;
-          }
         }
       }
 

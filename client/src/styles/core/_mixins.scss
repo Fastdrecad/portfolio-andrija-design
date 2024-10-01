@@ -1,5 +1,23 @@
 $themes: (
   light: (
+    // primary button
+    pb-bg-col: $pb-bg-col-light,
+    pb-col: $pb-col-light,
+    pb-hv-col: $pb-hv-col-light,
+    pb-bshv-col: $pb-bshv-col-light,
+    pb-active-col: $pb-active-col-light,
+    // secondary button
+    sb-bg-col: $sb-bg-col-light,
+    sb-col: $sb-col-light,
+    sb-hv-col: $sb-hv-col-light,
+    sb-bshv-col: $sb-bshv-col-light,
+    sb-active-col: $sb-active-col-light,
+    // outline button
+    ob-bg-col: $ob-bg-col-light,
+    ob-col: $ob-col-light,
+    ob-hv-col: $ob-hv-col-light,
+    ob-bshv-col: $ob-bshv-col-light,
+    ob-active-col: $ob-active-col-light,
     background-color: $white,
     text-color: $black,
     text-color-opposite: $white,
@@ -18,6 +36,24 @@ $themes: (
   ),
 
   dark: (
+    // primary button
+    pb-bg-col: $pb-bg-col-dark,
+    pb-col: $pb-col-dark,
+    pb-hv-col: $pb-hv-col-dark,
+    pb-bshv-col: $pb-bshv-col-dark,
+    pb-active-col: $pb-active-col-dark,
+    // secondary button
+    sb-bg-col: $sb-bg-col-dark,
+    sb-col: $sb-col-dark,
+    sb-hv-col: $sb-hv-col-dark,
+    sb-bshv-col: $sb-bshv-col-dark,
+    sb-active-col: $sb-active-col-dark,
+    // outline button
+    ob-bg-col: $ob-bg-col-dark,
+    ob-col: $ob-col-dark,
+    ob-hv-col: $ob-hv-col-dark,
+    ob-bshv-col: $ob-bshv-col-dark,
+    ob-active-col: $ob-active-col-dark,
     background-color: $backgroundBlack,
     text-color: $white,
     text-color-opposite: $black,

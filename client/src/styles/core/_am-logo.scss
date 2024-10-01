@@ -1,0 +1,14 @@
+.am-hero-banner {
+  @include themify($themes) {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    opacity: 0.1;
+    filter: drop-shadow(1px 7px 5px rgba($black, 0.5));
+
+    path {
+      stroke-width: 0.125;
+      color: themed("text-color");
+    }
+  }
+}

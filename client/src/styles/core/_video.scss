@@ -50,9 +50,9 @@
 
       h2 {
         font-weight: $font-weight-light;
-        white-space: nowrap;
         font-size: 6rem !important;
-        line-height: 6.5rem !important;
+        line-height: 1.75 !important;
+        margin-bottom: 2rem;
         text-transform: uppercase;
         color: themed("text-color") !important;
 

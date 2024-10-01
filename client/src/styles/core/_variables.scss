@@ -30,9 +30,6 @@ $animation-timing: 300ms ease-in-out;
 $hamburger-height: calc(($bar-height * 3) + ($hamburger-gap * 2));
 $x-width: calc($hamburger-height * 1.41421356237);
 
-// button color
-$buttonColor: #d4d4d4;
-
 // standard colors
 $blue: #20a8d8;
 $indigo: #6610f2 !default;
@@ -58,9 +55,6 @@ $gradient: linear-gradient(to right, #464646, #3b3b3b, #2e2e2e, #000000);
 $font-family: "Open Sans";
 $font-family-heading: "Open Sans";
 $font-family-body: "Open Sans";
-// $font-family: "NeueMontreal-Regular";
-// $font-family-heading: "NeueMontreal-Regular";
-// $font-family-body: "NeueMontreal-Regular";
 $font-size-xs: 12px;
 $font-size-small: 13px;
 $font-size-medium: 14px;
@@ -123,8 +117,6 @@ $logo-opacity-white: 0.5;
 
 // layout variables
 
-$btn-bg: $black;
-$btn-bg-hover: $primary-bg;
 $font-color: $black;
 $font-light-color: #00000026;
 $font-custom-color: $theme-black;
@@ -175,3 +167,48 @@ $instagram: url("/images/social-icons/instagram.svg");
 $facebook: url("/images/social-icons/facebook.svg");
 $close: url("/images/close.svg");
 $name: url("/andrija-signature.svg");
+
+$buttonColor: #303236;
+$btnBoxShadow: 0 0 40px 40px $red inset, 0 0 0 0 $red;
+$btnBoxShadowHover: 0 0 10px 0 $buttonColor inset, 0 0 10px 4px $buttonColor;
+$btnBoxShadowActive: 0 0 10px 0 $secondary-color inset,
+  0 0 10px 4px $secondary-color;
+
+// Primary Button Colors
+$pb-bg-col-light: $btnBoxShadow;
+$pb-col-light: $white;
+$pb-hv-col-light: 0 0 10px 0 $black inset, 0 0 10px 4px $black;
+$pb-bshv-col-light: rgba(0, 0, 0, 0.2);
+$pb-active-col-light: $btnBoxShadowActive;
+
+$pb-bg-col-dark: $btnBoxShadow;
+$pb-col-dark: $white;
+$pb-hv-col-dark: rgb(237, 32, 36);
+$pb-bshv-col-dark: rgba(255, 255, 255, 0.2);
+$pb-active-col-dark: $btnBoxShadowActive;
+
+// Secondary Button Colors
+$sb-bg-col-light: $black;
+$sb-col-light: $white;
+$sb-hv-col-light: #3a3a3a;
+$sb-bshv-col-light: rgba(0, 0, 0, 0.15);
+$sb-active-col-light: #d40000;
+
+$sb-bg-col-dark: $white;
+$sb-col-dark: $black;
+$sb-hv-col-dark: $white;
+$sb-bshv-col-dark: rgba(255, 255, 255, 0.15);
+$sb-active-col-dark: #d40000;
+
+// Outline Button Colors
+$ob-bg-col-light: transparent;
+$ob-col-light: $black;
+$ob-hv-col-light: #d02630;
+$ob-bshv-col-light: rgba(0, 0, 0, 0.1);
+$ob-active-col-light: #d40000;
+
+$ob-bg-col-dark: transparent;
+$ob-col-dark: $white;
+$ob-hv-col-dark: rgb(237, 32, 36);
+$ob-bshv-col-dark: rgba(255, 255, 255, 0.1);
+$ob-active-col-dark: #d40000;

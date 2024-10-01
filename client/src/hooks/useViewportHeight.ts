@@ -10,7 +10,6 @@ const useViewportHeight = () => {
     setViewportHeight();
     window.addEventListener("resize", setViewportHeight);
 
-    // Cleanup function
     return () => {
       window.removeEventListener("resize", setViewportHeight);
     };

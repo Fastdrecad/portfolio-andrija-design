@@ -95,7 +95,7 @@ p {
 
 label {
   cursor: default;
-  // text-transform: capitalize;
+  text-transform: capitalize;
   margin: 0;
   font-weight: $font-weight-normal;
 }
@@ -117,13 +117,8 @@ a {
   }
 
   &:focus {
-    outline: none;
+    outline: none !important;
   }
-}
-
-body.user-is-tabbing a:focus {
-  box-shadow: none;
-  outline: 1px dotted;
 }
 
 h1,
@@ -196,9 +191,3 @@ h6,
   background: $theme-dark-gray;
 }
 /* scrollbar styles */
-
-body.user-is-tabbing *:focus {
-  outline: none;
-  box-shadow: $outline-box-shadow;
-  border-radius: $border-radius-default;
-}

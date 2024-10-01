@@ -1,397 +1,43 @@
 .contact-page {
   @include themify($themes) {
-    position: relative;
     margin-top: $navbarHeight;
     background-color: themed("background-color");
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
 
     @include media-breakpoint-up(xl) {
       margin-top: 200px;
     }
 
-    &__header {
+    &__wrapper {
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
       display: flex;
-      position: relative;
-      justify-content: center;
-      align-items: center;
-      background-color: themed("background-color");
-      flex-direction: column;
-
-      @include media-breakpoint-up(md) {
-      }
     }
 
-    &__header-wrapper {
-      margin: 30px 0 0;
-
-      @include media-breakpoint-up(md) {
-        margin: 60px 0 0;
-      }
-    }
-
-    &__header-logo-container {
-      position: relative;
-      line-height: 0;
+    &__logo-banner-container {
+      position: absolute;
+      inset: 0px;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
 
-      svg {
-        opacity: themed("logo-opacity") !important;
-        min-height: 1100px;
-        width: auto;
+      .am-hero-banner {
+        opacity: 0.1;
       }
     }
 
-    &__form-container {
-      position: relative;
-      z-index: 1;
-      width: 400px;
-      max-width: 100%;
-      padding: 0 20px;
-      margin: 0 auto;
-
-      @include media-breakpoint-up(md) {
-        padding: 0;
-        margin: 0 auto;
-        width: 550px;
-        height: auto;
-      }
-    }
-
-    &__title-content {
-      display: flex;
-      flex-direction: column;
-
-      .red-line-wrapper {
-        display: flex;
-        margin-top: 1.25rem;
-        margin-bottom: 3rem;
-        justify-content: center;
-
-        @include media-breakpoint-up(lg) {
-          margin-bottom: 4rem;
-        }
-
-        svg {
-          width: clamp(4em, 8vw, 8em);
-          height: auto;
-        }
-      }
-    }
-
-    &__title-container {
-      color: themed("text-color") !important;
-
-      h2 {
-        color: inherit !important;
-        font-weight: 600;
-        font-size: clamp(3rem, 4.25vw, 4rem);
-        text-align: center;
-        text-transform: uppercase;
-      }
-
-      p {
-        @include media-breakpoint-up(lg) {
-          display: block;
-        }
-      }
-    }
-
-    &__form-subtitle {
-      color: inherit;
-      text-align: center;
-      max-width: 400px;
-      font-size: clamp(1.5rem, 2.7vw, 1.4rem);
-      text-transform: none;
-      margin-bottom: 2rem;
-      margin-inline: auto;
-      padding: 0 20px;
-
-      @include media-breakpoint-up(md) {
-        width: 550px;
-        padding: 0;
-      }
-    }
-
-    &__form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    &__form-row {
-      margin-bottom: 3px;
-      line-height: 1;
-
-      label {
-        font-size: 12px;
-        color: themed("text-color") !important;
-
-        &::after {
-          content: "*";
-          display: inline-block;
-          color: red;
-          font-size: 1.25rem;
-          font-weight: $font-weight-light;
-          margin-left: 0.25rem;
-        }
-      }
-
-      textarea {
-        width: 100%;
-        min-height: 5lh;
-        padding: 8px;
-        line-height: 1.5;
-        field-sizing: content;
-        resize: none;
-        overflow: hidden;
-        box-sizing: border-box;
-        transition: all 0.3s ease;
-        font-size: clamp(16px, 3.6vw, 1.35rem);
-
-        &:invalid[data-focused="true"] ~ span {
-          display: block;
-        }
-      }
-    }
-
-    &__form-input {
-      width: 100%;
-      background-color: #ffffffd3;
-      outline: none;
-      font-size: clamp(16px, 3.6vw, 1.35rem);
-      padding: clamp(9px, 1.6vw, 12px);
-      margin: clamp(5px, 1.6vw, 8px) auto;
-      border-radius: 6px;
-      border: 1px solid;
-      resize: vertical;
-      font-weight: normal;
-
-      &:focus {
-        background-color: rgb(242, 253, 253);
-      }
-
-      &:invalid[data-focused="true"] {
-        border: 1px solid red;
-      }
-
-      &:invalid[data-focused="true"] ~ span {
-        display: block;
-      }
-    }
-
-    span {
-      color: red;
-      font-size: 14px;
-      display: none;
-    }
-
-    &__error-message {
-      color: $red;
-      font-size: 16px;
-      text-align: left;
-      font-weight: $font-weight-semibold;
-    }
-
-    &__btn-send {
-      width: 50%;
-      margin: auto;
-      text-align: center;
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 50px;
-      font-size: clamp(18px, 3.2vw, 20px);
-      border: none;
-      font-weight: $font-weight-medium;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: all 0.2s ease-in-out;
-      user-select: none;
-      border: 1px solid black;
-
-      &:not(:disabled):hover {
-        outline: none;
-        border-color: $secondary-color;
-        box-shadow: 0 0 10px 0 $secondary-color inset,
-          0 0 10px 4px $secondary-color;
-      }
-
-      &:disabled {
-        // border: 1px solid black;
-        border: 1px solid rgba(0, 0, 0, 0.3);
-        background-color: rgb(255, 255, 255);
-        // color: black;
-        color: rgba(128, 128, 128, 0.521);
-        cursor: not-allowed;
-      }
-    }
-
-    &__footer-wrapper {
-      width: 100%;
-      margin-top: -60px;
-
-      @include media-breakpoint-down(xxl) {
-        margin-top: -100px;
-      }
-      @include media-breakpoint-down(lg) {
-        margin-top: -80px;
-      }
-
-      @include media-breakpoint-down(sm) {
-        margin-top: -20px;
-      }
-    }
-
-    &__footer {
-      position: relative;
-      height: 100%;
-    }
-
-    &__image-container {
-      overflow: hidden;
-      z-index: 1;
-      position: relative;
-      height: 30vh;
-      margin-top: -10px;
-
-      @include media-breakpoint-up(md) {
-        height: 40vh;
-        margin-top: -80px;
-      }
-
-      @include media-breakpoint-up(lg) {
-        height: 100% !important;
-      }
-
-      @include media-breakpoint-up(xl) {
-        margin-top: -20px;
-      }
-
-      @include media-breakpoint-up(xxl) {
-        margin-top: -80px;
-      }
-
-      &::after {
-        content: "";
-        display: block;
-        aspect-ratio: 4 / 1;
-      }
-    }
-
-    &__background-image {
-      background: $gradient;
+    &__content {
+      margin-top: 60px;
       position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      clip-path: polygon(0 1%, 100% 30%, 100% 100%, 0 100%);
-
-      @include media-breakpoint-up(md) {
-      }
-
-      img {
-        position: absolute;
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-        object-position: left;
-        clip-path: polygon(0 20%, 100% 40%, 100% 100%, 0 100%);
-        filter: brightness(0.45);
-
-        @include media-breakpoint-up(md) {
-          object-position: center;
-        }
-      }
-    }
-
-    &__footer-front-title {
-      margin-top: 6rem;
-      position: absolute;
-      top: 50%;
       left: 50%;
-      right: 0;
-      bottom: 0;
-      width: 100%;
-      height: fit-content;
-      transform: translate(-50%, -50%);
-
-      @include media-breakpoint-up(md) {
-        margin-top: 6rem;
-      }
+      top: 0;
+      transform: translate(-50%, 0);
     }
-
-    &__footer-front-text {
-      color: $white !important;
-      text-align: center;
-      text-transform: capitalize;
-      font-size: clamp(1.8rem, 4vw, 3.5rem);
-      font-weight: $font-weight-light;
-      display: block;
-      transition: all 1s ease;
-    }
-
-    &__red-line-wrap {
-      margin: 20px 0;
-
-      .red-line {
-        opacity: 0;
-        background: url("/images/red-curved-line.png") no-repeat;
-        width: 100px;
-        height: 20px;
-        background-size: 100px auto;
-        text-align: center;
-        left: 50%;
-        transform: translateX(-50%);
-        margin-left: -4.15rem;
-        position: relative;
-        display: inline-block;
-        animation: curvedRedLine ease-in-out 1.5s;
-
-        @include media-breakpoint-down(sm) {
-          background-size: 60px auto;
-        }
-      }
-
-      @keyframes curvedRedLine {
-        from {
-          width: 0;
-        }
-        to {
-          width: 100px;
-        }
-      }
-
-      .side-in {
-        transform: translateX(0) !important ;
-        opacity: 1 !important;
-      }
-    }
-  }
-
-  &__response-message {
-    color: red;
-    font-size: 14px;
-    display: none;
-    color: $red;
-    font-size: 16px;
-    text-align: left;
-    font-weight: $font-weight-semibold;
-  }
-}
-
-@media screen and (orientation: landscape) {
-  .contact-page__image-container {
-    height: 100vh !important;
-    margin-top: -100px;
-  }
-
-  .contact-page__footer-front-text {
-    font-size: 4rem !important;
   }
 }

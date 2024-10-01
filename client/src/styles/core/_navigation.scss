@@ -30,7 +30,8 @@
       background-color: rgb(193, 193, 193) !important;
     }
 
-    &.active {
+    &.active,
+    &:active {
       color: $white !important;
       background-color: $secondary-color !important;
     }

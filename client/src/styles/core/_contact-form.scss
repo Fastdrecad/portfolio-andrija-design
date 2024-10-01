@@ -1,0 +1,41 @@
+.contact-form {
+  @include themify($themes) {
+    &__container {
+      position: relative;
+      z-index: 1;
+      width: 400px;
+      max-width: 100%;
+      padding: 0 20px;
+      margin: 0 auto;
+
+      @include media-breakpoint-up(md) {
+        padding: 0;
+        margin: 0 auto;
+        width: 550px;
+        height: auto;
+      }
+    }
+
+    &__form {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    &__btn-send {
+      width: 50%;
+      margin: auto;
+      margin-top: 20px;
+    }
+
+    &__response-message {
+      font-size: 14px;
+      display: none;
+      color: $red;
+      font-size: 16px;
+      text-align: left;
+      font-weight: $font-weight-semibold;
+    }
+  }
+}

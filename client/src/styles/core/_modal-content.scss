@@ -5,7 +5,6 @@
       top: 0;
       left: 0;
       width: 100vw;
-      height: 100vh;
       height: calc(100dvh + env(safe-area-inset-bottom));
       z-index: 1000;
       overflow-y: auto;
@@ -35,7 +34,7 @@
       min-height: 100%;
       display: flex;
       flex-direction: column;
-      background-color: rgba(255, 255, 255, 1);
+      background-color: $white;
     }
 
     &__fullscreen-desktop-navbar-container {
@@ -51,10 +50,8 @@
       transform: translateY(0);
       visibility: visible;
       padding: 10px 70px 10px 1.5rem;
-      box-shadow: 0 1px 1px 0 rgba(65, 69, 73, 0.3),
-        0 1px 3px 1px rgba(65, 69, 73, 0.15);
-
-      background-color: rgba(255, 255, 255, 0.8);
+      box-shadow: $box-shadow-navigation;
+      background-color: rgba($white, 0.8);
       backdrop-filter: blur(10px);
 
       @include media-breakpoint-up(md) {
@@ -108,15 +105,10 @@
     &__fullscreen-icon {
       transition: 0.5s;
 
-      &:hover {
-        background-color: #eee;
-        color: #555;
-      }
-
       svg {
         width: 25px;
         height: 25px;
-        color: black;
+        color: $black;
       }
     }
 
@@ -135,15 +127,10 @@
       height: 50px !important;
       margin-right: 20px;
 
-      &:hover {
-        background-color: #eee;
-        color: #555;
-      }
-
       svg {
         width: 25px;
         height: 25px;
-        color: black;
+        color: $black;
       }
     }
   }

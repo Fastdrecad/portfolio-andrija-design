@@ -52,31 +52,7 @@
       font-weight: $font-weight-thin;
       text-transform: uppercase;
       margin-bottom: 40px;
-      padding-bottom: 50px;
       transition: all 1s ease;
-
-      &::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        margin-left: -50px;
-        background: url("/images/red-curved-line.png") no-repeat;
-        width: 100px;
-        height: 20px;
-        background-size: 100px auto;
-        mix-blend-mode: darken;
-        animation: curvedRedLine ease-in-out 1s;
-
-        @include media-breakpoint-down(lg) {
-          background-size: 90px auto;
-        }
-
-        @include media-breakpoint-down(md) {
-          background-size: 80px auto;
-          margin-left: -40px;
-        }
-      }
 
       strong {
         display: block;
@@ -118,8 +94,7 @@
     .design-process-part {
       position: relative;
       padding: 250px 0 100px;
-      // margin-top: 30px;
-      background-image: url("/images/testimonial-bg.jpg");
+      background-image: url("@/assets/images/testimonial-bg.jpg");
       background-repeat: repeat;
       clip-path: polygon(0 8%, 100% 2%, 100% 100%, 0 100%);
 
@@ -183,7 +158,8 @@
               &::before {
                 content: "";
                 position: absolute;
-                background: url("/images/design-process-arrow.png") no-repeat;
+                background: url("@/assets/images/design-process-arrow.png")
+                  no-repeat;
                 width: 37px;
                 height: 140px;
                 right: 50px;

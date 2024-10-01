@@ -6,7 +6,7 @@
 
     &__bg {
       position: relative;
-      background-image: url("/images/testimonial-bg.jpg");
+      background-image: url("@/assets/images/testimonial-bg.jpg");
       background-repeat: repeat;
       clip-path: polygon(0 0, 100% 0%, 100% 82%, 0% 93%);
     }
@@ -33,6 +33,7 @@
     &__header {
       display: flex;
       flex-direction: column;
+      margin-bottom: 6rem;
 
       h2 {
         color: $white !important;
@@ -41,6 +42,7 @@
         text-align: center;
         padding-top: clamp(2rem, 10vw, 10rem);
         font-weight: normal;
+        line-height: 2.5 !important;
 
         @include media-breakpoint-down(md) {
           margin-bottom: 0;
@@ -79,7 +81,7 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      margin: 20rem 0 3rem;
+      margin: 15rem 0;
       color: themed("text-color");
 
       h3 {
@@ -88,24 +90,7 @@
         text-align: center;
         padding: 0 10px;
         color: themed("text-color") !important;
-
-        .red-line-wrapper-2 {
-          font-size: 13px !important;
-          display: flex;
-          justify-content: center;
-          margin-top: 1.25rem;
-          margin-bottom: 10rem;
-
-          @include media-breakpoint-up(lg) {
-            margin-top: 2.25rem;
-            margin-bottom: 15rem;
-          }
-
-          svg {
-            width: clamp(4em, 8vw, 8em) !important;
-            height: auto;
-          }
-        }
+        margin-bottom: 2rem;
       }
     }
   }

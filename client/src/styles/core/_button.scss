@@ -1,0 +1,115 @@
+.btn {
+  @include themify($themes) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(16px, 5vw, 20px);
+    font-weight: $font-weight-medium;
+    letter-spacing: 1px;
+    border-radius: 50px;
+    padding: clamp(6px, 3.7vw, 15px) clamp(30px, 4.4vw, 25px);
+    padding: 1.5rem 4.5rem;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    transition: all 150ms ease-in-out;
+    outline: none;
+    border: none;
+
+    // Disabled state styles
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+      background-color: themed("sb-active-col");
+      box-shadow: 0 0 10px 0 $buttonColor inset, 0 0 10px 4px $buttonColor;
+      background-color: $red;
+      color: $white;
+    }
+
+    // Loading state styles
+    .btn__loader {
+      display: inline-block;
+      width: 2rem;
+      height: 2rem;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    // Icon styles
+    .btn__icon {
+      margin-right: 0.5rem; // Add spacing between the icon and the text
+      display: flex;
+      align-items: center;
+    }
+
+    // Animation for the loader
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    // Variants
+    &--primary {
+      box-shadow: 0 0 40px 40px $red inset, 0 0 0 0 $red;
+      color: themed("pb-col");
+
+      &:hover:not(:disabled) {
+        border-color: $secondary-color;
+        box-shadow: 0 0 10px 0 $buttonColor inset, 0 0 10px 4px $buttonColor;
+        background-color: $white;
+        color: $red;
+        transform: translateY(-2px);
+      }
+
+      &:active:not(:disabled) {
+        box-shadow: 0 0 10px 0 $secondary-color inset,
+          0 0 10px 4px $secondary-color;
+        transform: translateY(0);
+      }
+    }
+
+    &--secondary {
+      background-color: themed("sb-bg-col");
+      color: themed("sb-col");
+
+      &:hover:not(:disabled) {
+        background-color: themed("sb-hv-col");
+        border-color: $secondary-color;
+        box-shadow: 0 0 10px 0 $secondary-color inset,
+          0 0 10px 4px $secondary-color;
+        transform: translateY(-2px);
+      }
+
+      &:active:not(:disabled) {
+        background-color: themed("sb-active-col");
+        box-shadow: 0 0 10px 0 $buttonColor inset, 0 0 10px 4px $buttonColor;
+        background-color: $red;
+        color: $white;
+        transform: translateY(0);
+      }
+    }
+
+    &--outline {
+      border: 1px solid themed("ob-col");
+      background-color: transparent;
+      color: themed("ob-col");
+
+      &:hover:not(:disabled) {
+        color: $white;
+        background-color: themed("ob-hv-col");
+        border-color: $secondary-color;
+        transform: translateY(-2px);
+      }
+
+      &:active:not(:disabled) {
+        background-color: themed("ob-active-col");
+        transform: translateY(0);
+        box-shadow: 0 0 10px 0 $buttonColor inset, 0 0 10px 4px $buttonColor;
+        background-color: $red;
+      }
+    }
+  }
+}

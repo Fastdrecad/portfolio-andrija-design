@@ -97,25 +97,8 @@
       }
 
       &--link {
-        border-radius: 50px;
-        white-space: nowrap;
-        text-transform: uppercase;
         text-decoration: none;
-        font-size: clamp(16px, 5.3vw, 20px);
-        transition: all 150ms ease-in-out;
-        padding: 10px 25px;
-        background-color: themed("text-color");
-        color: themed("background-color") !important;
         margin-top: 50px;
-
-        &:hover {
-          background-color: themed("background-color") !important;
-          color: themed("text-color") !important;
-          background-color: themed("text-color");
-          border-radius: 50px;
-          box-shadow: 0 0 10px 0 $secondary-color inset,
-            0 0 10px 4px $secondary-color;
-        }
       }
     }
   }

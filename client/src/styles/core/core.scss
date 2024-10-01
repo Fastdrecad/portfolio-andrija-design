@@ -6,6 +6,16 @@
 @import "layout";
 
 // components
+@import "mobile-header";
+@import "desktop-header";
+@import "contact-page";
+@import "red-line";
+@import "contact-header";
+@import "button";
+@import "am-logo";
+@import "contact-form";
+@import "contact-footer";
+@import "form-input";
 @import "header";
 @import "image";
 @import "hero";
@@ -19,9 +29,7 @@
 @import "latest-works";
 @import "portfolio-item";
 @import "modal-content";
-@import "modal-carousel";
 @import "calendly";
-@import "thumbnails";
 @import "time-is-now";
 @import "testimonial-items";
 @import "testimonials";
@@ -34,7 +42,7 @@
 @import "about-page";
 @import "hero-section";
 @import "about-section";
-@import "contact-page";
+
 @import "not-found-page";
 @import "success-page";
 @import "sidebar";

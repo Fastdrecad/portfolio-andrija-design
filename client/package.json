@@ -17,6 +17,8 @@
     "andrija-design": "file:..",
     "axios": "^1.7.7",
     "framer-motion": "^11.0.27",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
     "react": "^18.2.0",
     "react-calendly": "^4.3.1",
     "react-confetti": "^6.1.0",
@@ -28,7 +30,7 @@
     "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
-    "@types/node": "^20.12.7",
+    "@types/node": "^20.16.10",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@types/react-helmet": "^6.1.11",
@@ -38,9 +40,10 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
-    "sass": "^1.74.1",
+    "sass": "^1.79.4",
+    "ts-node": "^10.9.2",
     "typescript": "^5.6.2",
     "vite": "^5.2.0",
-    "vite-plugin-inspect": "^0.8.7"
+    "vite-plugin-pwa": "^0.20.5"
   }
 }

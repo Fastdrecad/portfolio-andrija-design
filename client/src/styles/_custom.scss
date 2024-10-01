@@ -1,8 +1,25 @@
 button {
   user-select: none;
+  background-color: transparent;
 }
 
 .no-scroll {
   overflow: hidden !important;
   height: 100%; /* Optional: Fixes potential issues on iOS */
+}
+
+.animated-visibility-wrapper {
+  line-height: 0;
+  text-align: center;
+  margin: 15px auto 0;
+  width: fit-content;
+}
+
+.red-line-placeholder {
+  display: inline-flex;
+
+  svg {
+    width: clamp(4em, 8vw, 8em);
+    height: auto;
+  }
 }

@@ -1,19 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const routeSlice = createSlice({
-  name: 'route',
+  name: "route",
   initialState: {
-    current: ''
+    currentRoute: "",
+    modalOrigin: ""
   },
   reducers: {
     setCurrentRoute: (state, action) => {
-      if (action.payload === '/') {
-        state.current = '/home';
-      } else if (action.payload === '/design-process') {
-        state.current = '/design process';
-      } else {
-        state.current = action.payload;
-      }
+      state.currentRoute = action.payload.pathname || action.payload;
     }
   }
 });

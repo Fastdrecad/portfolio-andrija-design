@@ -23,10 +23,11 @@ export const modalSlice = createSlice({
   reducers: {
     openModal: (state, action: PayloadAction<ModalPayload>) => {
       const { modalType, projectId } = action.payload;
-
-      // Handle opening of different modals
       if (modalType === "project" && projectId !== undefined) {
-        state.project = projectId; // Store project ID when opening project modal
+        if (state.project !== projectId) {
+          // Only update if the ID changes
+          state.project = projectId;
+        }
       } else if (modalType === "calendly") {
         state.calendly = true;
       } else if (modalType === "youtube") {
