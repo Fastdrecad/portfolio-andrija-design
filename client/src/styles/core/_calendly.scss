@@ -1,11 +1,6 @@
 .calendly {
   @include themify($themes) {
-    position: relative;
-    height: 100vh;
-    min-height: 100vh;
-
     &__close-btn-container {
-      width: 100%;
       height: 70px;
       display: flex;
       align-items: center;
@@ -22,12 +17,11 @@
       width: 50px;
       height: 50px;
       cursor: pointer;
-      background-color: transparent;
 
       svg {
         width: 30px;
         height: 30px;
-        fill: $black;
+        fill: themed("text-color");
       }
     }
 

@@ -1,10 +1,10 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import nodemailer from "nodemailer";
 import chalk from "chalk";
-import dotenv from "dotenv";
 import cors from "cors";
-
-dotenv.config();
+import validator from "validator";
 
 const app = express();
 app.use(express.json());
@@ -61,12 +61,26 @@ const sendEmail = async (
 
 // Create a POST route to send the email
 app.post("/api/contact", async (req, res) => {
-  const { firstName, lastName, email, message } = req.body;
+  const { firstName, lastName, email, message, telephone } = req.body;
 
-  if (!firstName || !lastName || !email || !message) {
+  // Validate each field
+  let errors = [];
+  if (!firstName) errors.push("First Name is missing");
+  if (!lastName) errors.push("Last Name is missing");
+  if (!email) errors.push("Email is missing");
+  if (!message) errors.push("Message is missing");
+  if (email && !validator.isEmail(email)) errors.push("Invalid email format");
+  if (
+    telephone &&
+    !validator.isMobilePhone(telephone, "any", { strictMode: false })
+  )
+    errors.push("Invalid telephone number");
+
+  // If errors exist, return 400 error
+  if (errors.length) {
     return res.status(400).json({
-      error:
-        "Missing required fields: First Name, Last Name, Email, and Message"
+      error: "Validation errors",
+      details: errors
     });
   }
 
@@ -83,6 +97,7 @@ app.post("/api/contact", async (req, res) => {
       <p><strong>Email:</strong> ${email}</p>
       <p><strong>Poruka:</strong></p>
       <p>${message.replace(/\n/g, "<br>")}</p>
+      <p>${validator.escape(message).replace(/\n/g, "<br>")}</p>
     `;
 
     // Send the email with your Titan email as the sender and user's email as "Reply-To"

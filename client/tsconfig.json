@@ -15,8 +15,6 @@
     "strictNullChecks": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "outDir": "./dist", // This should output to the dist directory
-    "rootDir": "./src", // Adjust this based on your file structure
 
     /* Linting */
     "strict": true,
@@ -30,6 +28,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src/**/*"], // Ensures all files in src are included
+  "exclude": ["node_modules"]
 }

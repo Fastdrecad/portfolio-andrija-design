@@ -36,11 +36,11 @@ const Contact: React.FC = () => {
         <div className="contact-page__wrapper">
           <div className="contact-page__logo-banner-container">
             <AmHeroBanner color="black" />
+          </div>
 
-            <div className="contact-page__content">
-              <ContactHeader />
-              <ContactForm />
-            </div>
+          <div className="contact-page__content">
+            <ContactHeader />
+            <ContactForm />
           </div>
         </div>
 

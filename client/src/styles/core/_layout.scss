@@ -136,12 +136,12 @@ h6,
   color: $font-heading-color !important;
   font-family: $font-family-heading;
   font-size: $font-size-heading-medium;
-  line-height: $line-height !important;
+  line-height: $line-height;
 }
 
 h1,
 .h1 {
-  font-size: clamp(3rem, 4.7vw, 6rem) !important;
+  font-size: clamp(3rem, 4.7vw, 6rem);
   font-weight: $font-weight-bold;
 }
 

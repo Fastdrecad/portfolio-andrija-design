@@ -1,13 +1,9 @@
-import useViewportHeight from "@/hooks/useViewportHeight";
-
 import Image from "@/components/common/Image";
 
 import aboutHero from "@/assets/images/about-hero.jpg";
 import aboutProfileImg from "@/assets/images/andrija-about-page.png";
 
 const AboutHeroSection: React.FC = () => {
-  useViewportHeight();
-
   return (
     <div className="hero-section">
       <div className="hero-section__profile-image">

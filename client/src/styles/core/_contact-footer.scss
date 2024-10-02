@@ -3,10 +3,12 @@
     &__container {
       width: 100%;
       margin-top: -60px;
+      z-index: 1;
 
       @include media-breakpoint-down(xxl) {
         margin-top: -100px;
       }
+
       @include media-breakpoint-down(lg) {
         margin-top: -80px;
       }
@@ -106,40 +108,55 @@
     transition: all 1s ease;
   }
 
-  &__red-line-wrap {
-    margin: 20px 0;
+  //todo remove later
+  // &__red-line-wrap {
+  //   margin: 20px 0;
 
-    .red-line {
-      opacity: 0;
-      background: url("@/assets/images/red-curved-line.png") no-repeat;
-      width: 100px;
-      height: 20px;
-      background-size: 100px auto;
-      text-align: center;
-      left: 50%;
-      transform: translateX(-50%);
-      margin-left: -4.15rem;
-      position: relative;
-      display: inline-block;
-      animation: curvedRedLine ease-in-out 1.5s;
+  //   .red-line {
+  //     opacity: 0;
+  //     background: url("@/assets/images/red-curved-line.png") no-repeat;
+  //     width: 100px;
+  //     height: 20px;
+  //     background-size: 100px auto;
+  //     text-align: center;
+  //     left: 50%;
+  //     transform: translateX(-50%);
+  //     margin-left: -4.15rem;
+  //     position: relative;
+  //     display: inline-block;
+  //     animation: curvedRedLine ease-in-out 1.5s;
 
-      @include media-breakpoint-down(sm) {
-        background-size: 60px auto;
-      }
-    }
+  //     @include media-breakpoint-down(sm) {
+  //       background-size: 60px auto;
+  //     }
+  //   }
 
-    @keyframes curvedRedLine {
-      from {
-        width: 0;
-      }
-      to {
-        width: 100px;
-      }
-    }
+  //   @keyframes curvedRedLine {
+  //     from {
+  //       width: 0;
+  //     }
+  //     to {
+  //       width: 100px;
+  //     }
+  //   }
 
-    .side-in {
-      transform: translateX(0) !important ;
-      opacity: 1 !important;
-    }
+  //   .side-in {
+  //     transform: translateX(0) !important ;
+  //     opacity: 1 !important;
+  //   }
+  // }
+}
+
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+  .contact-footer__image-container {
+    min-height: 100vh;
+    margin-top: 200px;
+  }
+}
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .contact-footer__image-container {
+    min-height: 40vh !important;
+    margin-top: 200px;
   }
 }

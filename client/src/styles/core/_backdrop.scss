@@ -1,10 +1,9 @@
 .backdrop {
   @include themify($themes) {
     position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    height: 100dvh;
+    inset: 0;
+    min-height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     width: 100vw;
     z-index: 1005;
     background-color: themed("background-color");

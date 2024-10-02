@@ -51,7 +51,7 @@
       visibility: visible;
       padding: 10px 70px 10px 1.5rem;
       box-shadow: $box-shadow-navigation;
-      background-color: rgba($white, 0.8);
+      background-color: themed("header-footer-background");
       backdrop-filter: blur(10px);
 
       @include media-breakpoint-up(md) {
@@ -81,7 +81,8 @@
 
       .project-title {
         min-height: 50px;
-        font-size: 24px !important;
+        font-size: 24px;
+        color: themed("text-color") !important;
         vertical-align: middle;
         display: flex;
         align-items: center;
@@ -108,7 +109,7 @@
       svg {
         width: 25px;
         height: 25px;
-        color: $black;
+        color: themed("text-color") !important;
       }
     }
 
@@ -119,18 +120,18 @@
       justify-content: space-between;
       position: absolute;
       right: 0;
+      margin-right: 10px;
     }
 
     &__fullscreen-close {
       transition: 0.5s;
       width: 50px !important;
       height: 50px !important;
-      margin-right: 20px;
 
       svg {
         width: 25px;
         height: 25px;
-        color: $black;
+        color: themed("text-color");
       }
     }
   }

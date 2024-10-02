@@ -5,8 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { openModal, closeModal } from "@/redux/modalSlice";
 
-import useViewportHeight from "@/hooks/useViewportHeight";
-
 import AmHeroLogo from "@/components/home/TimeIsNowSection/AmHeroLogo";
 import TitleSection from "@/components/home/TimeIsNowSection/TitleSection";
 import Modal from "@/components/common/Modal/Modal";
@@ -19,8 +17,6 @@ const TimeIsNow: React.FC = () => {
   const isCalendlyOpen = useSelector(
     (state: RootState) => state.modal.calendly
   );
-
-  useViewportHeight(); // Adjust viewport height for mobile devices
 
   const handleOpen = useCallback(() => {
     setIsLoading(true);
@@ -66,10 +62,10 @@ const TimeIsNow: React.FC = () => {
         <TitleSection />
         <ScheduleMeetingButton handleOpen={handleOpen} loading={isLoading} />
         <h3>Join 500+ happy clients who achieved success!</h3>
-        {isCalendlyOpen && <Modal onClose={handleClose} modalType="calendly" />}
       </div>
+      {isCalendlyOpen && <Modal onClose={handleClose} modalType="calendly" />}
     </section>
   );
 };
 
-export default React.memo(TimeIsNow);
+export default TimeIsNow;

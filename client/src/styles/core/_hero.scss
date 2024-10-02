@@ -3,11 +3,11 @@
     background-color: themed("background-color");
     position: relative;
     margin-top: $navbarHeight;
-    min-height: calc(var(--vh, 1vh) * 100 - $navbarHeight);
+    height: calc(var(--vh, 1vh) * 100 - $navbarHeight);
     width: 100vw;
 
     @include media-breakpoint-up(xl) {
-      min-height: calc(100vh - $navbarHeightFixed);
+      height: calc(var(--vh, 1vh) * 100 - $navbarHeightFixed);
       margin-top: $navbarHeightFixed;
     }
 
@@ -18,7 +18,7 @@
         top: $hero-image-transparent;
         left: 0;
         width: 100%;
-        min-height: calc(100% - $hero-image-transparent);
+        height: calc(100% - $hero-image-transparent);
         background: linear-gradient(
           to right,
 
@@ -68,8 +68,9 @@
 
     &__image {
       position: absolute;
-      height: 100%;
       width: auto;
+      height: 100%;
+      max-width: 100%;
       display: block;
       object-fit: cover;
       object-position: left;
@@ -81,7 +82,7 @@
       .heading-title {
         color: themed("text-color") !important;
         text-transform: capitalize;
-        font-size: clamp(4rem, 4.7vw, 6rem) !important;
+        font-size: clamp(3.5rem, 10vw, 6rem);
         font-weight: 300;
         position: relative;
         display: inline-block;
@@ -93,34 +94,14 @@
           font-weight: 500;
         }
       }
-
-      .red-line-wrapper {
-        display: flex;
-        margin-top: 1.25rem;
-        margin-bottom: 4rem;
-        justify-content: center;
-
-        @include media-breakpoint-up(lg) {
-          margin-top: 2.25rem;
-        }
-
-        svg {
-          width: clamp(4em, 8vw, 8em);
-          height: auto;
-        }
-      }
     }
 
     &__text {
-      min-height: 45vh;
+      min-height: calc(var(--vh, 1vh) * 45); // Updated to use custom --vh
       z-index: 6;
 
-      @include media-breakpoint-down(sm) {
-        min-height: 45vh;
-      }
-
-      @include media-breakpoint-down(md) {
-        min-height: 45vh;
+      @include media-breakpoint-down(xs) {
+        min-height: fit-content;
       }
 
       @include media-breakpoint-up(xl) {
@@ -137,18 +118,14 @@
         padding-right: 8vw;
       }
 
-      @include media-breakpoint-down(xl) {
-        height: fit-content;
-        bottom: 0;
-      }
-
       &-wrapper {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: fit-content;
+        height: 100%;
         padding: 30px;
+        gap: 2.5rem;
         border-radius: 30px;
         background-color: themed("background-title");
 
@@ -161,7 +138,8 @@
         }
 
         @include media-breakpoint-down(md) {
-          height: fit-content;
+          padding: 10px;
+          gap: 0.5rem;
         }
 
         p {
@@ -210,12 +188,16 @@
       @include media-breakpoint-down(md) {
         left: 50%;
         transform: translate(-50%) rotate(90deg);
-        bottom: -5%;
+        bottom: -8%;
       }
 
       @include media-breakpoint-up(lg) {
         right: -20px !important;
         bottom: 120px !important;
+      }
+
+      @include media-breakpoint-down(sm) {
+        display: none;
       }
 
       a {
@@ -248,7 +230,7 @@
         margin-right: 10px;
         color: inherit;
 
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-down(sm) {
           display: none;
         }
 
@@ -374,5 +356,22 @@
     right: -40px !important;
     bottom: 100px !important;
     color: $black !important;
+  }
+}
+
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .scroll-to-web {
+    display: none !important;
+  }
+  .heading-title {
+    font-size: clamp(3.5rem, 7vw, 6rem) !important;
+  }
+
+  .hero__text-wrapper {
+    gap: 15px !important;
+
+    p {
+      font-size: clamp(1.6rem, 2.4vw, 2.9rem) !important;
+    }
   }
 }

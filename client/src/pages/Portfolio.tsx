@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { motion, useInView } from "framer-motion";
 
-import useViewportHeight from "@/hooks/useViewportHeight";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import { useFadeIn } from "@/hooks/useFadeIn";
 
@@ -23,7 +22,6 @@ import JsonLd from "@/components/common/seo/JsonLd";
 const Portfolio: React.FC = () => {
   useDocumentTitle("Portfolio");
 
-  useViewportHeight();
   const titleRef = useRef<HTMLDivElement>(null);
   const isTitleInView = useInView(titleRef, {
     once: true
@@ -52,6 +50,8 @@ const Portfolio: React.FC = () => {
       setData(filterPortfolioByCategory(newCategory));
     }, 50);
   };
+
+  const NEXT_DATA = next < (data?.length || 0);
 
   const handleMoreImages = useCallback(() => {
     if (isButtonDisabled) return;
@@ -96,18 +96,23 @@ const Portfolio: React.FC = () => {
             handleTabChange={handleTabChange}
           />
         </div>
-        <ul className={`portfolio-page__image-gallery ${fadeInClass}`}>
-          {data?.slice(0, next).map((item, index) => (
-            <PortfolioItem
-              key={item.id}
-              className="portfolio-item"
-              {...item}
-              index={index}
-              newlyLoadedStartIndex={newlyLoadedStartIndex}
-              isModal={false}
-            />
-          ))}
-          {next < (data?.length || 0) && (
+
+        <div
+          className={`portfolio-page__container ${NEXT_DATA ? "" : "m-btm"}   `}
+        >
+          <ul className={`portfolio-page__image-gallery ${fadeInClass}`}>
+            {data?.slice(0, next).map((item, index) => (
+              <PortfolioItem
+                key={item.id}
+                className="portfolio-item"
+                {...item}
+                index={index}
+                newlyLoadedStartIndex={newlyLoadedStartIndex}
+                isModal={false}
+              />
+            ))}
+          </ul>
+          {NEXT_DATA && (
             <>
               <Button
                 variant="outline"
@@ -119,7 +124,7 @@ const Portfolio: React.FC = () => {
               </Button>
             </>
           )}
-        </ul>
+        </div>
       </main>
     </>
   );

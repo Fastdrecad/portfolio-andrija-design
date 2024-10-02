@@ -26,38 +26,6 @@
     &__title-content {
       display: flex;
       flex-direction: column;
-
-      .red-line-wrapper {
-        display: flex;
-        margin-top: 1.25rem;
-        margin-bottom: 3rem;
-        justify-content: center;
-
-        @include media-breakpoint-up(lg) {
-          margin-bottom: 4rem;
-        }
-
-        svg {
-          width: clamp(4em, 8vw, 8em);
-          height: auto;
-        }
-      }
-    }
-
-    &__red-line-wrapper {
-      display: flex;
-      margin-top: 1.25rem;
-      margin-bottom: 3rem;
-      justify-content: center;
-
-      @include media-breakpoint-up(lg) {
-        margin-bottom: 4rem;
-      }
-
-      svg {
-        width: clamp(4em, 8vw, 8em);
-        height: auto;
-      }
     }
 
     &__red-line-placeholder {

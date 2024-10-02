@@ -54,11 +54,7 @@ const ProjectDetail: React.FC = () => {
 
       <JsonLd pageType="project" pageData={project} />
 
-      <AnimatePresence
-        initial={false}
-        onExitComplete={() => null}
-        mode="popLayout"
-      >
+      <AnimatePresence initial={false} onExitComplete={() => null} mode="wait">
         <ModalContent
           projectId={project.id}
           isModal={false}

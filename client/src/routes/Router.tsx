@@ -6,6 +6,8 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { HelmetProvider } from "react-helmet-async";
 
+import useViewportHeight from "@/hooks/useViewportHeight";
+
 import HomePage from "@/pages/Home";
 import PortfolioPage from "@/pages/Portfolio";
 import AboutPage from "@/pages/About";
@@ -18,6 +20,8 @@ import ProjectDetail from "@/pages/ProjectDetail";
 const RoutesConfig: React.FC = () => {
   const location = useLocation();
   const dispatch = useDispatch();
+
+  useViewportHeight();
 
   // Dispatch the current route to Redux store when location changes
   useEffect(() => {

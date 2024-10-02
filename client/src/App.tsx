@@ -20,7 +20,7 @@ import VisibilityControl from "@/components/app/VisibilityControl";
 const App: React.FC = () => {
   const { darkMode } = useContext(DarkModeContext);
 
-  const loaded = useLoading(true, 2000); // Hook managing the loader state
+  const loaded = useLoading(true, 2000);
 
   return (
     <div className={`theme-${darkMode ? "dark" : "light"} app`}>

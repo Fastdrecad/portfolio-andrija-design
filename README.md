@@ -2,6 +2,9 @@
 
 ## Description
 
+When you deploy your site, the robots.txt file will be available at:
+https://www.portfolio.andrijadesign.com/robots.txt
+
 ## Quickstart Guide
 
 ## Backend Configuration

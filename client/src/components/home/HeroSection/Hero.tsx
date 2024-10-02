@@ -2,7 +2,6 @@ import { useContext, useEffect, useRef } from "react";
 
 import { MenuContext } from "@/context/navContext";
 
-import useViewportHeight from "@/hooks/useViewportHeight";
 import useScrollToVideo from "@/hooks/useScrollToVideo";
 
 import HeroImage from "@/components/home/HeroSection/HeroImage";
@@ -10,7 +9,6 @@ import HeroHeading from "@/components/home/HeroSection/HeroHeading";
 import ScrollToWeb from "@/components/home/HeroSection/ScrollToWeb ";
 
 const Hero: React.FC = () => {
-  useViewportHeight();
   const scrollToVideo = useScrollToVideo();
 
   const { menuOpen } = useContext(MenuContext);
