@@ -3,7 +3,7 @@ name: Deploy to VPS
 on:
   push:
     branches:
-      - master # Change to your branch name if necessary
+      - master
 
 jobs:
   deploy:
@@ -26,14 +26,14 @@ jobs:
         run: |
           ssh-keyscan -H ${{ secrets.VPS_IP }} >> ~/.ssh/known_hosts
 
-      - name: Copy files to VPS
+      - name: Copy files to VPS (using rsync)
         run: |
-          scp -r ./* root@${{ secrets.VPS_IP }}:/var/www/portfolio-andrija-design
+          rsync -avz --exclude '.git' --exclude 'node_modules' ./ root@${{ secrets.VPS_IP }}:/var/www/portfolio-andrija-design
 
-      - name: SSH Commands
+      - name: SSH into VPS and Deploy
         run: |
           ssh -v root@${{ secrets.VPS_IP }} << 'EOF'
           cd /var/www/portfolio-andrija-design
-          docker-compose down
-          docker-compose up --build -d
+          docker-compose -f docker-compose.prod.yml down
+          docker-compose -f docker-compose.prod.yml up --build -d
           EOF

@@ -59,6 +59,13 @@ const sendEmail = async (
   }
 };
 
+// Create a GET route to display something in the browser for checking purpose
+app.get("/", (req, res) => {
+  return res.status(200).json({
+    status: "healthy"
+  });
+});
+
 // Create a POST route to send the email
 app.post("/api/contact", async (req, res) => {
   const { firstName, lastName, email, message, telephone } = req.body;

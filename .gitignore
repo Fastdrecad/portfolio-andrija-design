@@ -1,5 +1,5 @@
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -7,23 +7,18 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-/.pnp
-.pnp.js
-dist
-dist-ssr
+# Dependency directories
+node_modules/
+
+# Build outputs
+dist/
+dist-ssr/
 *.local
 
-#testing
-/coverage
-
-#production
-/build
-
 # Editor directories and files
-.vscode/*
+.vscode/
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
@@ -31,24 +26,19 @@ dist-ssr
 *.sln
 *.sw?
 
-# dependencies
-node_modules
+# Operating system files
+Thumbs.db
+ehthumbs.db
+*.db
 
-# production
-build
-dist
-  
-# misc
-package.json.bak
-.DS_Store
-
-# config file
+# Other files that should not be in the repository
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+config.json
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log* 
-
-# Local Netlify folder
-.netlify
+# Security
+*.pem
+*.key

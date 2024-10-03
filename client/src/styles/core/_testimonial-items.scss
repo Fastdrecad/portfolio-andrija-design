@@ -90,7 +90,7 @@
           &::before {
             content: "";
             position: absolute;
-            background-image: url("/images/quote-start.png");
+            background-image: url("@/assets/images/quote-start.png");
             background-repeat: no-repeat;
             background-size: 4.15rem auto;
             width: 4.15rem;
@@ -109,7 +109,7 @@
 
           &::after {
             content: "";
-            background-image: url("/images/quote-start.png");
+            background-image: url("@/assets/images/quote-start.png");
             position: absolute;
             background-repeat: no-repeat;
             transform: rotateZ(180deg);
@@ -170,7 +170,7 @@
       font-size: clamp(8px, 0.9vw, 14px);
 
       &--active {
-        color: red;
+        color: $red;
       }
     }
   }

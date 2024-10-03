@@ -1,0 +1,15 @@
+# Ignore node_modules
+node_modules
+
+# Ignore build artifacts (if applicable)
+dist
+
+# Ignore Docker and Git configuration
+.dockerignore
+.git
+Dockerfile*
+docker-compose*
+*.env
+
+# Log files
+*.log

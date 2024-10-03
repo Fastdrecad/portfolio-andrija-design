@@ -1,52 +1,109 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
-import { motion } from "framer-motion";
-
-import { useWindowDimensions } from "@/hooks/useDimensions";
-
-import {
-  slideUp,
-  textVariants,
-  pathVariants,
-  curve
-} from "@/components/animations/variants/loaderVariants";
+import { Variants, motion } from "framer-motion";
 
 interface LoaderProps {
   active: boolean;
 }
 
-export const Loader: React.FC<LoaderProps> = ({ active }) => {
-  const { width, height } = useWindowDimensions();
+const slideUp = {
+  initial: {
+    top: 0
+  },
+  exit: {
+    top: "-100vh",
+    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.2 }
+  }
+};
 
+const textVariants: Variants = {
+  initial: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 1,
+      ease: "easeInOut",
+      repeat: Infinity,
+      repeatType: "loop"
+    }
+  }
+};
+
+const pathVariants: Variants = {
+  initial: {
+    pathLength: 0
+  },
+  visible: {
+    pathLength: 1,
+
+    transition: {
+      duration: 2,
+      ease: "easeInOut"
+    }
+  }
+};
+
+const Loader: React.FC<LoaderProps> = ({ active }) => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
+
     return () => {
       document.body.style.overflow = "auto";
     };
   }, []);
 
-  // Calculate 20% of the viewport height
-  const heightPercentage = 20;
+  const [dimension, setDimension] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight
+  });
+
+  useLayoutEffect(() => {
+    const updateWindowDimensions = () => {
+      setDimension({ width: window.innerWidth, height: window.innerHeight });
+    };
+
+    updateWindowDimensions();
+
+    const handleResize = () => {
+      updateWindowDimensions();
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // Calculate 50% of the viewport height
+  const heightPercentage = 20; // Adjust this value as needed
   const vh = Math.max(
     document.documentElement.clientHeight || 0,
     window.innerHeight || 0
   );
   const offset = (vh * heightPercentage) / 100;
 
-  // Define path states
-  const [initialPath, setInitialPath] = useState("");
-  const [exitPath, setExitPath] = useState("");
+  // Update the paths with the calculated offset
+  const initialPath = `M0 0 L${dimension.width} 0 L${dimension.width} ${
+    dimension.height
+  } Q${dimension.width / 2} ${dimension.height + offset} 0 ${
+    dimension.height
+  }  L0 0`;
 
-  useEffect(() => {
-    const newInitialPath = `M0 0 L${width} 0 L${width} ${height} Q${
-      width / 2
-    } ${height + offset} 0 ${height} L0 0`;
-    const newExitPath = `M0 0 L${width} 0 L${width} ${height} Q${
-      width / 2
-    } ${height} 0 ${height} L0 0`;
-    setInitialPath(newInitialPath);
-    setExitPath(newExitPath);
-  }, [width, height, offset]);
+  const targetPath = `M0 0 L${dimension.width} 0 L${dimension.width} ${
+    dimension.height
+  } Q${dimension.width / 2} ${dimension.height} 0 ${dimension.height}  L0 0`;
+
+  const curve = {
+    initial: {
+      d: initialPath,
+      transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1] }
+    },
+    exit: {
+      d: targetPath,
+      transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.3 }
+    }
+  };
 
   return (
     <motion.div
@@ -55,7 +112,7 @@ export const Loader: React.FC<LoaderProps> = ({ active }) => {
       initial="initial"
       exit="exit"
     >
-      {height > 0 && (
+      {dimension.height > 0 && (
         <>
           <svg fill="none" viewBox="0 0 120.5 87">
             <motion.path
@@ -81,9 +138,8 @@ export const Loader: React.FC<LoaderProps> = ({ active }) => {
               variants={curve}
               initial="initial"
               exit="exit"
-              d={initialPath} // Used during entry animation
-              custom={exitPath} // Used during exit animation, needs to be adjusted in curve variants if required
-            />
+              d={initialPath}
+            ></motion.path>
           </svg>
         </>
       )}
