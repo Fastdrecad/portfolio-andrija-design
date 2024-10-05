@@ -4,16 +4,20 @@ import { Link } from "react-router-dom";
 import MainGifLogo from "@/components/layout/Header/MainGifLogo";
 import Navigation from "@/components/layout/Header/Navigation";
 import ToggleSwitch from "@/components/common/ToggleSwitch";
+import { setCurrentRoute } from "@/redux/routeSlice";
+import { useDispatch } from "react-redux";
 
 interface DesktopHeaderProps {
   navClass: string;
-  handleNavLinkClick: (url: string) => void;
 }
 
-const DesktopHeader: React.FC<DesktopHeaderProps> = ({
-  navClass,
-  handleNavLinkClick
-}) => {
+const DesktopHeader: React.FC<DesktopHeaderProps> = ({ navClass }) => {
+  const dispatch = useDispatch();
+
+  const handleNavLinkClick = (url: string) => {
+    dispatch(setCurrentRoute(url));
+  };
+
   return (
     <nav className={`desktop-header ${navClass}`}>
       <div className="desktop-header__logo-container">

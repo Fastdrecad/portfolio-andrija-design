@@ -5,7 +5,6 @@ import { useInView } from "framer-motion";
 import useParallaxScroll from "@/hooks/useParallaxScroll";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 
-import pageTransition from "@/components/animations/pageTransition";
 import DesignProcessBox from "@/components/design-process/DesignProcessBox";
 
 import { designProcess } from "@/data";
@@ -69,5 +68,4 @@ const DesignProcess: React.FC = () => {
   );
 };
 
-const DesignProcessWithTransition = pageTransition(DesignProcess);
-export default DesignProcessWithTransition;
+export default DesignProcess;

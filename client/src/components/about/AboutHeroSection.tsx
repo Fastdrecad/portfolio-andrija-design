@@ -5,20 +5,22 @@ import aboutProfileImg from "@/assets/images/andrija-about-page.png";
 
 const AboutHeroSection: React.FC = () => {
   return (
-    <div className="hero-section">
-      <div className="hero-section__profile-image">
-        <div className="hero-section__profile-image-inner">
+    <div className="about-hero-section">
+      <div className="about-hero-section__profile-image">
+        <div className="about-hero-section__profile-image-inner">
           <Image
             src={aboutProfileImg}
             alt="Andrija Mićunović, Furniture Design Engineer and 3D Modeling Expert"
+            loading="eager"
           />
         </div>
       </div>
-      <div className="hero-section__content">
-        <div className="hero-section__background">
+      <div className="about-hero-section__content">
+        <div className="about-hero-section__background">
           <Image
             src={aboutHero}
             alt="3D CAD drawings and technical modeling of furniture designs, showcasing precision and detail in the design process."
+            loading="eager"
           />
         </div>
       </div>

@@ -45,14 +45,11 @@ body {
   flex-direction: column;
   min-height: 100vh;
   min-height: 100dvh;
+  overflow: hidden;
 }
 
 main {
   flex: 1 0 auto;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 html,
@@ -107,6 +104,7 @@ a {
   -webkit-transition: color $layout-transition-speed ease-in-out;
   -ms-transition: color $layout-transition-speed ease-in-out;
   transition: color $layout-transition-speed ease-in-out;
+  -webkit-tap-highlight-color: transparent !important;
 
   &:hover {
     color: $font-hover-color !important;

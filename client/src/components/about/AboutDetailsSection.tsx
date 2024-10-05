@@ -33,6 +33,7 @@ const ImageSection: React.FC = () => (
         <Image
           src={penImage}
           alt="Digital drawing pen and holder, typically used with graphic tablets for design work."
+          loading="eager"
         />
       </div>
     </div>

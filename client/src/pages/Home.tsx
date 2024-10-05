@@ -1,16 +1,18 @@
 import useDocumentTitle from "@/hooks/useDocumentTitle";
+import useViewportHeight from "@/hooks/useViewportHeight";
 
 import { Hero } from "@/components/home/HeroSection";
 import { Video } from "@/components/home/VideoSection";
 import { LatestWorks } from "@/components/home/LatestWorksSection";
 import { TimeIsNow } from "@/components/home/TimeIsNowSection";
 import { Testimonials } from "@/components/home/TestimonialsSection";
-import pageTransition from "@/components/animations/pageTransition";
 import SEO from "@/components/common/seo/SEO";
 import JsonLd from "@/components/common/seo/JsonLd";
 
 const Home: React.FC = () => {
   useDocumentTitle("Andrija Mićunović Design");
+
+  useViewportHeight();
 
   return (
     <>
@@ -35,5 +37,4 @@ const Home: React.FC = () => {
   );
 };
 
-const HomeWithTransition = pageTransition(Home);
-export default HomeWithTransition;
+export default Home;

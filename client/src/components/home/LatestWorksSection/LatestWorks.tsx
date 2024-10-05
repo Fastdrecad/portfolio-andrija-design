@@ -1,15 +1,14 @@
 import { useRef } from "react";
 
-import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useInView } from "framer-motion";
 
-import { setCurrentRoute } from "@/redux/routeSlice";
-
 import { PortfolioItem } from "@/components/portfolio";
+import Button from "@/components/common/Button";
 
 import { portfolio } from "@/data";
-import Button from "@/components/common/Button";
+import { setCurrentRoute } from "@/redux/routeSlice";
+import { useDispatch } from "react-redux";
 
 interface LatestWorksProps {
   className?: string;
@@ -48,12 +47,13 @@ const LatestWorks: React.FC<LatestWorksProps> = () => {
       </ul>
 
       <div className="latest-works__view-more">
-        <NavLink
-          to="/portfolio"
-          className="latest-works__view-more--link"
-          onClick={() => handleNavLinkClick("/portfolio")}
-        >
-          <Button variant="primary">VIEW MORE</Button>
+        <NavLink to="/portfolio" className="latest-works__view-more--link">
+          <Button
+            variant="primary"
+            onClick={() => handleNavLinkClick("/portfolio")}
+          >
+            VIEW MORE
+          </Button>
         </NavLink>
       </div>
     </section>

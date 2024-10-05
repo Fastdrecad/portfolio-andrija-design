@@ -7,7 +7,7 @@ interface MobileHeaderProps {
   navClass: string;
   isChecked: boolean;
   toggle: () => void;
-  isDesktop: boolean;
+  isDesktop?: boolean;
 }
 
 const MobileHeader: React.FC<MobileHeaderProps> = ({

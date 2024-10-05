@@ -1,32 +1,41 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { setCurrentRoute } from "@/redux/routeSlice";
 import { RootState } from "@/redux/store";
 import { MenuContext } from "@/context/navContext";
 
-import { useWindowResize } from "@/hooks/useWindowResize";
 import { useScrollHandler } from "@/hooks/useNavigationScroll";
 
 import DesktopHeader from "@/components/layout/Header/DesktopHeader";
 import MobileHeader from "@/components/layout/Header/MobileHeader";
+import { useLocation } from "react-router-dom";
+import { useDimension } from "@/hooks/useDimensions";
 
 const Header: React.FC = () => {
   const { toggle, isChecked } = useContext(MenuContext);
-  const dispatch = useDispatch();
+
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
   const { calendly, youtube, project } = useSelector(
     (state: RootState) => state.modal
   );
-
   const isAnyModalOpen = calendly || youtube || project !== null;
 
-  const isDesktop = useWindowResize(1200);
-  const navClass = useScrollHandler();
+  const navClass = useScrollHandler(); // Get scroll state from useScrollHandler hook
+  const { width } = useDimension(); // Get viewport width from useDimension hook
 
-  const handleNavLinkClick = (url: string) => {
-    dispatch(setCurrentRoute(url));
-  };
+  // Determine visibility of headers
+  const showDesktopHeader = isHomePage && width > 1200;
+
+  const [activeHeader, setActiveHeader] = useState<"desktop" | "mobile">(
+    isHomePage ? "desktop" : "mobile"
+  );
+
+  useEffect(() => {
+    setActiveHeader(isHomePage ? "desktop" : "mobile");
+  }, [isHomePage]);
 
   if (isAnyModalOpen) {
     return null;
@@ -34,19 +43,17 @@ const Header: React.FC = () => {
 
   return (
     <header className="header">
-      <MobileHeader
-        isDesktop={isDesktop}
-        navClass={navClass}
-        isChecked={isChecked}
-        toggle={toggle}
-      />
+      <MobileHeader navClass={navClass} isChecked={isChecked} toggle={toggle} />
 
-      {isDesktop && (
-        <DesktopHeader
-          navClass={navClass}
-          handleNavLinkClick={handleNavLinkClick}
-        />
-      )}
+      <div
+        className={`header__desktop ${
+          activeHeader === "desktop" && showDesktopHeader
+            ? "header--visible"
+            : "header--hidden"
+        }`}
+      >
+        <DesktopHeader navClass={navClass} />
+      </div>
     </header>
   );
 };

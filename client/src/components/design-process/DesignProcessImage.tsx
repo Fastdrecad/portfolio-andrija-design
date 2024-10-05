@@ -18,7 +18,7 @@ const DesignProcessImage: React.FC<{ item: DesignProcessBoxProps["item"] }> = ({
       className={`design-process-img ${isInView ? "animate-arrow" : ""}`}
     >
       <div className="design-process-image-container">
-        <Image src={item.img} alt={item.alt} />
+        <Image src={item.img} alt={item.alt} loading="lazy" />
       </div>
     </motion.div>
   );

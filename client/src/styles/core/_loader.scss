@@ -12,7 +12,8 @@
   justify-content: center;
   align-items: center;
   color: $white;
-  background-color: $black;
+  background-color: #222;
+  padding: 4rem 0;
 
   &.active {
     cursor: wait;
@@ -53,7 +54,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(100vh + 300px);
+    height: calc(100vh + 400px);
     z-index: -1;
   }
 }

@@ -8,10 +8,6 @@
     background-color: themed("background-color");
     overflow: hidden;
 
-    @include media-breakpoint-up(xl) {
-      margin-top: 200px;
-    }
-
     &__container {
       width: 100%;
       margin: 0 auto;
@@ -21,7 +17,7 @@
     &__heading {
       width: 100%;
       text-align: center;
-      padding-top: 125px;
+      margin-top: 125px;
     }
 
     &__section-title {

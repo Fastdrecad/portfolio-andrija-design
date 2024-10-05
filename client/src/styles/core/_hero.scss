@@ -35,6 +35,7 @@
     }
 
     &__wrapper {
+      pointer-events: none;
       position: absolute;
       left: 0;
       bottom: 0;
@@ -359,6 +360,12 @@
   }
 }
 
+@media screen and (min-height: 1200px) and (orientation: portrait) {
+  .hero {
+    margin-top: $navbarHeight !important;
+    height: calc(var(--vh, 1vh) * 100 - $navbarHeight) !important;
+  }
+}
 @media screen and (max-width: 768px) and (orientation: landscape) {
   .scroll-to-web {
     display: none !important;

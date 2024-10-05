@@ -23,6 +23,7 @@ const ContactFooter: React.FC = () => {
               alt="Furniture Design"
               srcSet={`${contactHero480} 480w, ${contactHero800} 800w, ${contactHero} 1200w`}
               sizes="(max-width: 600px) 480px, (max-width: 900px) 800px, 1200px"
+              loading="lazy"
             />
           </div>
           <motion.div

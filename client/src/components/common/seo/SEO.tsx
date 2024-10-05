@@ -1,7 +1,5 @@
 import { Helmet } from "react-helmet-async";
 
-import { jsonLd } from "@/data/jsonLdData"; // Assume this is dynamic and relevant to each page
-
 import { SEOProps } from "@/types/seoTypes";
 
 const SEO: React.FC<SEOProps> = ({
@@ -119,9 +117,6 @@ const SEO: React.FC<SEOProps> = ({
       <link rel="dns-prefetch" href="https://www.google.com" />
       <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
       <link rel="dns-prefetch" href="https://static.doubleclick.net" />
-
-      {/* Structured Data (JSON-LD) */}
-      <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
     </Helmet>
   );
 };

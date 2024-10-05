@@ -4,14 +4,24 @@ const routeSlice = createSlice({
   name: "route",
   initialState: {
     currentRoute: "",
-    modalOrigin: ""
+    modalOrigin: "",
+    isFormSubmitted: false
   },
   reducers: {
     setCurrentRoute: (state, action) => {
-      state.currentRoute = action.payload.pathname || action.payload;
+      if (action.payload === "/") {
+        state.currentRoute = "/home";
+      } else if (action.payload === "/design-process") {
+        state.currentRoute = "/design process";
+      } else {
+        state.currentRoute = action.payload;
+      }
+    },
+    setIsFormSubmitted: (state, action) => {
+      state.isFormSubmitted = action.payload;
     }
   }
 });
 
-export const { setCurrentRoute } = routeSlice.actions;
+export const { setCurrentRoute, setIsFormSubmitted } = routeSlice.actions;
 export default routeSlice.reducer;

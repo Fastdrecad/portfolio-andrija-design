@@ -28,7 +28,7 @@
     }
 
     &__container {
-      @include flex();
+      display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 clamp(20px, 7vw, 250px);

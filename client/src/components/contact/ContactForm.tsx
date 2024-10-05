@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 
-import { setCurrentRoute } from "@/redux/routeSlice";
+import { setCurrentRoute, setIsFormSubmitted } from "@/redux/routeSlice";
 
 import useContactForm from "@/hooks/useContactForm";
 
@@ -44,6 +44,7 @@ const ContactForm: React.FC = () => {
       const response = await contactService.sendMessage(values); // Use service to send the form
       if (response.status === 200) {
         setResponseMessage("Your message has been sent successfully!");
+        dispatch(setIsFormSubmitted(true));
         dispatch(setCurrentRoute("/success"));
         navigate("/success");
       }
