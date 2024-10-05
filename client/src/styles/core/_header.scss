@@ -1,7 +1,60 @@
 .header {
   @include themify($themes) {
-    &.hidden {
-      display: none;
+    position: relative;
+
+    &__desktop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      opacity: 0;
+      transform: translateX(-100vw);
+      z-index: 8; // Ensure visibility over the hidden element
+
+      &.header--visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      &.header--hidden {
+        opacity: 0;
+        transform: translateX(-100vw);
+        // z-index: 0; // Ensure it's behind the visible element
+      }
     }
+  }
+}
+
+.so-what {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  opacity: 1;
+  transform: translateX(100vw);
+
+  &.animate-me {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-70px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100vw);
   }
 }

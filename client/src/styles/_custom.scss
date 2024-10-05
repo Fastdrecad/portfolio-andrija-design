@@ -1,11 +1,12 @@
 button {
   user-select: none;
   background-color: transparent;
+  -webkit-tap-highlight-color: transparent !important;
 }
 
 .no-scroll {
   overflow: hidden !important;
-  height: 100%; /* Optional: Fixes potential issues on iOS */
+  height: 100% !important; /* Optional: Fixes potential issues on iOS */
 }
 
 .animated-visibility-wrapper {
@@ -21,5 +22,30 @@ button {
   svg {
     width: clamp(4em, 8vw, 8em);
     height: auto;
+  }
+}
+
+.underline {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    border-radius: 5px;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: currentcolor;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
   }
 }

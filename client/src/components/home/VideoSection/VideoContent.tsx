@@ -20,6 +20,7 @@ const VideoContent: React.FC<VideoContentProps> = ({ onPlayClick }) => {
       <Image
         src={videoImg}
         alt="Architectural interior with a play button and the text 'Imagination Creates Reality.'"
+        loading="lazy"
       />
       <div className="video__banner">
         <motion.div

@@ -11,16 +11,19 @@ const Image: React.FC<ImageProps> = ({
   className,
   loading,
   srcSet,
-  sizes
+  sizes,
+  useLoader = false,
+  delay = 0
 }) => {
-  const { imageSrc, loaded } = useImageLoader({ src });
+  const { imageSrc, loaded } = useImageLoader({ src, useLoader, delay });
 
-  const finalClassName = `${loaded ? "image-loaded" : "image-loading"} ${
-    className || ""
-  }`;
+  const finalClassName = `image ${loaded ? "image-loaded" : "image-loading"} ${
+    className ? className : ""
+  }`.trim();
 
   return (
-    <div style={{ width, height }}>
+    <div style={{ width, height }} className="image-container">
+      {/* Always render the image element */}
       {!loaded && (
         <div
           className={`image-loading ${
@@ -29,15 +32,14 @@ const Image: React.FC<ImageProps> = ({
           style={{ width: "100%", height: "100%" }}
         ></div>
       )}
-
       <img
-        src={loaded ? imageSrc : placeholder}
-        srcSet={srcSet}
-        sizes={sizes}
-        loading={loading}
+        src={!loaded && placeholder ? placeholder : imageSrc}
         alt={alt}
         className={finalClassName}
-        style={{ opacity: loaded ? 1 : 0 }}
+        style={{ opacity: loaded ? 1 : 0, width, height }}
+        loading={loading}
+        srcSet={srcSet}
+        sizes={sizes}
       />
     </div>
   );

@@ -21,4 +21,5 @@ export interface PortfolioItemProps {
   index: number;
   isModal: boolean;
   newlyLoadedStartIndex?: number;
+  onClick?: () => void;
 }

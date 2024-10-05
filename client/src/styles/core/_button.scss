@@ -15,6 +15,7 @@
     transition: all 150ms ease-in-out;
     outline: none;
     border: none;
+    -webkit-tap-highlight-color: transparent !important;
 
     // Disabled state styles
     &:disabled {
@@ -35,6 +36,7 @@
       border-top-color: white;
       border-radius: 50%;
       animation: spin 1s linear infinite;
+      -webkit-tap-highlight-color: transparent !important;
     }
 
     // Icon styles

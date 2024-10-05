@@ -33,11 +33,8 @@ const TimeIsNow: React.FC = () => {
 
   // Z-index handling for Calendly modal
   const widgetRef = useRef<HTMLDivElement>(null);
-  const body = document.body;
 
   useEffect(() => {
-    body.style.overflow = isCalendlyOpen ? "hidden" : "visible";
-
     const handleClickOutside = (event: MouseEvent) => {
       if (
         widgetRef.current &&
@@ -47,12 +44,14 @@ const TimeIsNow: React.FC = () => {
       }
     };
 
+    // Add the click event listener
     document.addEventListener("mousedown", handleClickOutside);
+
     return () => {
+      // Remove the click event listener on cleanup
       document.removeEventListener("mousedown", handleClickOutside);
-      body.style.overflow = "visible";
     };
-  }, [isCalendlyOpen, handleClose, body.style]);
+  }, [handleClose]);
 
   return (
     <section className="time-is-now" id="time-is-now">

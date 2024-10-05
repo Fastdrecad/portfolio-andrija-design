@@ -105,6 +105,9 @@ const GalleryItem = forwardRef<HTMLDivElement, GalleryItemProps>(
                       src={item.url}
                       alt={item.alt || "Portfolio image"}
                       className="gallery-item__image"
+                      delay={800}
+                      useLoader={true}
+                      loading="lazy"
                     />
                     <p className="gallery-item__image-description">
                       {item.desc}

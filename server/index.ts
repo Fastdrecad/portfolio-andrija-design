@@ -1,17 +1,25 @@
 import dotenv from "dotenv";
-dotenv.config();
 import express from "express";
 import nodemailer from "nodemailer";
 import chalk from "chalk";
 import cors from "cors";
 import validator from "validator";
 
+dotenv.config();
+
 const app = express();
 app.use(express.json());
 
+const CORS_ORIGIN =
+  process.env.NODE_ENV === "production"
+    ? process.env.CORS_ORIGIN || "https://portfolio.andrijadesign.com"
+    : "http://localhost:5173";
+
 app.use(
   cors({
-    origin: "http://localhost:5173"
+    origin: CORS_ORIGIN,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true
   })
 );
 
@@ -32,10 +40,15 @@ const sendEmail = async (
     const transporter = nodemailer.createTransport({
       host: smtpServer,
       port: smtpPort,
+      secure: false,
       auth: {
         user: process.env.SMTP_USER, // Authenticate with your Titan email
-        pass: senderPassword
-      }
+        pass: process.env.SMTP_PASSWORD
+      },
+      tls: {
+        rejectUnauthorized: false // Allow self-signed certificates (for testing purposes)
+      },
+      debug: true
     });
 
     const mailOptions = {
@@ -126,6 +139,11 @@ app.post("/api/contact", async (req, res) => {
       details: error
     });
   }
+});
+
+app.use((req, res, next) => {
+  console.log(`${req.method} request to ${req.url}`);
+  next();
 });
 
 const port = process.env.PORT || 3000;

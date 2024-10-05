@@ -1,3 +1,15 @@
+#ignores all files in the root directory.
+/*
+
+# Ignore all files in the root, except directories
+!*/
+
+# Allow specific files or folders in the root
+!.gitignore
+!.github/
+!client/
+!server/
+
 # Logs
 logs/
 *.log
@@ -34,9 +46,13 @@ ehthumbs.db
 # Other files that should not be in the repository
 .env
 .env.local
+.env.development
+.env.production
+.env.test
 .env.development.local
 .env.test.local
 .env.production.local
+
 config.json
 
 # Security

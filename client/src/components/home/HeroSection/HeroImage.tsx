@@ -7,7 +7,7 @@ const HeroImage: React.FC = () => (
     src={heroImage}
     alt="Andrija Mićunović at the workplace"
     className="hero__image top"
-    height={"100%"}
+    loading="eager"
   />
 );
 

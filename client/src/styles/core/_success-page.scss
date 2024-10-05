@@ -1,25 +1,23 @@
 .success {
   position: relative;
   flex: 1 1 0%;
-  height: calc(100vh - $footerHeight);
+  padding-top: $navbarHeight;
   background-color: rgb(47, 47, 47);
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4rem;
+  min-height: fit-content !important;
 
-  &__wrapper {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
-    justify-content: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 25vh;
+  @include media-breakpoint-up(xl) {
+    padding-top: $navbarHeightFixed;
   }
 
   &__message {
+    margin: auto;
     border-radius: 7px;
-    padding: 1.5rem 6rem 1.5rem 1.5rem;
+    padding: 3rem;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -28,34 +26,34 @@
   }
 
   &__title {
-    margin-bottom: 1rem;
-    font-size: 2rem !important;
-
-    p {
-      margin-bottom: 30px;
-      font-size: 1.25rem;
-    }
+    margin-bottom: 2rem;
+    font-size: clamp(4rem, 3.75em, 6rem);
   }
 
-  &__back-to {
-    color: gray;
+  p {
+    margin-bottom: 2rem;
+    font-size: clamp(1.75rem, 2em, 4rem);
+  }
+
+  a {
+    color: $red !important;
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 2.2em, 2.1rem);
     transition: all 0.3s ease !important;
-    margin-top: 30px;
+    margin-top: 4rem;
 
     span {
+      color: $red !important;
       text-decoration: none;
       transition: all 0.3s ease !important;
-      font-size: 1.5rem;
+      font-size: clamp(1.25rem, 2.2em, 2.1rem);
     }
+  }
+}
 
-    &:hover {
-      color: $red !important;
-    }
-
-    &:hover span {
-      color: $red !important;
-    }
+@media (orientation: landscape) {
+  .success {
+    min-height: 100vh !important;
+    padding-top: $navbarHeight;
   }
 }

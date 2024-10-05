@@ -184,7 +184,7 @@
       }
 
       @include media-breakpoint-down(md) {
-        position: sticky;
+        position: fixed;
         margin: auto;
         top: 250px;
         width: 100%;

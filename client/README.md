@@ -17,7 +17,7 @@ Welcome to my personal portfolio website where I showcase my work as a passionat
 
 ## Usage
 
-1. Visit [Andrija Design](https://andrija-design.netlify.app/) to explore the projects.
+1. Visit [Andrija Design](https://portfolio.andrijadesign.com) to explore the projects.
 2. Use the category filters to narrow down your interests.
 3. Click on individual projects to view detailed information, images, and, where available, 3D models.
 

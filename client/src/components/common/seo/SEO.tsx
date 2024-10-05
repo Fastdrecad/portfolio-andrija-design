@@ -1,7 +1,5 @@
 import { Helmet } from "react-helmet-async";
 
-import { jsonLd } from "@/data/jsonLdData"; // Assume this is dynamic and relevant to each page
-
 import { SEOProps } from "@/types/seoTypes";
 
 const SEO: React.FC<SEOProps> = ({
@@ -58,51 +56,67 @@ const SEO: React.FC<SEOProps> = ({
       <link
         rel="icon"
         type="image/png"
-        href="/favicon-16x16.png"
+        href="/icons/favicon-16x16.png"
         sizes="16x16"
       />
       <link
         rel="icon"
         type="image/png"
-        href="/favicon-32x32.png"
+        href="/icons/favicon-32x32.png"
         sizes="32x32"
       />
       <link
         rel="icon"
         type="image/png"
-        href="/favicon-96x96.png"
+        href="/icons/favicon-96x96.png"
         sizes="96x96"
       />
 
       {/* Apple Touch Icons */}
-      <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
-      <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
-      <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
-      <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+      <link
+        rel="apple-touch-icon"
+        sizes="57x57"
+        href="/icons/apple-icon-57x57.png"
+      />
+      <link
+        rel="apple-touch-icon"
+        sizes="60x60"
+        href="/icons/apple-icon-60x60.png"
+      />
+      <link
+        rel="apple-touch-icon"
+        sizes="72x72"
+        href="/icons/apple-icon-72x72.png"
+      />
+      <link
+        rel="apple-touch-icon"
+        sizes="76x76"
+        href="/icons/apple-icon-76x76.png"
+      />
       <link
         rel="apple-touch-icon"
         sizes="114x114"
-        href="/apple-icon-114x114.png"
+        href="/icons/apple-icon-114x114.png"
       />
       <link
         rel="apple-touch-icon"
         sizes="120x120"
-        href="/apple-icon-120x120.png"
+        href="/icons/apple-icon-120x120.png"
       />
       <link
         rel="apple-touch-icon"
         sizes="144x144"
-        href="/apple-icon-144x144.png"
+        href="/icons/apple-icon-144x144.png"
       />
       <link
         rel="apple-touch-icon"
         sizes="152x152"
-        href="/apple-icon-152x152.png"
+        href="/icons/apple-icon-152x152.png"
       />
       <link
         rel="apple-touch-icon"
         sizes="180x180"
-        href="/apple-icon-180x180.png"
+        href="/icons/apple-icon-180x180.png"
       />
 
       {/* Manifest for PWA (if applicable) */}
@@ -119,9 +133,6 @@ const SEO: React.FC<SEOProps> = ({
       <link rel="dns-prefetch" href="https://www.google.com" />
       <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
       <link rel="dns-prefetch" href="https://static.doubleclick.net" />
-
-      {/* Structured Data (JSON-LD) */}
-      <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
     </Helmet>
   );
 };

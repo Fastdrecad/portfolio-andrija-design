@@ -9,15 +9,14 @@ import { filterPortfolioByCategory } from "@/utils/portfolioUtils";
 
 import { PortfolioItem, PortfolioTabs } from "@/components/portfolio";
 import RedLine from "@/components/common/RedLine";
-import pageTransition from "@/components/animations/pageTransition";
 import Button from "@/components/common/Button";
+import SEO from "@/components/common/seo/SEO";
+import JsonLd from "@/components/common/seo/JsonLd";
 
 import { IMAGES_PER_ROW } from "@/constants";
 import { categories, portfolio } from "@/data";
 
 import { PortfolioItemType } from "@/types/portfolioTypes";
-import SEO from "@/components/common/seo/SEO";
-import JsonLd from "@/components/common/seo/JsonLd";
 
 const Portfolio: React.FC = () => {
   useDocumentTitle("Portfolio");
@@ -130,6 +129,4 @@ const Portfolio: React.FC = () => {
   );
 };
 
-const PortfolioPageWithTransition = pageTransition(Portfolio);
-
-export default PortfolioPageWithTransition;
+export default Portfolio;

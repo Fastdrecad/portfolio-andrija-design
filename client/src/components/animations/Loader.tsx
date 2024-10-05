@@ -1,98 +1,32 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { motion } from "framer-motion";
 
-import { Variants, motion } from "framer-motion";
+import { useDimension } from "@/hooks/useDimensions";
+
+import {
+  pathVariants,
+  slideUp,
+  textVariants
+} from "@/components/animations/variants/loaderVariants";
 
 interface LoaderProps {
   active: boolean;
 }
 
-const slideUp = {
-  initial: {
-    top: 0
-  },
-  exit: {
-    top: "-100vh",
-    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.2 }
-  }
-};
-
-const textVariants: Variants = {
-  initial: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 1,
-      ease: "easeInOut",
-      repeat: Infinity,
-      repeatType: "loop"
-    }
-  }
-};
-
-const pathVariants: Variants = {
-  initial: {
-    pathLength: 0
-  },
-  visible: {
-    pathLength: 1,
-
-    transition: {
-      duration: 2,
-      ease: "easeInOut"
-    }
-  }
-};
-
 const Loader: React.FC<LoaderProps> = ({ active }) => {
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
+  const dimension = useDimension();
 
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, []);
+  const heightMultiplier = window.innerWidth < 768 ? 2 : 3; // Different heights for mobile and desktop
 
-  const [dimension, setDimension] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight
-  });
-
-  useLayoutEffect(() => {
-    const updateWindowDimensions = () => {
-      setDimension({ width: window.innerWidth, height: window.innerHeight });
-    };
-
-    updateWindowDimensions();
-
-    const handleResize = () => {
-      updateWindowDimensions();
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  // Calculate 50% of the viewport height
-  const heightPercentage = 20; // Adjust this value as needed
-  const vh = Math.max(
-    document.documentElement.clientHeight || 0,
-    window.innerHeight || 0
-  );
-  const offset = (vh * heightPercentage) / 100;
-
-  // Update the paths with the calculated offset
+  // Calculate height based on multiplier
   const initialPath = `M0 0 L${dimension.width} 0 L${dimension.width} ${
-    dimension.height
-  } Q${dimension.width / 2} ${dimension.height + offset} 0 ${
-    dimension.height
-  }  L0 0`;
+    dimension.height * 1.5
+  } Q${dimension.width / 2} ${dimension.height * heightMultiplier} 0 ${
+    dimension.height * 1.5
+  } L0 0`;
 
   const targetPath = `M0 0 L${dimension.width} 0 L${dimension.width} ${
     dimension.height
-  } Q${dimension.width / 2} ${dimension.height} 0 ${dimension.height}  L0 0`;
+  } Q${dimension.width / 2} ${dimension.height} 0 ${dimension.height} L0 0`;
 
   const curve = {
     initial: {
@@ -101,7 +35,7 @@ const Loader: React.FC<LoaderProps> = ({ active }) => {
     },
     exit: {
       d: targetPath,
-      transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.3 }
+      transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.2 }
     }
   };
 
@@ -112,6 +46,7 @@ const Loader: React.FC<LoaderProps> = ({ active }) => {
       initial="initial"
       exit="exit"
     >
+      {/* Render the SVG logo with a motion path for animation */}
       {dimension.height > 0 && (
         <>
           <svg fill="none" viewBox="0 0 120.5 87">

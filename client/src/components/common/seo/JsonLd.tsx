@@ -29,21 +29,21 @@ const JsonLd: React.FC<JsonLdProps> = ({ pageType, pageData }) => {
       jsonLd = {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Andrija Mićunović Portfolio",
-        "url": "https://www.portfolio.andrijadesign.com",
-        "description":
+        name: "Andrija Mićunović Portfolio",
+        url: "https://www.portfolio.andrijadesign.com",
+        description:
           "Showcase of Andrija Mićunović's professional work in furniture design and 3D art.",
-        "author": {
+        author: {
           "@type": "Person",
-          "name": "Andrija Mićunović",
-          "url": "https://www.portfolio.andrijadesign.com",
-          "sameAs": [
+          name: "Andrija Mićunović",
+          url: "https://www.portfolio.andrijadesign.com",
+          sameAs: [
             "https://www.instagram.com/fastdrecad/",
             "https://www.linkedin.com/in/andrija-micunovic/",
             "https://www.behance.net/Andrijas"
           ]
         },
-        "mainEntityOfPage": "https://www.portfolio.andrijadesign.com"
+        mainEntityOfPage: "https://www.portfolio.andrijadesign.com"
       };
       break;
 
@@ -54,7 +54,7 @@ const JsonLd: React.FC<JsonLdProps> = ({ pageType, pageData }) => {
       ) {
         jsonLd = {
           "@context": "https://schema.org",
-          "@type": "ItemList",
+          "@type": "PortfolioPage",
           "name": "Portfolio of Andrija Mićunović",
           "url": "https://www.portfolio.andrijadesign.com/portfolio",
           "itemListElement": (pageData as PortfolioItemType[]).map(
@@ -98,7 +98,7 @@ const JsonLd: React.FC<JsonLdProps> = ({ pageType, pageData }) => {
       ) {
         jsonLd = {
           "@context": "https://schema.org",
-          "@type": "HowTo",
+          "@type": "DesignProcessPage",
           "name": "Design Process",
           "description": "Steps in the design process by Andrija Mićunović",
           "url": "https://www.portfolio.andrijadesign.com/design-process",
@@ -119,7 +119,7 @@ const JsonLd: React.FC<JsonLdProps> = ({ pageType, pageData }) => {
       // Schema for About page
       jsonLd = {
         "@context": "https://schema.org",
-        "@type": "Person",
+        "@type": "AboutPage",
         "name": "Andrija Mićunović",
         "jobTitle": "Furniture Designer & 3D Artist",
         "worksFor": {

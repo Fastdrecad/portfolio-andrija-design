@@ -1,7 +1,6 @@
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 
 import { AboutDetailsSection, AboutHeroSection } from "@/components/about";
-import pageTransition from "@/components/animations/pageTransition";
 import SEO from "@/components/common/seo/SEO";
 import JsonLd from "@/components/common/seo/JsonLd";
 
@@ -28,5 +27,4 @@ const About: React.FC = () => {
   );
 };
 
-const AboutPageWithTransition = pageTransition(About);
-export default AboutPageWithTransition;
+export default About;

@@ -8,4 +8,6 @@ export interface ImageProps {
   loading?: "lazy" | "eager" | undefined;
   srcSet?: string;
   sizes?: string;
+  useLoader?: boolean; // This controls the image loading mechanism
+  delay?: number;
 }

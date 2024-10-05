@@ -7,9 +7,5 @@
     margin-top: $navbarHeight;
     display: flex;
     flex-direction: column;
-
-    @include media-breakpoint-up(xl) {
-      margin-top: 200px;
-    }
   }
 }

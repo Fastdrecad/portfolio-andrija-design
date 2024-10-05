@@ -8,8 +8,6 @@ import GalleryItem from "@/components/common/Modal/GalleryItem";
 
 import { portfolio } from "@/data";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setCurrentRoute } from "@/redux/routeSlice";
 
 interface ModalContentProps {
   onClose: () => void;
@@ -28,7 +26,6 @@ const ModalContent: React.FC<ModalContentProps> = ({
   const modalRef = useRef<HTMLDivElement>(null);
   const navbarRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleResize = () => {
@@ -124,9 +121,8 @@ const ModalContent: React.FC<ModalContentProps> = ({
       // If opened from LatestWorks, stay on "/"
       onClose(); // Close the modal, but stay on the current route "/"
     } else {
-      // If opened from "portfolio/slug", navigate to "portfolio"
+      // If opened from "portfolio", navigate to "portfolio"
       navigate("/portfolio");
-      dispatch(setCurrentRoute("/portfolio"));
     }
   };
 

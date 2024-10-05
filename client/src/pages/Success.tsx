@@ -8,7 +8,6 @@ import { setCurrentRoute } from "@/redux/routeSlice";
 
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 
-import pageTransition from "@/components/animations/pageTransition";
 import SEO from "@/components/common/seo/SEO";
 
 const Success: React.FC = () => {
@@ -43,25 +42,22 @@ const Success: React.FC = () => {
       />
 
       <div className="success">
-        <div className="success__wrapper">
-          <div className="success__message">
-            <h1 className="success__title">Thank you!</h1>
-            <p>Your form submission has been received.</p>
-            <NavLink
-              onClick={() => handleNavLinkClick("/")}
-              to="/"
-              className="success__back-to"
-            >
-              <span>&larr;</span> Back to home
-            </NavLink>
-          </div>
+        <div className="success__message">
+          <h1 className="success__title">Thank you!</h1>
+          <p>Your form submission has been received.</p>
+          <NavLink
+            onClick={() => handleNavLinkClick("/")}
+            to="/"
+            className="underline"
+          >
+            <span>&larr;</span> Back to home
+          </NavLink>
         </div>
+
         <Confetti gravity={0.3} numberOfPieces={pieces} />
       </div>
     </>
   );
 };
 
-const SuccessPageWithTransition = pageTransition(Success);
-
-export default SuccessPageWithTransition;
+export default Success;

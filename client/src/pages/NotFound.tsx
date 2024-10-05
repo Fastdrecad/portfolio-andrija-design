@@ -5,7 +5,6 @@ import { setCurrentRoute } from "@/redux/routeSlice";
 
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 
-import pageTransition from "@/components/animations/pageTransition";
 import SEO from "@/components/common/seo/SEO";
 
 const NotFound = () => {
@@ -71,7 +70,4 @@ const NotFound = () => {
     </>
   );
 };
-
-const NotFoundWithTransition = pageTransition(NotFound);
-
-export default NotFoundWithTransition;
+export default NotFound;

@@ -29,22 +29,13 @@ const ScrollToTop: React.FC = () => {
   };
 
   return (
-    <>
-      {/* <button
-        id="scroll-to-top"
-        className={showTopBtn ? "show" : ""}
-        onClick={goToTop}
-      >
-        <GoChevronUp />
-      </button> */}
-      <Button
-        id="scroll-to-top"
-        className={showTopBtn ? "show" : ""}
-        onClick={goToTop}
-      >
-        <GoChevronUp />
-      </Button>
-    </>
+    <Button
+      id="scroll-to-top"
+      className={showTopBtn ? "show" : ""}
+      onClick={goToTop}
+    >
+      <GoChevronUp />
+    </Button>
   );
 };
 

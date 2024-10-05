@@ -123,6 +123,10 @@
       height: calc(var(--vh, 1vh) * 100);
       z-index: 1;
 
+      @include media-breakpoint-up(lg) {
+        min-height: 100vh !important;
+      }
+
       svg {
         height: 100vh;
         height: 100%;
@@ -141,9 +145,9 @@
   align-items: center;
 }
 
-@media screen and (orientation: landscape) {
-  .time-is-now {
+@media (orientation: landscape) {
+  .time-is-now,
+  .time-is-now__logo-container {
     min-height: 200vh !important;
-    height: -webkit-fill-available;
   }
 }
