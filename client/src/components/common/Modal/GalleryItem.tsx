@@ -1,5 +1,10 @@
-import { forwardRef } from "react";
-import { CSSProperties, MutableRefObject, useEffect, useState } from "react";
+import {
+  CSSProperties,
+  forwardRef,
+  MutableRefObject,
+  useEffect,
+  useState
+} from "react";
 
 import Image from "@/components/common/Image";
 
@@ -62,7 +67,6 @@ const GalleryItem = forwardRef<HTMLDivElement, GalleryItemProps>(
             <div className="gallery-item__details">
               <div className="gallery-item__description">
                 <div
-                  // className="gallery-item__description-content"
                   className={`gallery-item__description-content ${navClass}`}
                 >
                   <div className="gallery-item__description-center">

@@ -1,0 +1,27 @@
+services:
+  client:
+    image: ${DOCKER_USERNAME}/portfolio-client:latest
+    container_name: portfolio-client-prod
+    restart: always
+    ports:
+      - "8085:80"
+    environment:
+      - NODE_ENV=production
+      - VITE_API_URL=${VITE_API_URL}
+    networks:
+      - portfolio-network
+
+  api:
+    image: ${DOCKER_USERNAME}/portfolio-api:latest
+    container_name: portfolio-api-prod
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - portfolio-network
+    env_file:
+      - .env
+
+networks:
+  portfolio-network:
+    driver: bridge

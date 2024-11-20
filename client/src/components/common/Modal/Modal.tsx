@@ -43,12 +43,16 @@ const Modal: React.FC<ModalProps> = ({
       dispatch(openModal({ modalType } as ModalPayload));
     }
 
+    document.body.style.overflow = "hidden";
+
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
       // Dispatch closeModal only when the modal is closed
       dispatch(closeModal(modalType));
       window.removeEventListener("keydown", handleKeyDown);
+
+      document.body.style.overflow = "auto";
     };
   }, [dispatch, modalType, id, handleKeyDown]);
 

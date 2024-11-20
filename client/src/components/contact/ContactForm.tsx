@@ -1,18 +1,18 @@
 import { useRef } from "react";
 
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { setCurrentRoute, setIsFormSubmitted } from "@/redux/routeSlice";
 
 import useContactForm from "@/hooks/useContactForm";
-
 import contactService from "@/services/contactService";
 
-import FormInput from "@/components/contact/FormInput";
-import { inputs } from "@/data";
 import Button from "@/components/common/Button";
+import FormInput from "@/components/contact/FormInput";
+
+import { inputs } from "@/data";
 
 const ContactForm: React.FC = () => {
   const formContentRef = useRef<HTMLDivElement>(null);
@@ -41,13 +41,17 @@ const ContactForm: React.FC = () => {
     setResponseMessage(null);
 
     try {
-      const response = await contactService.sendMessage(values); // Use service to send the form
-      if (response.status === 200) {
-        setResponseMessage("Your message has been sent successfully!");
-        dispatch(setIsFormSubmitted(true));
-        dispatch(setCurrentRoute("/success"));
-        navigate("/success");
-      }
+      await contactService.sendMessage(values);
+      setResponseMessage("Your message has been sent successfully!");
+
+      // Ensure state updates complete before navigation
+      await Promise.all([
+        dispatch(setIsFormSubmitted(true)),
+        dispatch(setCurrentRoute("/success"))
+      ]);
+
+      // Navigate after state updates
+      navigate("/success");
     } catch (error) {
       setResponseMessage("There was an error sending your message.");
     } finally {

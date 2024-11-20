@@ -1,4 +1,3 @@
-import { API_BASE_URL } from "@/constants";
 import axios from "axios";
 
 interface ContactFormData {
@@ -8,17 +7,42 @@ interface ContactFormData {
   message: string;
 }
 
+// Base URL configuration for API using Docker Compose for development
+// const API_BASE_URL = "http://localhost:3200/api";
+
+// Base URL configuration for API
+const API_BASE_URL = import.meta.env.DEV
+  ? "http://localhost:3000/api" // Development API endpoint
+  : import.meta.env.VITE_API_URL || "/api"; // Production: Nginx proxy
+
+console.log("Environment:", import.meta.env.MODE); // Logs the current mode (e.g., "production")
+console.log("API_BASE_URL:", API_BASE_URL); // Logs the selected API_BASE_URL
+
+// Create an Axios instance with the base URL
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.DEV ? "/api" : import.meta.env.VITE_API_BASE_URL
+  baseURL: API_BASE_URL,
+  headers: {
+    "Content-Type": "application/json"
+  }
 });
 
+// Contact service for sending messages
 const contactService = {
   sendMessage: async (data: ContactFormData) => {
-    // development
-    return axiosInstance.post(`${API_BASE_URL}/api/contact`, data);
-
-    // production
-    // return axiosInstance.post(`/api/contact`, data);
+    try {
+      // POST request to /contact endpoint
+      const response = await axiosInstance.post("/contact", data);
+      return response.data; // Return the API response data
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        console.error(
+          "Error sending message:",
+          error.response || error.message
+        );
+        throw error.response?.data || error.message;
+      }
+      throw new Error("Unknown error occurred");
+    }
   }
 };
 

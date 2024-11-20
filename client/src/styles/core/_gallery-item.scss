@@ -44,7 +44,6 @@
   &__description-content {
     @include media-breakpoint-up(lg) {
       padding-right: 4rem;
-      position: sticky;
       z-index: 1;
       top: 80px;
     }
@@ -121,8 +120,11 @@
     margin-bottom: 50px;
     gap: 10px;
     position: relative;
-    min-height: 350px;
-    max-height: 100%;
+
+    @include media-breakpoint-up(lg) {
+      min-height: 350px;
+      max-height: 100%;
+    }
   }
 
   &__image {

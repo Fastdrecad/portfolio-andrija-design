@@ -1,13 +1,10 @@
-import { useEffect, useRef, useState } from "react";
-
 import { motion } from "framer-motion";
-
+import { useEffect, useRef, useState } from "react";
 import { BsArrowsFullscreen, BsXLg } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 import GalleryItem from "@/components/common/Modal/GalleryItem";
-
 import { portfolio } from "@/data";
-import { useNavigate } from "react-router-dom";
 
 interface ModalContentProps {
   onClose: () => void;
@@ -20,12 +17,13 @@ const ModalContent: React.FC<ModalContentProps> = ({
   projectId,
   isModal = true
 }) => {
-  const [navClass, setNavClass] = useState("top");
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [navClass, setNavClass] = useState<string>("");
   const [navbarHeight, setNavbarHeight] = useState(0);
   const modalRef = useRef<HTMLDivElement>(null);
   const navbarRef = useRef<HTMLDivElement>(null);
+  const galleryItemRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const lastScrollYRef = useRef(0);
 
   useEffect(() => {
     const handleResize = () => {
@@ -34,61 +32,37 @@ const ModalContent: React.FC<ModalContentProps> = ({
       }
     };
 
-    handleResize(); // Call once on mount to set initial height
-    window.addEventListener("resize", handleResize); // Adjust on window resize
+    const navbar = navbarRef.current;
+    const observer = new ResizeObserver(handleResize);
+    if (navbar) {
+      observer.observe(navbar);
+    }
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      if (navbar) {
+        observer.unobserve(navbar);
+      }
     };
   }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (navbarRef.current) {
-        const newHeight = navbarRef.current.offsetHeight;
-        if (newHeight !== navbarHeight) {
-          setNavbarHeight(newHeight);
-        }
-      }
-    };
-
-    // Observe changes in the navbar that could affect its size
-    const observer = new ResizeObserver(handleResize);
-    if (navbarRef.current) {
-      observer.observe(navbarRef.current);
-    }
-
-    handleResize(); // Also call on mount
-
-    return () => {
-      if (navbarRef.current) {
-        observer.unobserve(navbarRef.current);
-      }
-    };
-  }, [navbarHeight]);
 
   useEffect(() => {
     const handleScroll = () => {
       const modal = modalRef.current;
       if (modal) {
         const currentScrollY = modal.scrollTop;
-        const isScrollingDown = currentScrollY > lastScrollY;
+        const isScrollingDown = currentScrollY > lastScrollYRef.current;
 
-        if (currentScrollY <= 150) {
-          if (navClass !== "top") {
-            setNavClass("top"); // Show navbar when within 100px from the top
-          }
-        } else if (isScrollingDown) {
-          if (navClass !== "hidden") {
-            setNavClass("hidden"); // Hide navbar when scrolling down
-          }
+        if (isScrollingDown) {
+          setNavClass("hidden");
         } else {
-          if (navClass !== "scrolled-up") {
-            setNavClass("scrolled-up"); // Show navbar in 'scrolled-up' state otherwise
-          }
+          setNavClass("scrolled-up");
         }
 
-        setLastScrollY(currentScrollY); // Update last scroll position for next comparison
+        lastScrollYRef.current = currentScrollY;
       }
     };
 
@@ -98,7 +72,7 @@ const ModalContent: React.FC<ModalContentProps> = ({
     return () => {
       modal?.removeEventListener("scroll", handleScroll);
     };
-  }, [lastScrollY, navClass]);
+  }, []);
 
   const project = portfolio.find((p) => p.id === projectId);
 
@@ -107,10 +81,10 @@ const ModalContent: React.FC<ModalContentProps> = ({
   }
 
   const handleFullscreen = () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-    } else {
-      if (document.exitFullscreen) {
+    if (modalRef.current) {
+      if (!document.fullscreenElement) {
+        modalRef.current.requestFullscreen();
+      } else {
         document.exitFullscreen();
       }
     }
@@ -118,10 +92,8 @@ const ModalContent: React.FC<ModalContentProps> = ({
 
   const handleClose = () => {
     if (isModal) {
-      // If opened from LatestWorks, stay on "/"
-      onClose(); // Close the modal, but stay on the current route "/"
+      onClose();
     } else {
-      // If opened from "portfolio", navigate to "portfolio"
       navigate("/portfolio");
     }
   };
@@ -174,11 +146,7 @@ const ModalContent: React.FC<ModalContentProps> = ({
             </div>
           </div>
 
-          <GalleryItem
-            projectId={projectId}
-            style={{ marginTop: `${navbarHeight}px` }}
-            ref={modalRef}
-          />
+          <GalleryItem projectId={projectId} ref={galleryItemRef} />
         </div>
       </div>
     </motion.div>

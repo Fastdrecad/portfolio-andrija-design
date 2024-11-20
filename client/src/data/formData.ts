@@ -8,7 +8,7 @@ export const inputs = [
     errorMessage:
       "First Name should be between 3-15 characters and shouldn't include any special character.",
     label: "First Name",
-    pattern: "^[A-Za-z0-9]{3,15}$",
+    pattern: "^[A-Za-z]{3,15}$",
     required: true
   },
   {
@@ -19,7 +19,7 @@ export const inputs = [
     errorMessage:
       "Last Name should be between 3-15 characters and shouldn't include any special character.",
     label: "Last Name",
-    pattern: "^[A-Za-z0-9]{3,15}$",
+    pattern: "^[A-Za-z]{3,15}$",
     required: true
   },
   {
