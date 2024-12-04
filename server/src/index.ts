@@ -3,17 +3,75 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import rateLimit from "express-rate-limit";
+import helmet from "helmet";
+import mongoose from "mongoose";
+import morgan from "morgan";
+
+import { errorHandler } from "./middleware/errorHandler";
+import authRoutes from "./routes/authRoutes";
+import portfolioRoutes from "./routes/portfolioRoutes";
+import uploadRoutes from "./routes/uploadRoutes";
 import { emailService } from "./services/email.service";
 import { EmailPayload } from "./types/email.types";
 
-dotenv.config();
+// Load environment variables - development takes precedence
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config({ path: ".env.development" });
+} else {
+  dotenv.config();
+}
 
 const app = express();
 
+// MongoDB connection
+mongoose
+  .connect(process.env.MONGO_URI!)
+  .then(() => console.log(chalk.green("✓ Connected to MongoDB")))
+  .catch((err) => console.error(chalk.red("MongoDB connection error:"), err));
+
 // Middleware
 app.use(express.json());
+app.use(morgan("dev"));
 
-// CORS Configuration
+// Security Headers with Helmet
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        imgSrc: ["'self'", "data:", "https:", "http:"],
+        connectSrc: ["'self'", "https:", "http:"]
+      }
+    },
+    crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: { policy: "cross-origin" }
+  })
+);
+
+// Enhanced Rate Limiting
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // 5 attempts
+  message: "Too many login attempts, please try again after 15 minutes",
+  standardHeaders: true,
+  legacyHeaders: false
+});
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: "Too many requests from this IP, please try again later",
+  standardHeaders: true,
+  legacyHeaders: false
+});
+
+// Apply rate limiting
+app.use("/api/auth/login", authLimiter); // Stricter limit for login
+app.use("/api/", apiLimiter); // General API rate limiting
+
+// Enhanced CORS Configuration
 const allowedOrigins =
   process.env.NODE_ENV === "production"
     ? [
@@ -38,29 +96,17 @@ const corsOptions = {
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   exposedHeaders: ["Content-Range", "X-Content-Range"],
-  maxAge: 600
+  maxAge: 600,
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 };
 
 app.use(cors(corsOptions));
 
-// Rate limiting
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
-  message: "Too many requests from this IP, please try again later."
-});
-
-app.use("/api/", limiter);
-
-// Logging middleware
-app.use((req, res, next) => {
-  console.log(`${req.method} request to ${req.url}`);
-  next();
-});
-
-app.get("/api/health", (req, res) => {
-  res.status(200).json({ status: "ok" });
-});
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/portfolio", portfolioRoutes);
+app.use("/api/upload", uploadRoutes);
 
 // Contact route
 app.post("/api/contact", async (req, res) => {
@@ -79,9 +125,6 @@ app.post("/api/contact", async (req, res) => {
   });
 });
 
-// Start server
-const port = process.env.PORT || 3000;
-
 // Error handling middleware
 app.use(
   (
@@ -98,9 +141,13 @@ app.use(
   }
 );
 
-// Server initialization
+// Global error handling
+app.use(errorHandler);
+
+// Start server
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(chalk.yellow(`🔥 Environment: ${process.env.NODE_ENV}`));
+  console.log(chalk.yellow(` Environment: ${process.env.NODE_ENV}`));
   console.log(chalk.green(`✓ Server is running on port ${chalk.blue(port)}`));
 });
 
@@ -111,7 +158,6 @@ process.on("SIGINT", () => {
 });
 
 process.on("unhandledRejection", (reason, promise) => {
-  // Catch any unhandled promise rejections
   console.error(
     chalk.red("Unhandled Rejection at:"),
     promise,
