@@ -14,6 +14,7 @@
 @import "button";
 @import "am-logo";
 @import "contact-form";
+@import "image-gallery";
 @import "contact-footer";
 @import "form-input";
 @import "header";
@@ -42,7 +43,7 @@
 @import "about-page";
 @import "about-hero-section";
 @import "about-section";
-
+@import "edit-portfolio";
 @import "not-found-page";
 @import "success-page";
 @import "sidebar";
@@ -51,3 +52,14 @@
 @import "loader";
 @import "gallery-item";
 @import "new-modal-content";
+
+// Base styles
+@import "form-input";
+
+// Admin styles
+@import "admin-login";
+@import "admin-header";
+@import "admin-sidebar";
+@import "admin-dashboard";
+@import "portfolio-manager";
+@import "image-uploader";

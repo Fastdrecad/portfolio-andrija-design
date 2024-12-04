@@ -7,11 +7,11 @@ import { useFadeIn } from "@/hooks/useFadeIn";
 
 import { filterPortfolioByCategory } from "@/utils/portfolioUtils";
 
-import { PortfolioItem, PortfolioTabs } from "@/components/portfolio";
-import RedLine from "@/components/common/RedLine";
 import Button from "@/components/common/Button";
-import SEO from "@/components/common/seo/SEO";
+import RedLine from "@/components/common/RedLine";
 import JsonLd from "@/components/common/seo/JsonLd";
+import SEO from "@/components/common/seo/SEO";
+import { PortfolioItem, PortfolioTabs } from "@/components/portfolio";
 
 import { IMAGES_PER_ROW } from "@/constants";
 import { categories, portfolio } from "@/data";

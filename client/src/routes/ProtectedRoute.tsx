@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
-import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "../redux/store"; // Adjust the import path as necessary
+import { Navigate } from "react-router-dom";
+import { RootState } from "../redux/store";
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -13,7 +13,6 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   );
 
   if (!isFormSubmitted) {
-    // Redirect user to the home page or any other page
     return <Navigate to="/" replace />;
   }
 

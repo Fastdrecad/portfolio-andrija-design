@@ -10,7 +10,7 @@ import useContactForm from "@/hooks/useContactForm";
 import contactService from "@/services/contactService";
 
 import Button from "@/components/common/Button";
-import FormInput from "@/components/contact/FormInput";
+import FormInput from "@/components/common/FormInput";
 
 import { inputs } from "@/data";
 

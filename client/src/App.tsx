@@ -1,9 +1,9 @@
+import { RootState } from "@/redux/store";
 import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
 
-import { BrowserRouter } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import { BrowserRouter } from "react-router-dom";
 
 import { DarkModeContext } from "@/context/darkModeContext";
 
@@ -11,14 +11,16 @@ import useLoading from "@/hooks/useLoading";
 
 import Router from "@/routes/Router";
 
-import Header from "@/components/layout/Header/Header";
-import Footer from "@/components/layout/Footer/Footer";
-import ScrollToTop from "@/components/app/ScrollToTop";
-import NavigateToTop from "@/components/app/NavigateToTop";
-import Sidebar from "@/components/layout/Sidebar";
 import Loader from "@/components/animations/Loader";
+import NavigateToTop from "@/components/app/NavigateToTop";
+import ScrollToTop from "@/components/app/ScrollToTop";
 import VisibilityControl from "@/components/app/VisibilityControl";
+import Footer from "@/components/layout/Footer/Footer";
+import Header from "@/components/layout/Header/Header";
+import Sidebar from "@/components/layout/Sidebar";
 import { HelmetProvider } from "react-helmet-async";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App: React.FC = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -60,7 +62,6 @@ const App: React.FC = () => {
       document.body.style.overflow = "";
     }
 
-    // Cleanup to restore overflow when component unmounts
     return () => {
       document.body.style.overflow = "";
     };
@@ -84,6 +85,18 @@ const App: React.FC = () => {
           </VisibilityControl>
           <ScrollToTop />
         </BrowserRouter>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
       </div>
     </HelmetProvider>
   );

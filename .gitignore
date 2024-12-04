@@ -44,6 +44,9 @@ package.json.bak
 
 # config file
 .env
+.env.local
+.env.development
+.env.production
 
 # debug
 npm-debug.log*

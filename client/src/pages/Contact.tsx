@@ -1,13 +1,13 @@
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 
+import { AmHeroBanner } from "@/components/common/AmHeroBanner";
+import JsonLd from "@/components/common/seo/JsonLd";
+import SEO from "@/components/common/seo/SEO";
 import {
   ContactFooter,
   ContactForm,
   ContactHeader
 } from "@/components/contact";
-import { AmHeroBanner } from "@/components/common/AmHeroBanner";
-import SEO from "@/components/common/seo/SEO";
-import JsonLd from "@/components/common/seo/JsonLd";
 
 const Contact: React.FC = () => {
   useDocumentTitle("Contact Me");
@@ -49,7 +49,4 @@ const Contact: React.FC = () => {
   );
 };
 
-// const ContactPageWithTransition = pageTransition(Contact);
-
-// export default ContactPageWithTransition;
 export default Contact;
