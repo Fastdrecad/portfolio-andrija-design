@@ -1,7 +1,14 @@
 import { Request, Response } from "express";
+import { Document } from "mongoose";
+import slugify from "slugify";
 import { CustomError } from "../lib/CustomError";
 import asyncHandler from "../middleware/asyncHandler";
 import { Portfolio } from "../models/Portfolio";
+
+const validateSlug = (slug: string) => {
+  const slugRegex = /^[a-z0-9]+$/;
+  return slugRegex.test(slug);
+};
 
 // Get all projects
 export const getProjects = asyncHandler(
@@ -13,6 +20,20 @@ export const getProjects = asyncHandler(
     }
 
     res.json(projects);
+  }
+);
+
+// Get single project by slug
+export const getProjectBySlug = asyncHandler(
+  async (req: Request, res: Response) => {
+    const { slug } = req.params;
+    const project = await Portfolio.findOne({ slug });
+
+    if (!project) {
+      throw new CustomError("Project not found", 404);
+    }
+
+    res.json(project);
   }
 );
 
@@ -38,7 +59,18 @@ export const createProject = asyncHandler(
       throw new CustomError("Missing required fields", 400);
     }
 
-    const project = new Portfolio(req.body);
+    let slug = slugify(projectName, { lower: true, strict: true });
+
+    if (!validateSlug(slug)) {
+      throw new CustomError("Invalid slug format", 400);
+    }
+
+    const existingProject = await Portfolio.findOne({ slug });
+    if (existingProject) {
+      slug = `${slug}-${Date.now()}`;
+    }
+
+    const project = new Portfolio({ ...req.body, slug });
 
     await project.save();
     res.status(201).json(project);
@@ -52,17 +84,38 @@ export const updateProject = asyncHandler(
       throw new CustomError("No fields provided to update", 400);
     }
 
-    const project = await Portfolio.findByIdAndUpdate(
-      req.params.id,
-      { ...req.body, updatedAt: new Date() },
-      { new: true, runValidators: true }
-    );
+    const { id } = req.params;
+    const updateData = req.body;
+
+    const project = await Portfolio.findById(id);
 
     if (!project) {
       throw new CustomError("Project not found", 404);
     }
 
-    res.json(project);
+    if (updateData.projectName) {
+      let newSlug = slugify(updateData.projectName, {
+        lower: true,
+        strict: true
+      });
+
+      const existingProject = await Portfolio.findOne({ slug: newSlug });
+      if (existingProject) {
+        newSlug = `${newSlug}-${Date.now()}`;
+      }
+
+      updateData.slug = newSlug;
+    }
+
+    Object.keys(updateData).forEach((key) => {
+      if (updateData[key] !== undefined) {
+        (project as Document & { [key: string]: any })[key] = updateData[key];
+      }
+    });
+
+    await project.save();
+
+    res.status(200).json(project);
   }
 );
 

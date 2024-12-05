@@ -1,7 +1,7 @@
-import { usePortfolioUpload } from "@/hooks/usePortfolioUpload";
 import { useDropzone } from "react-dropzone";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { NewUsePortfolioUpload } from "../../hooks/NewUsePortfolioUpload";
 
 interface ImageUploaderProps {
   onImagesUploaded: (
@@ -10,11 +10,11 @@ interface ImageUploaderProps {
   isSubmitting?: boolean;
 }
 
-export const ImageUploader = ({
+export const NewImageUploader = ({
   onImagesUploaded,
   isSubmitting
 }: ImageUploaderProps) => {
-  const { isUploading, handleUpload } = usePortfolioUpload();
+  const { isUploading, handleUpload } = NewUsePortfolioUpload();
 
   const onDrop = async (acceptedFiles: File[]) => {
     if (acceptedFiles.length === 0) return;
@@ -40,7 +40,7 @@ export const ImageUploader = ({
     },
     disabled: isSubmitting || isUploading,
     multiple: true,
-    maxSize: 20971520, // 20MB
+    maxSize: 5242880, // 5MB
     onDropRejected: (fileRejections) => {
       fileRejections.forEach(({ file, errors }) => {
         if (errors[0]?.code === "file-too-large") {
@@ -57,10 +57,12 @@ export const ImageUploader = ({
   return (
     <div
       {...getRootProps()}
-      className={`image-uploader__dropzone ${
-        isDragActive ? "image-uploader__dropzone--active" : ""
+      className={`new-image-uploader__dropzone ${
+        isDragActive ? "new-image-uploader__dropzone--active" : ""
       } ${
-        isSubmitting || isUploading ? "image-uploader__dropzone--disabled" : ""
+        isSubmitting || isUploading
+          ? "new-image-uploader__dropzone--disabled"
+          : ""
       }`}
     >
       <input {...getInputProps()} />

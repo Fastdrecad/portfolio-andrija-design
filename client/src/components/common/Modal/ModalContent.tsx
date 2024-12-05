@@ -4,11 +4,11 @@ import { BsArrowsFullscreen, BsXLg } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 import GalleryItem from "@/components/common/Modal/GalleryItem";
-import { portfolio } from "@/data";
+import { useGetProjectByIdQuery } from "@/redux/services/portfolioApi";
 
 interface ModalContentProps {
   onClose: () => void;
-  projectId: number;
+  projectId: string;
   isModal?: boolean;
 }
 
@@ -24,6 +24,7 @@ const ModalContent: React.FC<ModalContentProps> = ({
   const galleryItemRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const lastScrollYRef = useRef(0);
+  const { data: project } = useGetProjectByIdQuery(projectId);
 
   useEffect(() => {
     const handleResize = () => {
@@ -73,8 +74,6 @@ const ModalContent: React.FC<ModalContentProps> = ({
       modal?.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const project = portfolio.find((p) => p.id === projectId);
 
   if (!project) {
     return <div>Project not found</div>;

@@ -1,18 +1,25 @@
 import { ProjectCard } from "@/components/admin/ProjectCard";
-import { useDeleteProjectMutation } from "@/redux/services/portfolioApi";
-import { PortfolioItem } from "@/types/portfolioTypes";
+import {
+  portfolioApi,
+  useDeleteProjectMutation
+} from "@/redux/services/portfolioApi";
+import { AppDispatch } from "@/redux/store";
+import { PortfolioItemProps } from "@/types/portfolioTypes";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 interface PortfolioGridProps {
-  projects: PortfolioItem[];
+  projects: PortfolioItemProps[];
 }
 
 export const PortfolioGrid = ({ projects }: PortfolioGridProps) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const [deleteProject] = useDeleteProjectMutation();
-  const [localProjects, setLocalProjects] = useState<PortfolioItem[]>(projects);
+  const [localProjects, setLocalProjects] =
+    useState<PortfolioItemProps[]>(projects);
   const [showModal, setShowModal] = useState(false);
   const [projectIdToDelete, setProjectIdToDelete] = useState<string | null>(
     null
@@ -23,8 +30,17 @@ export const PortfolioGrid = ({ projects }: PortfolioGridProps) => {
     setLocalProjects(projects);
   }, [projects]);
 
-  const handleEdit = (id: string) => {
-    navigate(`/admin/dashboard/edit/${id}`);
+  const handleEdit = async (slug: string) => {
+    // Prefetch the project data before navigation
+    try {
+      await dispatch(
+        portfolioApi.endpoints.getProjectBySlug.initiate(slug)
+      ).unwrap();
+      navigate(`/admin/dashboard/portfolio/edit/${slug}`);
+    } catch (error) {
+      console.error("Failed to prefetch project data:", error);
+      navigate(`/admin/dashboard/portfolio/edit/${slug}`);
+    }
   };
 
   const handleDeleteClick = (id: string) => {

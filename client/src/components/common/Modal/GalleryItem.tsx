@@ -7,11 +7,10 @@ import {
 } from "react";
 
 import Image from "@/components/common/Image";
-
-import { portfolio } from "@/data";
+import { useGetProjectByIdQuery } from "@/redux/services/portfolioApi";
 
 interface GalleryItemProps {
-  projectId: number;
+  projectId: string;
   style?: CSSProperties;
 }
 
@@ -31,18 +30,18 @@ const GalleryItem = forwardRef<HTMLDivElement, GalleryItemProps>(
 
           if (isScrollingDown) {
             if (navClass !== "up") {
-              setNavClass("up"); // Immediately hide navbar when starting to scroll down
+              setNavClass("up");
             }
           } else {
             if (currentScrollY <= 100) {
               if (navClass !== "default") {
-                setNavClass("default"); // Revert to "top" when scrolled back to the very top
+                setNavClass("default");
               }
             } else if (navClass !== "scrolled-up") {
-              setNavClass("scrolled-up"); // Show "scrolled-up" when scrolling up but not yet at the top
+              setNavClass("scrolled-up");
             }
           }
-          setLastScrollY(currentScrollY); // Update last scroll position for next comparison
+          setLastScrollY(currentScrollY);
         }
       };
 
@@ -54,7 +53,7 @@ const GalleryItem = forwardRef<HTMLDivElement, GalleryItemProps>(
       };
     }, [lastScrollY, navClass, ref]);
 
-    const project = portfolio.find((p) => p.id === projectId);
+    const { data: project } = useGetProjectByIdQuery(projectId);
 
     if (!project) {
       return <div>Project not found</div>;
@@ -72,7 +71,7 @@ const GalleryItem = forwardRef<HTMLDivElement, GalleryItemProps>(
                   <div className="gallery-item__description-center">
                     <div className="gallery-item__client">
                       <span>My Role: </span>
-                      {project.myRole}
+                      {project.myRole.join(", ")}
                     </div>
                     <div className="gallery-item__outcome">
                       <span>Project Description: </span>
@@ -91,9 +90,9 @@ const GalleryItem = forwardRef<HTMLDivElement, GalleryItemProps>(
                     <div className="gallery-item__skills">
                       <p>Tools: </p>
                       <div className="gallery-item__skills-tags-wrapper">
-                        {project.toolsUsed?.map((tag, i) => (
+                        {project.toolsUsed?.map((tool, i) => (
                           <div key={i} className="gallery-item__skills-tag">
-                            {tag}
+                            {tool}
                           </div>
                         ))}
                       </div>

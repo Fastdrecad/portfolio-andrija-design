@@ -1,5 +1,6 @@
 import { authApi } from "@/redux/services/authApi";
 import { portfolioApi } from "@/redux/services/portfolioApi";
+import { uploadApi } from "@/redux/services/uploadService";
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
 import modalReducer from "./modalSlice";
@@ -11,7 +12,8 @@ export const store = configureStore({
     modal: modalReducer,
     auth: authReducer,
     [authApi.reducerPath]: authApi.reducer,
-    [portfolioApi.reducerPath]: portfolioApi.reducer
+    [portfolioApi.reducerPath]: portfolioApi.reducer,
+    [uploadApi.reducerPath]: uploadApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(authApi.middleware, portfolioApi.middleware)

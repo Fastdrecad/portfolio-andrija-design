@@ -1,22 +1,28 @@
-import { portfolio } from "@/data/portfolioData";
+import { PortfolioItemProps } from "@/types/portfolioTypes";
 
-import { PortfolioItemType } from "@/types/portfolioTypes";
+type CategoryType =
+  | "Product Design"
+  | "3D Rendering"
+  | "CAD"
+  | "Furniture Design";
 
 export const filterPortfolioByCategory = (
-  category: string
-): PortfolioItemType[] => {
-  switch (category.toLowerCase()) {
-    case "rendering":
-      return portfolio.filter((el) => el.category === "3D Rendering");
-    case "cad":
-      return portfolio.filter((el) => el.category === "CAD");
-    case "furniture":
-      return portfolio.filter((el) => el.category === "Furniture Design");
-    case "animation":
-      return portfolio.filter((el) => el.category === "3D Animation");
-    case "product":
-      return portfolio.filter((el) => el.category === "Product Design");
-    default:
-      return portfolio;
+  category: string,
+  portfolios: PortfolioItemProps[]
+): PortfolioItemProps[] => {
+  if (category.toLowerCase() === "all") {
+    return portfolios;
   }
+
+  const categoryMap: Record<string, CategoryType> = {
+    product: "Product Design",
+    rendering: "3D Rendering",
+    cad: "CAD",
+    furniture: "Furniture Design"
+  };
+
+  const mappedCategory = categoryMap[category.toLowerCase()];
+  if (!mappedCategory) return portfolios;
+
+  return portfolios.filter((item) => item.category.includes(mappedCategory));
 };

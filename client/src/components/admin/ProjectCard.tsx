@@ -1,9 +1,9 @@
-import { PortfolioItem } from "@/types/portfolioTypes";
+import { PortfolioItemProps } from "@/types/portfolioTypes";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 interface ProjectCardProps {
-  project: PortfolioItem;
-  onEdit: (id: string) => void;
+  project: PortfolioItemProps;
+  onEdit: (slug: string) => void;
   onDelete: (id: string) => void;
 }
 
@@ -35,7 +35,7 @@ export const ProjectCard = ({
           className="edit-btn"
           onClick={(e) => {
             e.preventDefault();
-            onEdit(project._id!);
+            onEdit(project.slug!);
           }}
           aria-label="Edit project"
         >

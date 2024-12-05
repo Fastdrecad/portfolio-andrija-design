@@ -68,7 +68,7 @@ const apiLimiter = rateLimit({
 });
 
 // Apply rate limiting
-app.use("/api/auth/login", authLimiter); // Stricter limit for login
+// app.use("/api/auth/login", authLimiter); // Stricter limit for login
 app.use("/api/", apiLimiter); // General API rate limiting
 
 // Enhanced CORS Configuration

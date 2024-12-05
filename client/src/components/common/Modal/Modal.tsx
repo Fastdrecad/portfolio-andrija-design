@@ -2,17 +2,17 @@ import { useCallback, useEffect } from "react";
 
 import { useDispatch } from "react-redux";
 
-import { closeModal, openModal, ModalPayload } from "@/redux/modalSlice";
+import { closeModal, ModalPayload, openModal } from "@/redux/modalSlice";
 
 import Backdrop from "@/components/common/Modal/Backdrop";
+import Calendly from "@/components/common/Modal/Calendly";
 import ModalContent from "@/components/common/Modal/ModalContent";
 import YoutubeEmbed from "@/components/common/Modal/YoutubeEmbed";
-import Calendly from "@/components/common/Modal/Calendly";
 
 interface ModalProps {
   onClose: () => void;
   children?: React.ReactNode;
-  id?: number;
+  id?: string;
   modalType: "project" | "youtube" | "calendly";
   videoId?: string;
 }

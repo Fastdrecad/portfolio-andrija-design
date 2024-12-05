@@ -1,4 +1,4 @@
-import { uploadToCloudinary } from "@/services/cloudinaryUpload";
+import { uploadToCloudinary } from "@/services/uploadService";
 import { CloudinaryResponse } from "@/types/cloudinaryTypes";
 import { AxiosError } from "axios";
 import { useCallback, useState } from "react";
@@ -11,7 +11,7 @@ interface ErrorResponse {
 const MAX_RETRIES = 2;
 const RETRY_DELAY = 1000;
 
-export const usePortfolioUpload = () => {
+export const NewUsePortfolioUpload = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<Record<string, number>>(
     {}

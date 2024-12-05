@@ -1,0 +1,397 @@
+.portfolio-form {
+  @include themify($themes) {
+    background-color: themed("background-color");
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: themed("shadowSm");
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .portfolio-button {
+      width: fit-content;
+      margin: 0 auto;
+      font-size: 1.5rem;
+    }
+
+    &__field {
+      margin-bottom: 1.5rem;
+      position: relative;
+
+      label {
+        display: block;
+        font-size: 1.25rem;
+        font-weight: $font-weight-medium;
+        color: themed("text-color");
+        margin-bottom: 0.5rem;
+
+        &::after {
+          content: " *";
+          color: $red;
+        }
+
+        &:not([required])::after {
+          content: none;
+        }
+
+        @include media-breakpoint-up(md) {
+          font-size: 1.35rem;
+          margin-bottom: 0.75rem;
+        }
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid rgba($border-color, 0.2);
+        border-radius: $border-radius;
+        background: themed("background-color");
+        color: themed("text-color");
+        transition: border-color 0.2s ease;
+        border: 1px solid rgba($default-color, 0.2);
+        border-radius: $border-radius;
+        padding: 1rem;
+        transition: all 0.2s ease;
+
+        @include media-breakpoint-up(md) {
+          font-size: 1.3rem;
+          padding: 0.85rem;
+        }
+
+        &:focus {
+          outline: none;
+          border-color: $red;
+          box-shadow: 0 0 0 2px rgba($red, 0.1);
+        }
+
+        &::placeholder {
+          color: rgba(themed("text-color"), 0.5);
+        }
+
+        &:hover {
+          border-color: rgba($red, 0.5);
+          background: rgba($red, 0.02);
+        }
+
+        &:hover:not(&--disabled) {
+          border-color: $red;
+          background-color: rgba($red, 0.05);
+
+          &::before {
+            opacity: 0.7;
+          }
+        }
+      }
+
+      textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+
+      &--grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+
+        @include media-breakpoint-down(sm) {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .select__control {
+        min-height: 47px;
+        background-color: themed("input-background");
+        border-color: themed("border-color");
+        border-radius: 0.375rem;
+        border-width: 1px;
+        border-style: solid;
+
+        &:hover {
+          border-color: $red;
+        }
+
+        &--is-focused {
+          border-color: $red;
+          box-shadow: 0 0 0 2px rgba($red, 0.1);
+        }
+
+        &:focus {
+          outline: none;
+          border-color: $red;
+          box-shadow: 0 0 0 2px rgba($red, 0.1);
+        }
+
+        &::placeholder {
+          color: rgba(themed("text-color"), 0.5);
+        }
+
+        &:hover {
+          border-color: rgba($red, 0.5);
+          background: rgba($red, 0.02);
+        }
+
+        &:hover:not(&--disabled) {
+          border-color: $red;
+          background-color: rgba($red, 0.05);
+
+          &::before {
+            opacity: 0.7;
+          }
+        }
+      }
+
+      .select__menu {
+        background-color: themed("background-color");
+        border: 1px solid themed("border-color");
+        box-shadow: themed("shadowMd");
+        z-index: 10;
+
+        &-list {
+          padding: 0;
+        }
+      }
+
+      .select__option {
+        padding: 8px 12px;
+        cursor: pointer;
+        color: themed("text-color");
+
+        &:active {
+          background-color: rgba($red, 0.2);
+        }
+
+        &:hover {
+          background-color: rgba($red, 0.1);
+          color: $red;
+        }
+
+        &--is-focused {
+          background-color: rgba($red, 0.1);
+          color: $red;
+        }
+
+        &--is-selected {
+          background-color: rgba($red, 0.15);
+          color: $red;
+          font-weight: $font-weight-medium;
+
+          &:hover {
+            background-color: rgba($red, 0.2);
+          }
+        }
+      }
+
+      .select__multi-value {
+        background-color: rgba($red, 0.1);
+        border-radius: 4px;
+
+        &__label {
+          color: themed("text-color");
+          padding: 2px 6px;
+        }
+
+        &__remove {
+          color: themed("text-color");
+          cursor: pointer;
+          padding: 0 4px;
+
+          &:hover {
+            background-color: rgba($red, 0.2);
+            color: $red;
+          }
+        }
+      }
+
+      .select__input {
+        color: themed("text-color");
+      }
+
+      .select__placeholder {
+        color: rgba(themed("text-color"), 0.5);
+      }
+
+      .select__indicator {
+        color: rgba(themed("text-color"), 0.5);
+
+        &:hover {
+          color: $red;
+        }
+
+        &-separator {
+          background-color: themed("border-color");
+        }
+      }
+
+      .select__value-container {
+        padding: 2px 8px;
+      }
+
+      .select__single-value {
+        color: themed("text-color");
+      }
+
+      .image-uploader__image-overlay {
+        position: static;
+        flex: 1;
+        background: none;
+        backdrop-filter: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        justify-content: space-between;
+        height: 100%;
+
+        input {
+          width: 100%;
+          padding: 0.5rem 0.75rem;
+          border: 1px solid themed("border-color");
+          border-radius: 0.25rem;
+          background-color: themed("input-background");
+          color: themed("text-color");
+          font-size: 0.875rem;
+
+          &:focus {
+            outline: none;
+            border-color: $red;
+            box-shadow: 0 0 0 2px rgba($red, 0.1);
+          }
+
+          &::placeholder {
+            color: rgba(themed("text-color"), 0.5);
+          }
+        }
+      }
+
+      .image-uploader__remove-button {
+        background-color: transparent;
+        color: rgba(themed("text-color"), 0.5);
+        width: auto;
+        height: auto;
+        padding: 0.25rem;
+        font-size: 1.25rem;
+        line-height: 1;
+
+        &:hover {
+          color: $red;
+          background-color: transparent;
+        }
+      }
+    }
+
+    &__selected-images {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    &__error {
+      color: $red;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+
+    &__submit {
+      margin-top: 2rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: $font-weight-medium;
+      color: $white;
+      background-color: $red;
+      border: none;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover:not(:disabled) {
+        background-color: darken($red, 5%);
+      }
+
+      &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+
+      .btn__loader {
+        width: 1.25rem;
+        height: 1.25rem;
+        border: 2px solid rgba($white, 0.3);
+        border-top-color: $white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @include media-breakpoint-up(sm) {
+        width: auto;
+      }
+    }
+
+    .react-select-container {
+      .react-select__control {
+        background: themed("background-color");
+        border-color: rgba($border-color, 0.1);
+
+        &:hover {
+          border-color: $red;
+        }
+
+        &--is-focused {
+          border-color: $red;
+          box-shadow: 0 0 0 1px $red;
+        }
+      }
+
+      .react-select__menu {
+        background: themed("background-color");
+        border: 1px solid rgba($border-color, 0.1);
+      }
+
+      .react-select__option {
+        background: themed("background-color");
+        color: themed("text-color");
+
+        &:hover {
+          background: rgba($red, 0.1);
+        }
+
+        &--is-selected {
+          background: $red;
+          color: $white;
+        }
+      }
+
+      .react-select__multi-value {
+        background: rgba($red, 0.1);
+
+        &__label {
+          color: $red;
+        }
+
+        &__remove:hover {
+          background: $red;
+          color: $white;
+        }
+      }
+
+      .react-select__input-container {
+        caret-color: transparent;
+      }
+
+      input {
+        caret-color: transparent !important;
+      }
+    }
+  }
+}

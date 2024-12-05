@@ -1,24 +1,18 @@
 import { AnimatePresence } from "framer-motion";
-import { lazy } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-
-// Lazy load admin routes
-const Login = lazy(() => import("@/pages/admin/Login"));
-const Dashboard = lazy(() => import("@/pages/admin/Dashboard"));
-const PortfolioManager = lazy(() => import("@/pages/admin/PortfolioManager"));
-const EditPortfolio = lazy(() => import("@/pages/admin/EditPortfolio"));
 
 import AdminProtectedRoute from "@/components/admin/AdminProtectedRoute";
 import PageTransition from "@/components/app/PageTransition";
+import { pages } from "@/config/routesConfig"; // Import the routes configuration
 import { useAuth } from "@/hooks/useAuth";
-import AboutPage from "@/pages/About";
-import ContactPage from "@/pages/Contact";
-import DesignProcessPage from "@/pages/DesignProcess";
-import HomePage from "@/pages/Home";
-import NotFoundPage from "@/pages/NotFound";
-import PortfolioPage from "@/pages/Portfolio";
-import SuccessPage from "@/pages/Success";
 import ProtectedRoute from "@/routes/ProtectedRoute";
+
+// Helper function to wrap components with PageTransition
+const withPageTransition = (Component: React.FC) => (
+  <PageTransition>
+    <Component />
+  </PageTransition>
+);
 
 const RoutesConfig: React.FC = () => {
   useAuth();
@@ -28,71 +22,52 @@ const RoutesConfig: React.FC = () => {
     <>
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
-          <Route
-            path="/"
-            element={
-              <PageTransition>
-                <HomePage />
-              </PageTransition>
-            }
-          />
+          {/* Public Routes */}
+          <Route path="/" element={withPageTransition(pages.HomePage)} />
           <Route
             path="/portfolio"
-            element={
-              <PageTransition>
-                <PortfolioPage />
-              </PageTransition>
-            }
+            element={withPageTransition(pages.PortfolioPage)}
           />
-
           <Route
             path="/design-process"
-            element={
-              <PageTransition>
-                <DesignProcessPage />
-              </PageTransition>
-            }
+            element={withPageTransition(pages.DesignProcessPage)}
           />
-          <Route
-            path="/about"
-            element={
-              <PageTransition>
-                <AboutPage />
-              </PageTransition>
-            }
-          />
+          <Route path="/about" element={withPageTransition(pages.AboutPage)} />
           <Route
             path="/contact"
-            element={
-              <PageTransition>
-                <ContactPage />
-              </PageTransition>
-            }
+            element={withPageTransition(pages.ContactPage)}
           />
           <Route
             path="/success"
             element={
               <ProtectedRoute>
-                <SuccessPage />
+                <pages.SuccessPage />
               </ProtectedRoute>
             }
           />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="*" element={<pages.NotFoundPage />} />
 
-          {/* Admin routes */}
+          {/* Admin Routes */}
           <Route path="/admin">
             <Route index element={<Navigate to="/admin/dashboard" replace />} />
-            <Route path="login" element={<Login />} />
+            <Route path="login" element={<pages.AdminLogin />} />
             <Route
               path="dashboard"
               element={
                 <AdminProtectedRoute>
-                  <Dashboard />
+                  <pages.AdminDashboard />
                 </AdminProtectedRoute>
               }
             >
-              <Route index element={<PortfolioManager />} />
-              <Route path="edit/:id" element={<EditPortfolio />} />
+              <Route
+                path="portfolio/edit/:slug"
+                element={
+                  <AdminProtectedRoute>
+                    <pages.EditPortfolioPage />
+                  </AdminProtectedRoute>
+                }
+              />
+              <Route index element={<pages.PortfolioManager />} />
             </Route>
           </Route>
         </Routes>

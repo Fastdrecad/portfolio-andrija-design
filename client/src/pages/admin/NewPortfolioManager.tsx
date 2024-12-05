@@ -1,14 +1,14 @@
-import { PortfolioForm } from "@/components/admin/PortfolioForm";
+import { NewPortfolioForm } from "@/components/admin/NewPortfolioForm";
 import { PortfolioGrid } from "@/components/admin/PortfolioGrid";
 import { SuccessMessage } from "@/components/admin/SuccessMessage";
-import { usePortfolioForm } from "@/hooks/usePortfolioForm";
+import { NewUsePortfolioForm } from "@/hooks/NewUsePortfolioForm";
 import {
   useAddProjectMutation,
   useGetProjectByIdQuery,
   useGetProjectsQuery,
   useUpdateProjectMutation
 } from "@/redux/services/portfolioApi";
-import { PortfolioFormData } from "@/schemas/portfolioSchema";
+import { PortfolioFormData } from "@/schemas/NewPortfolioSchema";
 import {
   transformApiDataToForm,
   transformFormDataToApi
@@ -17,7 +17,7 @@ import { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
-const PortfolioManager = () => {
+const NewPortfolioManager = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const isEditing = Boolean(id);
@@ -67,7 +67,7 @@ const PortfolioManager = () => {
     updateImageDetails,
     formState,
     handleSubmit
-  } = usePortfolioForm({
+  } = NewUsePortfolioForm({
     onSubmit: submitForm,
     isEditing,
     initialData: existingProject
@@ -76,16 +76,16 @@ const PortfolioManager = () => {
   });
 
   if (isEditing && isLoadingProject) {
-    return <div className="portfolio-manager__loading">Loading...</div>;
+    return <div className="new-portfolio-manager__loading">Loading...</div>;
   }
 
   return (
-    <div className="portfolio-manager">
-      <div className="portfolio-manager__container">
-        <div className="portfolio-manager__header">
+    <div className="new-portfolio-manager">
+      <div className="new-portfolio-manager__container">
+        <div className="new-portfolio-manager__header">
           <h1>{isEditing ? "Edit Project" : "Create New Project"}</h1>
         </div>
-        <PortfolioForm
+        <NewPortfolioForm
           control={control}
           errors={errors}
           isSubmitting={isSubmitting}
@@ -108,4 +108,4 @@ const PortfolioManager = () => {
   );
 };
 
-export default PortfolioManager;
+export default NewPortfolioManager;

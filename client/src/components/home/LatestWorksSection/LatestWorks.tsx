@@ -1,14 +1,12 @@
-import { useRef } from "react";
-
-import { NavLink } from "react-router-dom";
 import { useInView } from "framer-motion";
-
-import { PortfolioItem } from "@/components/portfolio";
-import Button from "@/components/common/Button";
-
-import { portfolio } from "@/data";
-import { setCurrentRoute } from "@/redux/routeSlice";
+import { useRef } from "react";
 import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
+
+import Button from "@/components/common/Button";
+import { PortfolioItem } from "@/components/portfolio";
+import { setCurrentRoute } from "@/redux/routeSlice";
+import { useGetProjectsQuery } from "@/redux/services/portfolioApi";
 
 interface LatestWorksProps {
   className?: string;
@@ -17,12 +15,23 @@ interface LatestWorksProps {
 const LatestWorks: React.FC<LatestWorksProps> = () => {
   const latestWorksRef = useRef<HTMLUListElement>(null);
   const isLatestWorksInView = useInView(latestWorksRef, { once: true });
-
   const dispatch = useDispatch();
+
+  const { data: projects, isLoading } = useGetProjectsQuery(undefined, {
+    refetchOnMountOrArgChange: true
+  });
 
   const handleNavLinkClick = (url: string) => {
     dispatch(setCurrentRoute(url));
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!projects || projects.length === 0) {
+    return <div>No projects available</div>;
+  }
 
   return (
     <section className="latest-works" id="latest-works">
@@ -35,15 +44,24 @@ const LatestWorks: React.FC<LatestWorksProps> = () => {
         }`}
         ref={latestWorksRef}
       >
-        {portfolio.slice(0, 8).map((item, index) => (
-          <PortfolioItem
-            key={item.id}
-            className="portfolio-item"
-            {...item}
-            index={index}
-            isModal={true}
-          />
-        ))}
+        {projects
+          .slice()
+          .sort(
+            (a, b) =>
+              new Date(b.createdAt || "").getTime() -
+              new Date(a.createdAt || "").getTime()
+          )
+          .slice(0, 8)
+          .map((item, index) => (
+            <PortfolioItem
+              key={item._id}
+              className="portfolio-item"
+              {...item}
+              index={index}
+              newlyLoadedStartIndex={0}
+              isModal={true}
+            />
+          ))}
       </ul>
 
       <div className="latest-works__view-more">

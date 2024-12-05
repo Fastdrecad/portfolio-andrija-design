@@ -1,19 +1,18 @@
-import React, { useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { RootState } from "@/redux/store";
 import { closeModal, openModal } from "@/redux/modalSlice";
+import { RootState } from "@/redux/store";
 
 import Image from "@/components/common/Image";
 import Modal from "@/components/common/Modal/Modal";
 
 import { PortfolioItemProps } from "@/types/portfolioTypes";
-// import { generateSlug } from "@/utils/slugUtils";
 
 const PortfolioItem: React.FC<PortfolioItemProps> = ({
-  id,
+  _id,
   title,
   projectName,
   url,
@@ -24,19 +23,24 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({
   isModal = false
 }) => {
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
+  const portfolioItemRef = useRef<HTMLLIElement>(null);
   const isModalOpen = useSelector(
-    (state: RootState) => state.modal.project === id
+    (state: RootState) => state.modal.project === _id
   );
 
-  // console.log(isModalOpen);
+  // Early return after hooks
+  if (!_id) {
+    return null;
+  }
 
-  const portfolioItemRef = useRef<HTMLLIElement>(null);
-  const isNewItem = index >= newlyLoadedStartIndex;
+  const isNewItem =
+    typeof index === "number" && index >= (newlyLoadedStartIndex || 0);
 
   const handleOpenModal = () => {
-    dispatch(openModal({ modalType: "project", projectId: id }));
+    if (!_id) return; // Additional safety check
+
+    dispatch(openModal({ modalType: "project", projectId: _id }));
 
     if (isModal) {
       navigate(`/`);
@@ -48,25 +52,27 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({
   const handleCloseModal = () => {
     dispatch(closeModal("project"));
 
-    // Navigate based on context (if from LatestWorks or Portfolio)
     if (isModal) {
-      // Stay on the current page if the modal was opened from LatestWorks
       navigate("/");
     } else {
-      // Navigate back to portfolio if opened from the portfolio page
       navigate("/portfolio");
     }
+  };
+
+  const getTransitionDelay = () => {
+    if (typeof index !== "number") return "0ms";
+    return isNewItem
+      ? `${(index - (newlyLoadedStartIndex || 0)) * 150 + 200}ms`
+      : `${index * 100 + 100}ms`;
   };
 
   return (
     <>
       <motion.li
-        id={`portfolioboxxid-${id}`}
-        className={`portfolio ${className}  "fadeInnn" }`}
+        id={`portfolioboxxid-${_id}`}
+        className={`portfolio ${className || ""}  fadeInnn`}
         style={{
-          transitionDelay: isNewItem
-            ? `${(index - newlyLoadedStartIndex) * 150 + 200}ms`
-            : `${index * 100 + 100}ms`
+          transitionDelay: getTransitionDelay()
         }}
         ref={portfolioItemRef}
         onClick={handleOpenModal}
@@ -83,8 +89,8 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({
           <Modal
             modalType="project"
             onClose={handleCloseModal}
-            id={id}
-            key={"modal"}
+            id={_id}
+            key="modal"
           />
         )}
       </AnimatePresence>

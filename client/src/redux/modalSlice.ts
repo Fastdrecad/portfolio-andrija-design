@@ -3,13 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface ModalState {
   calendly: boolean;
   youtube: boolean;
-  project: number | null; // Store project ID when the modal is open, null when closed
+  project: string | null; // Promenjen tip iz number u string
 }
 
 // Define a discriminated union for the payload
 export type ModalPayload =
   | { modalType: "calendly" | "youtube"; projectId?: never }
-  | { modalType: "project"; projectId: number };
+  | { modalType: "project"; projectId: string }; // Promenjen tip iz number u string
 
 const initialState: ModalState = {
   calendly: false,

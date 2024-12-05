@@ -1,4 +1,4 @@
-.image-uploader {
+.new-image-uploader {
   @include themify($themes) {
     &__dropzone {
       border: 1px dashed rgba($default-color, 0.2);

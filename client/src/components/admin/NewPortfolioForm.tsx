@@ -1,12 +1,5 @@
 import { Button } from "@/components/common";
-import { useEffect } from "react";
-import {
-  Control,
-  Controller,
-  FieldErrors,
-  FormState,
-  useForm
-} from "react-hook-form";
+import { Control, Controller, FieldErrors, FormState } from "react-hook-form";
 import { FaTimes } from "react-icons/fa";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
@@ -15,10 +8,11 @@ import {
   defaultRoleOptions,
   ImageType,
   PortfolioFormData
-} from "../../schemas/portfolioSchema";
+} from "../../schemas/NewPortfolioSchema";
 import { Tags, Tools } from "../../types/portfolioTypes";
-import { ImageUploader } from "./ImageUploader";
+import { NewImageUploader } from "./NewImageUploader";
 
+// Konvertujemo enume u opcije za react-select
 const tagsOptions = Object.values(Tags).map((tag) => ({
   value: tag,
   label: tag
@@ -33,7 +27,7 @@ interface PortfolioFormProps {
   control: Control<PortfolioFormData>;
   errors: FieldErrors<PortfolioFormData>;
   isSubmitting: boolean;
-  onSubmit: (data: PortfolioFormData) => Promise<void>;
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   items: ImageType[];
   addImages: (images: ImageType[]) => void;
   removeImage: (index: number) => void;
@@ -41,10 +35,9 @@ interface PortfolioFormProps {
   formState: FormState<PortfolioFormData>;
   isLoading?: boolean;
   isEditing?: boolean;
-  initialData?: PortfolioFormData;
 }
 
-export const PortfolioForm = ({
+export const NewPortfolioForm = ({
   control,
   errors,
   isSubmitting,
@@ -54,35 +47,19 @@ export const PortfolioForm = ({
   removeImage,
   updateImageDetails,
   formState: { isValid },
-  initialData,
   isLoading = false,
   isEditing = false
 }: PortfolioFormProps) => {
-  const { reset } = useForm<PortfolioFormData>();
-
-  useEffect(() => {
-    if (initialData) {
-      reset(initialData); // Set initial data in form
-    }
-  }, [initialData, reset]);
-
   if (isLoading) {
-    return <div className="portfolio-form__loading">Loading form data...</div>;
+    return (
+      <div className="new-portfolio-form__loading">Loading form data...</div>
+    );
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(
-      formData.entries()
-    ) as unknown as PortfolioFormData;
-    onSubmit(data);
-  };
-
   return (
-    <form onSubmit={handleSubmit} className="portfolio-form">
+    <form onSubmit={onSubmit} className="new-portfolio-form">
       {/* Project Name */}
-      <div className="portfolio-form__field">
+      <div className="new-portfolio-form__field">
         <Controller
           name="projectName"
           control={control}
@@ -91,7 +68,7 @@ export const PortfolioForm = ({
               <label>Project Name *</label>
               <input {...field} type="text" />
               {errors.projectName && (
-                <p className="portfolio-form__error">
+                <p className="new-portfolio-form__error">
                   {errors.projectName.message}
                 </p>
               )}
@@ -101,7 +78,7 @@ export const PortfolioForm = ({
       </div>
 
       {/* Title */}
-      <div className="portfolio-form__field">
+      <div className="new-portfolio-form__field">
         <Controller
           name="title"
           control={control}
@@ -110,7 +87,9 @@ export const PortfolioForm = ({
               <label>Title *</label>
               <input {...field} type="text" />
               {errors.title && (
-                <p className="portfolio-form__error">{errors.title.message}</p>
+                <p className="new-portfolio-form__error">
+                  {errors.title.message}
+                </p>
               )}
             </div>
           )}
@@ -118,7 +97,7 @@ export const PortfolioForm = ({
       </div>
 
       {/* Category */}
-      <div className="portfolio-form__field">
+      <div className="new-portfolio-form__field">
         <Controller
           name="category"
           control={control}
@@ -134,7 +113,7 @@ export const PortfolioForm = ({
                 classNamePrefix="react-select"
               />
               {errors.category && (
-                <p className="portfolio-form__error">
+                <p className="new-portfolio-form__error">
                   {errors.category.message}
                 </p>
               )}
@@ -144,7 +123,7 @@ export const PortfolioForm = ({
       </div>
 
       {/* My Role */}
-      <div className="portfolio-form__field">
+      <div className="new-portfolio-form__field">
         <Controller
           name="myRole"
           control={control}
@@ -160,7 +139,9 @@ export const PortfolioForm = ({
                 classNamePrefix="react-select"
               />
               {errors.myRole && (
-                <p className="portfolio-form__error">{errors.myRole.message}</p>
+                <p className="new-portfolio-form__error">
+                  {errors.myRole.message}
+                </p>
               )}
             </div>
           )}
@@ -168,7 +149,7 @@ export const PortfolioForm = ({
       </div>
 
       {/* Tools Used */}
-      <div className="portfolio-form__field">
+      <div className="new-portfolio-form__field">
         <Controller
           name="toolsUsed"
           control={control}
@@ -184,7 +165,7 @@ export const PortfolioForm = ({
                 classNamePrefix="react-select"
               />
               {errors.toolsUsed && (
-                <p className="portfolio-form__error">
+                <p className="new-portfolio-form__error">
                   {errors.toolsUsed.message}
                 </p>
               )}
@@ -194,7 +175,7 @@ export const PortfolioForm = ({
       </div>
 
       {/* Tags */}
-      <div className="portfolio-form__field">
+      <div className="new-portfolio-form__field">
         <Controller
           name="tags"
           control={control}
@@ -210,7 +191,9 @@ export const PortfolioForm = ({
                 classNamePrefix="react-select"
               />
               {errors.tags && (
-                <p className="portfolio-form__error">{errors.tags.message}</p>
+                <p className="new-portfolio-form__error">
+                  {errors.tags.message}
+                </p>
               )}
             </div>
           )}
@@ -218,7 +201,7 @@ export const PortfolioForm = ({
       </div>
 
       {/* Client & Client URL */}
-      <div className="portfolio-form__field portfolio-form__field--grid">
+      <div className="new-portfolio-form__field new-portfolio-form__field--grid">
         <Controller
           name="client"
           control={control}
@@ -237,7 +220,7 @@ export const PortfolioForm = ({
               <label>Client URL</label>
               <input {...field} type="url" />
               {errors.clientUrl && (
-                <p className="portfolio-form__error">
+                <p className="new-portfolio-form__error">
                   {errors.clientUrl.message}
                 </p>
               )}
@@ -247,7 +230,7 @@ export const PortfolioForm = ({
       </div>
 
       {/* Description */}
-      <div className="portfolio-form__field">
+      <div className="new-portfolio-form__field">
         <Controller
           name="description"
           control={control}
@@ -261,39 +244,39 @@ export const PortfolioForm = ({
       </div>
 
       {/* Image Uploader */}
-      <div className="portfolio-form__field">
+      <div className="new-portfolio-form__field">
         <label>Images *</label>
-        <ImageUploader
+        <NewImageUploader
           onImagesUploaded={addImages}
           isSubmitting={isSubmitting}
         />
         {errors.items && (
-          <p className="portfolio-form__error">{errors.items.message}</p>
+          <p className="new-portfolio-form__error">{errors.items.message}</p>
         )}
       </div>
 
       {/* Image Preview */}
-      <div className="portfolio-form__selected-images">
+      <div className="new-portfolio-form__selected-images">
         {items.map((image, index) => (
-          <div key={index} className="image-uploader__image-item">
-            <div className="image-uploader__image-container">
+          <div key={index} className="new-image-uploader__image-item">
+            <div className="new-image-uploader__image-container">
               <img
                 src={image.url}
                 alt={image.alt || ""}
-                className="image-uploader__image"
+                className="new-image-uploader__image"
               />
 
               <button
                 type="button"
                 onClick={() => removeImage(index)}
-                className="image-uploader__remove-button"
+                className="new-image-uploader__remove-button"
               >
                 <FaTimes />
               </button>
             </div>
 
-            <div className="image-uploader__image-overlay">
-              <div className="image-uploader__details">
+            <div className="new-image-uploader__image-overlay">
+              <div className="new-image-uploader__details">
                 <label>Description</label>
                 <input
                   type="text"
@@ -307,7 +290,7 @@ export const PortfolioForm = ({
                   }
                 />
               </div>
-              <div className="image-uploader__details">
+              <div className="new-image-uploader__details">
                 <label>Alt text</label>
                 <input
                   type="text"

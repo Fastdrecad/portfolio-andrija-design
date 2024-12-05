@@ -16,7 +16,8 @@ import { PortfolioItem, PortfolioTabs } from "@/components/portfolio";
 import { IMAGES_PER_ROW } from "@/constants";
 import { categories, portfolio } from "@/data";
 
-import { PortfolioItemType } from "@/types/portfolioTypes";
+import { useGetProjectsQuery } from "@/redux/services/portfolioApi";
+import { PortfolioItemProps } from "@/types/portfolioTypes";
 
 const Portfolio: React.FC = () => {
   useDocumentTitle("Portfolio");
@@ -26,7 +27,8 @@ const Portfolio: React.FC = () => {
     once: true
   });
 
-  const [data, setData] = useState<PortfolioItemType[]>([]);
+  const { data: portfolios, isLoading, error } = useGetProjectsQuery();
+  const [data, setData] = useState<PortfolioItemProps[]>([]);
   const [selected, setSelected] = useState<string>("all");
   const [next, setNext] = useState<number>(IMAGES_PER_ROW);
   const [newlyLoadedStartIndex, setNewlyLoadedStartIndex] = useState<number>(0);
@@ -34,9 +36,10 @@ const Portfolio: React.FC = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
 
   useEffect(() => {
-    setData(filterPortfolioByCategory(selected));
-    resetAnimation();
-  }, [selected, resetAnimation]);
+    if (portfolios) {
+      setData(filterPortfolioByCategory(selected, portfolios));
+    }
+  }, [selected, portfolios]);
 
   const handleTabChange = (newCategory: string) => {
     setSelected(newCategory);
@@ -46,7 +49,9 @@ const Portfolio: React.FC = () => {
     setData([]);
 
     setTimeout(() => {
-      setData(filterPortfolioByCategory(newCategory));
+      if (portfolios) {
+        setData(filterPortfolioByCategory(newCategory, portfolios));
+      }
     }, 50);
   };
 
@@ -66,6 +71,14 @@ const Portfolio: React.FC = () => {
       setIsButtonDisabled(false);
     }, 1200);
   }, [data.length, next, resetAnimation, isButtonDisabled]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error loading portfolio items</div>;
+  }
 
   return (
     <>
@@ -102,7 +115,7 @@ const Portfolio: React.FC = () => {
           <ul className={`portfolio-page__image-gallery ${fadeInClass}`}>
             {data?.slice(0, next).map((item, index) => (
               <PortfolioItem
-                key={item.id}
+                key={item._id}
                 className="portfolio-item"
                 {...item}
                 index={index}
