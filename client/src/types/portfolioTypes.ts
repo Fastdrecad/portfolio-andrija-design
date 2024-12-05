@@ -1,7 +1,17 @@
-export interface ImageFile extends File {
-  preview?: string;
-  alt?: string;
-  desc?: string;
+export enum MyRole {
+  FURNITURE_DESIGNER = "Furniture Designer",
+  THREE_D_MODELER = "3D Modeler",
+  CAD_SPECIALIST = "CAD Specialist",
+  PRODUCT_DESIGNER = "Product Designer",
+  THREE_D_ARTIST = "3D Artist"
+}
+
+export type MyRoleType = (typeof MyRole)[keyof typeof MyRole];
+
+export interface SelectOption {
+  value: string;
+  label: string;
+  isNew?: boolean;
 }
 
 export interface Image {
@@ -16,30 +26,20 @@ export interface PortfolioItem {
   title: string;
   url: string;
   alt: string;
-  category: Array<
-    "Product Design" | "3D Rendering" | "CAD" | "Furniture Design"
-  >;
+  category: ("Product Design" | "3D Rendering" | "CAD" | "Furniture Design")[];
   client: string;
   clientUrl: string;
-  myRole: Array<
-    | "Furniture Designer"
-    | "3D Modeler"
-    | "CAD Specialist"
-    | "Product Designer"
-    | "3D Artist"
-  >;
+  myRole: MyRoleType[];
   description: string;
   tags: string[];
   toolsUsed: string[];
   items: Image[];
 }
 
-export enum MyRole {
-  FURNITURE_DESIGNER = "Furniture Designer",
-  THREE_D_MODELER = "3D Modeler",
-  CAD_SPECIALIST = "CAD Specialist",
-  PRODUCT_DESIGNER = "Product Designer",
-  TEXTURE_ARTIST = "3D Artist"
+export interface ImageFile extends File {
+  preview?: string;
+  alt?: string;
+  desc?: string;
 }
 
 export enum Tags {

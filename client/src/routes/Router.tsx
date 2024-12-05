@@ -6,7 +6,6 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 const Login = lazy(() => import("@/pages/admin/Login"));
 const Dashboard = lazy(() => import("@/pages/admin/Dashboard"));
 const PortfolioManager = lazy(() => import("@/pages/admin/PortfolioManager"));
-const EditPortfolio = lazy(() => import("@/pages/admin/EditPortfolio"));
 
 import AdminProtectedRoute from "@/components/admin/AdminProtectedRoute";
 import PageTransition from "@/components/app/PageTransition";
@@ -92,7 +91,6 @@ const RoutesConfig: React.FC = () => {
               }
             >
               <Route index element={<PortfolioManager />} />
-              <Route path="edit/:id" element={<EditPortfolio />} />
             </Route>
           </Route>
         </Routes>

@@ -33,6 +33,7 @@ export const uploadToCloudinary = async (
 
     return response.data;
   } catch (error) {
+    console.error("Upload error details:", error);
     if (axios.isAxiosError(error)) {
       if (error.response?.status === 401) {
         toast.error("Please login to upload images");
