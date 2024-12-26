@@ -8,6 +8,7 @@
   text-transform: capitalize;
   cursor: pointer;
   background-color: #e4e4e4;
+  color: $black;
 
   @include media-breakpoint-down(md) {
     margin: 5px 5px;

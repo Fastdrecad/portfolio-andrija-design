@@ -1,14 +1,14 @@
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
-
-import { setCurrentRoute } from "@/redux/routeSlice";
 import { links } from "@/data";
+import { useRouteName } from "@/context/routeNameContext";
+import { formatRouteName } from "@/utils/routeUtils";
 
 const Navigation: React.FC = () => {
-  const dispatch = useDispatch();
+  const { setRouteName } = useRouteName();
 
-  const handleNavLinkClick = (url: string) => {
-    dispatch(setCurrentRoute(url));
+  const handleClick = (url: string) => {
+    const routeName = formatRouteName(url);
+    setRouteName(routeName);
   };
 
   return (
@@ -22,7 +22,7 @@ const Navigation: React.FC = () => {
                 key={id}
                 to={url}
                 className="navigation__link"
-                onClick={() => handleNavLinkClick(url)}
+                onClick={() => handleClick(url)}
               >
                 {text}
               </NavLink>

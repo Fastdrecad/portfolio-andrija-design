@@ -29,6 +29,7 @@ button {
   display: inline-block;
   position: relative;
   text-decoration: none;
+  color: $red !important;
 
   &::after {
     content: "";
@@ -42,10 +43,16 @@ button {
     background: currentcolor;
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
+    color: $red;
   }
 
   &:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
+    color: $red;
+  }
+
+  &:hover {
+    color: $red !important;
   }
 }

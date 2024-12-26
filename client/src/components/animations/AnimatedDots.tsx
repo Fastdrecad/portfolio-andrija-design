@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 interface DotProps {
   delay: number;
@@ -7,7 +7,7 @@ interface DotProps {
 const Dot: React.FC<DotProps> = ({ delay }) => {
   return (
     <motion.div
-      className='dot-load'
+      className="dot-load"
       animate={{
         scale: [1, 1.5, 1],
         transition: {
@@ -24,9 +24,9 @@ const AnimatedDots: React.FC = () => {
   return (
     <div
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'end'
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "end"
       }}
     >
       <Dot delay={0} />

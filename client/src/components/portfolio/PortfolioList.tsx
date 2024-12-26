@@ -13,8 +13,11 @@ const PortfolioList: React.FC<PortfolioListProps> = ({
 }) => {
   return (
     <li
-      className={`portfolio-list ${active ? 'active' : ''}`}
-      onClick={() => setSelected(id)}
+      className={`portfolio-list ${active ? "active" : ""}`}
+      onClick={() => {
+        setSelected(id);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }}
     >
       {title}
     </li>

@@ -9,7 +9,7 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const isFormSubmitted = useSelector(
-    (state: RootState) => state.route.isFormSubmitted
+    (state: RootState) => state.contact.isFormSubmitted
   );
 
   if (!isFormSubmitted) {

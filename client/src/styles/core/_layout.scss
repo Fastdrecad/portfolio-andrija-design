@@ -1,5 +1,12 @@
 // layout styles
 
+html,
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: var(--theme-transition);
+}
+
 html {
   overflow: visible;
   -ms-text-size-adjust: 100%;
@@ -25,8 +32,6 @@ html {
 }
 
 body {
-  background-color: $white;
-  color: $font-color !important;
   font-family: $font-family-body;
   font-size: $font-size-small;
   font-weight: $font-weight-normal;

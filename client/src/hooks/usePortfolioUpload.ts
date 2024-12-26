@@ -1,6 +1,5 @@
-import { uploadToCloudinary } from "@/services/uploadService";
+import { uploadToCloudinary } from "@/services/cloudinaryUpload";
 import { CloudinaryResponse } from "@/types/cloudinaryTypes";
-import { ImageFile } from "@/types/portfolioTypes";
 import { AxiosError } from "axios";
 import { useCallback, useState } from "react";
 import { toast } from "react-toastify";
@@ -13,24 +12,18 @@ const MAX_RETRIES = 2;
 const RETRY_DELAY = 1000;
 
 export const usePortfolioUpload = () => {
+  const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<Record<string, number>>(
     {}
   );
-  const [selectedImages, setSelectedImages] = useState<ImageFile[]>([]);
-  const [imageDetails, setImageDetails] = useState<
-    Record<number, { alt?: string; desc?: string }>
-  >({});
 
   const sleep = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
 
-  // Handle file upload with retry mechanism
   const handleUpload = useCallback(
-    async (
-      files: ImageFile[],
-      retryCount = 0
-    ): Promise<CloudinaryResponse[]> => {
+    async (files: File[], retryCount = 0): Promise<CloudinaryResponse[]> => {
       try {
+        setIsUploading(true);
         const uploadedImages = await uploadToCloudinary(
           files,
           (fileName: string, progress: number) => {
@@ -56,42 +49,17 @@ export const usePortfolioUpload = () => {
 
         toast.error(errorMessage);
         throw error;
+      } finally {
+        setIsUploading(false);
+        setUploadProgress({});
       }
     },
     []
   );
 
-  // Update image details (alt text or description)
-  const handleImageDetailsChange = useCallback(
-    (index: number, field: "alt" | "desc", value: string) => {
-      console.log(
-        `Updating image details for index ${index}, field ${field}, value ${value}`
-      );
-      setImageDetails((prev) => ({
-        ...prev,
-        [index]: {
-          ...prev[index],
-          [field]: value
-        }
-      }));
-    },
-    []
-  );
-
-  // Reset all upload-related state
-  const resetUpload = useCallback(() => {
-    setSelectedImages([]);
-    setUploadProgress({});
-    setImageDetails({});
-  }, []);
-
   return {
+    isUploading,
     uploadProgress,
-    selectedImages,
-    imageDetails,
-    setSelectedImages,
-    handleImageDetailsChange,
-    handleUpload,
-    resetUpload
+    handleUpload
   };
 };

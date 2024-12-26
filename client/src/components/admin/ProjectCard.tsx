@@ -1,8 +1,8 @@
-import { PortfolioItem } from "@/types/portfolioTypes";
+import { PortfolioItemProps } from "@/types/portfolioTypes";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 interface ProjectCardProps {
-  project: PortfolioItem;
+  project: PortfolioItemProps;
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
 }
@@ -13,6 +13,22 @@ export const ProjectCard = ({
   onDelete
 }: ProjectCardProps) => {
   if (!project._id) return null;
+
+  const handleEdit = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (project._id) {
+      onEdit(project._id);
+    }
+  };
+
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (project._id) {
+      onDelete(project._id);
+    }
+  };
 
   return (
     <div className="project-card">
@@ -30,23 +46,22 @@ export const ProjectCard = ({
           ))}
         </div>
       </div>
-      <div className="project-card__actions">
+      <div
+        className="project-card__actions"
+        onClick={(e) => e.stopPropagation()}
+      >
         <button
+          type="button"
           className="edit-btn"
-          onClick={(e) => {
-            e.preventDefault();
-            onEdit(project._id!);
-          }}
+          onClick={handleEdit}
           aria-label="Edit project"
         >
           <FaEdit />
         </button>
         <button
+          type="button"
           className="delete-btn"
-          onClick={(e) => {
-            e.preventDefault();
-            onDelete(project._id!);
-          }}
+          onClick={handleDelete}
           aria-label="Delete project"
         >
           <FaTrash />

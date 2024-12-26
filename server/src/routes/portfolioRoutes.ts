@@ -3,21 +3,25 @@ import express from "express";
 import {
   createProject,
   deleteProject,
-  getProjectById,
+  getProjectBySlug,
   getProjects,
-  updateProject
+  updateProject,
+  reorderProjects,
+  initializeProjectOrder
 } from "../controllers/portfolioController";
 import { authenticate } from "../middleware/authMiddleware";
 
 const router = express.Router();
 
 // Public routes
+router.get("/:slug", getProjectBySlug);
 router.get("/", getProjects);
-router.get("/:id", getProjectById);
 
 // Protected routes
 router.post("/", authenticate, createProject);
 router.put("/:id", authenticate, updateProject);
 router.delete("/:id", authenticate, deleteProject);
+router.post("/reorder", authenticate, reorderProjects);
+router.post("/initialize-order", authenticate, initializeProjectOrder);
 
 export default router;

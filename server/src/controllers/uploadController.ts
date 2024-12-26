@@ -50,8 +50,10 @@ export const uploadImage = asyncHandler(
       }
     });
 
-    // Wait for all files to be uploaded
+    // Wait for all files to finish uploading
     const results = await Promise.all(uploadPromises);
+
+    // Respond with the Cloudinary results
     res.json(results);
   }
 );

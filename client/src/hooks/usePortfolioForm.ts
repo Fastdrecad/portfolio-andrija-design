@@ -1,76 +1,109 @@
-import { useSelectOptions } from "@/hooks/useSelectOptions";
-import { MyRole, PortfolioItem } from "@/types/portfolioTypes";
-import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { PortfolioFormData, portfolioSchema } from "../schemas/portfolioSchema";
 
-// Helper function to return the default form data
-const getDefaultFormData = (): Omit<PortfolioItem, "_id"> => ({
-  projectName: "",
-  title: "",
-  url: "",
-  alt: "",
-  category: ["Product Design"],
-  client: "",
-  clientUrl: "",
-  myRole: [],
-  description: "",
-  tags: [],
-  toolsUsed: [],
-  items: []
-});
+interface UsePortfolioFormProps {
+  initialData?: Partial<PortfolioFormData>;
+  onSubmit: SubmitHandler<PortfolioFormData>;
+  isEditing?: boolean;
+}
 
-export const usePortfolioForm = (initialData?: PortfolioItem) => {
-  // Form handling with react-hook-form
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    getValues,
-    reset
-  } = useForm<PortfolioItem>({
-    defaultValues: initialData || getDefaultFormData()
-  });
+export const usePortfolioForm = ({
+  initialData,
+  onSubmit,
+  isEditing = false
+}: UsePortfolioFormProps) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Get select options
-  const { roleOptions, tagOptions, toolOptions, handleCreate } =
-    useSelectOptions(setValue, getValues);
+  const { register, handleSubmit, control, reset, formState, setValue, watch } =
+    useForm<PortfolioFormData>({
+      resolver: zodResolver(portfolioSchema),
+      mode: "onChange",
+      defaultValues: {
+        projectName: initialData?.projectName || "",
+        title: initialData?.title || "",
+        category: initialData?.category || { value: "", label: "" },
+        client: initialData?.client || "",
+        clientUrl: initialData?.clientUrl || "",
+        myRole: initialData?.myRole || [
+          { value: "Furniture Designer", label: "Furniture Designer" }
+        ],
+        description: initialData?.description || "",
+        tags: initialData?.tags || [],
+        toolsUsed: initialData?.toolsUsed || [],
+        items: initialData?.items || []
+      }
+    });
 
-  // Handle input changes
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setValue(name as keyof PortfolioItem, value);
+  const items = watch("items");
+
+  const handleFormSubmit: SubmitHandler<PortfolioFormData> = async (data) => {
+    try {
+      setIsSubmitting(true);
+      await onSubmit(data);
+      toast.success(
+        `Portfolio ${isEditing ? "updated" : "created"} successfully!`
+      );
+      if (!isEditing) {
+        reset();
+      }
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "An error occurred");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  // Handle select changes
-  const handleSelectChange = (
-    field: keyof Pick<
-      PortfolioItem,
-      "category" | "myRole" | "tags" | "toolsUsed"
-    >,
-    value: string[] | MyRole[]
+  const addImages = (
+    newImages: Array<{ url: string; desc?: string; alt?: string }>
   ) => {
-    setValue(field, value);
+    const currentItems = watch("items") || [];
+    setValue("items", [...currentItems, ...newImages], {
+      shouldValidate: true
+    });
   };
 
-  // Reset form
-  const resetForm = () => {
-    reset(getDefaultFormData());
+  const removeImage = (index: number) => {
+    const currentItems = watch("items") || [];
+    setValue(
+      "items",
+      currentItems.filter((_, i: number) => i !== index),
+      { shouldValidate: true }
+    );
+  };
+
+  const updateImageDetails = (
+    index: number,
+    details: { desc?: string; alt?: string }
+  ) => {
+    const currentItems = watch("items") || [];
+    const updatedItems = currentItems.map((item, i: number) =>
+      i === index ? { ...item, ...details } : item
+    );
+    setValue("items", updatedItems, { shouldValidate: true });
+  };
+
+  const reorderItems = (sourceIndex: number, destinationIndex: number) => {
+    const currentItems = [...(watch("items") || [])];
+    const [removed] = currentItems.splice(sourceIndex, 1);
+    currentItems.splice(destinationIndex, 0, removed);
+    setValue("items", currentItems, { shouldValidate: true });
   };
 
   return {
-    errors,
     register,
-    handleSubmit,
-    setValue,
-    getValues,
-    handleInputChange,
-    handleSelectChange,
-    roleOptions,
-    tagOptions,
-    toolOptions,
-    handleCreate,
-    resetForm
+    control,
+    errors: formState.errors,
+    isSubmitting,
+    items,
+    addImages,
+    removeImage,
+    updateImageDetails,
+    reorderItems,
+    reset,
+    formState,
+    handleSubmit: handleSubmit(handleFormSubmit)
   };
 };

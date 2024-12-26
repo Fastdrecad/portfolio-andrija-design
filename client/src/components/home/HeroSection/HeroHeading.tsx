@@ -7,7 +7,7 @@ import AnimatedText from "@/components/animations/AnimatedText";
 
 const HeroHeading: React.FC = () => {
   const heroTitleRef = useRef<HTMLDivElement>(null);
-  const isHeroTitleInView = useInView(heroTitleRef);
+  const isHeroTitleInView = useInView(heroTitleRef, { once: true });
 
   return (
     <motion.div

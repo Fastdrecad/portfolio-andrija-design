@@ -11,7 +11,7 @@ import contactHero800 from "@/assets/images/contact-hero800.jpg";
 
 const ContactFooter: React.FC = () => {
   const footerRef = useRef<HTMLDivElement>(null);
-  const isFooterInView = useInView(footerRef);
+  const isFooterInView = useInView(footerRef, { once: true });
 
   return (
     <div className="contact-footer__container">

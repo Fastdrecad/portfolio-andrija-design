@@ -1,6 +1,7 @@
 // Import core styles
 @import "variables";
 @import "mixins";
+@import "select";
 
 // layout
 @import "layout";
@@ -51,8 +52,7 @@
 @import "animated-dots";
 @import "loader";
 @import "gallery-item";
-@import "new-modal-content";
-
+@import "animations";
 // Base styles
 @import "form-input";
 
@@ -61,5 +61,6 @@
 @import "admin-header";
 @import "admin-sidebar";
 @import "admin-dashboard";
-@import "portfolio-manager";
 @import "image-uploader";
+@import "portfolio-manager";
+@import "portfolio-form";

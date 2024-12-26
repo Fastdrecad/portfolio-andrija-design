@@ -69,7 +69,6 @@ const Loader: React.FC<LoaderProps> = ({ active }) => {
           </motion.h1>
           <svg className="curve">
             <motion.path
-              style={{ fill: "#222" }}
               variants={curve}
               initial="initial"
               exit="exit"

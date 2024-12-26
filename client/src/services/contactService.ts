@@ -15,9 +15,6 @@ const API_BASE_URL = import.meta.env.DEV
   ? "http://localhost:3000/api" // Development API endpoint
   : import.meta.env.VITE_API_URL || "/api"; // Production: Nginx proxy
 
-console.log("Environment:", import.meta.env.MODE); // Logs the current mode (e.g., "production")
-console.log("API_BASE_URL:", API_BASE_URL); // Logs the selected API_BASE_URL
-
 // Create an Axios instance with the base URL
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,

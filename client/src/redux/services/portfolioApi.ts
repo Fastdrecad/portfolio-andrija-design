@@ -1,4 +1,4 @@
-import { PortfolioItem } from "@/types/portfolioTypes";
+import { PortfolioItemProps } from "@/types/portfolioTypes";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { RootState } from "../store";
 
@@ -19,7 +19,7 @@ export const portfolioApi = createApi({
   tagTypes: ["Portfolio"],
   endpoints: (builder) => ({
     // Get all projects
-    getProjects: builder.query<PortfolioItem[], void>({
+    getProjects: builder.query<PortfolioItemProps[], void>({
       query: () => "portfolio",
       providesTags: (result) =>
         result
@@ -34,13 +34,22 @@ export const portfolioApi = createApi({
     }),
 
     // Get single project by ID
-    getProjectById: builder.query<PortfolioItem, string>({
+    getProjectById: builder.query<PortfolioItemProps, string>({
       query: (id) => `portfolio/${id}`,
       providesTags: (_result, _error, id) => [{ type: "Portfolio", id }]
     }),
 
+    // Get project by slug
+    getProjectBySlug: builder.query<PortfolioItemProps, string>({
+      query: (slug) => `portfolio/${slug}`,
+      providesTags: (_result, _error, slug) => [{ type: "Portfolio", id: slug }]
+    }),
+
     // Add new project
-    addProject: builder.mutation<PortfolioItem, Partial<PortfolioItem>>({
+    addProject: builder.mutation<
+      PortfolioItemProps,
+      Partial<PortfolioItemProps>
+    >({
       query: (body) => ({
         url: "portfolio",
         method: "POST",
@@ -51,8 +60,8 @@ export const portfolioApi = createApi({
 
     // Update existing project
     updateProject: builder.mutation<
-      PortfolioItem,
-      { id: string } & Partial<PortfolioItem>
+      PortfolioItemProps,
+      { id: string } & Partial<PortfolioItemProps>
     >({
       query: ({ id, ...patch }) => ({
         url: `portfolio/${id}`,
@@ -75,15 +84,42 @@ export const portfolioApi = createApi({
         { type: "Portfolio", id },
         { type: "Portfolio", id: "LIST" }
       ]
+    }),
+
+    // Reorder projects
+    reorderProjects: builder.mutation<
+      PortfolioItemProps[],
+      { sourceId: string; destinationId: string }
+    >({
+      query: (body) => ({
+        url: "portfolio/reorder",
+        method: "POST",
+        body
+      }),
+      invalidatesTags: [{ type: "Portfolio", id: "LIST" }]
+    }),
+
+    // Initialize project orders
+    initializeProjectOrder: builder.mutation<
+      { message: string; count: number },
+      void
+    >({
+      query: () => ({
+        url: "portfolio/initialize-order",
+        method: "POST"
+      }),
+      invalidatesTags: [{ type: "Portfolio", id: "LIST" }]
     })
   })
 });
 
-// Export hooks for usage in components
 export const {
   useGetProjectsQuery,
   useGetProjectByIdQuery,
   useAddProjectMutation,
   useUpdateProjectMutation,
-  useDeleteProjectMutation
+  useDeleteProjectMutation,
+  useGetProjectBySlugQuery,
+  useReorderProjectsMutation,
+  useInitializeProjectOrderMutation
 } = portfolioApi;

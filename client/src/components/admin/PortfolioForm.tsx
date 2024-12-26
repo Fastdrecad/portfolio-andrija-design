@@ -1,298 +1,439 @@
-import ImageUploader from "@/components/admin/ImageUploader";
 import { Button } from "@/components/common";
-import { usePortfolioForm } from "@/hooks/usePortfolioForm";
-import { usePortfolioUpload } from "@/hooks/usePortfolioUpload";
+import { useEffect, useState } from "react";
 import {
-  MyRoleType,
-  PortfolioItem,
-  SelectOption
-} from "@/types/portfolioTypes";
-import { useCallback, useEffect, useState } from "react";
+  Control,
+  Controller,
+  FieldErrors,
+  FormState,
+  useForm
+} from "react-hook-form";
+import { FaBars, FaTimes } from "react-icons/fa";
+import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
-import { toast } from "react-toastify";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult
+} from "react-beautiful-dnd";
+import {
+  categoryOptions,
+  defaultRoleOptions,
+  ImageType,
+  PortfolioFormData
+} from "../../schemas/portfolioSchema";
+import { Tags, Tools } from "../../types/portfolioTypes";
+import { ImageUploader } from "./ImageUploader";
+
+const DraggableImageList = ({
+  items,
+  removeImage,
+  updateImageDetails
+}: {
+  items: ImageType[];
+  removeImage: (index: number) => void;
+  updateImageDetails: (index: number, details: Partial<ImageType>) => void;
+}) => {
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    const animation = requestAnimationFrame(() => {
+      setEnabled(true);
+    });
+
+    return () => {
+      cancelAnimationFrame(animation);
+      setEnabled(false);
+    };
+  }, []);
+
+  if (!enabled) {
+    return null;
+  }
+
+  return (
+    <Droppable droppableId="portfolio-images">
+      {(provided) => (
+        <div
+          ref={provided.innerRef}
+          {...provided.droppableProps}
+          className="portfolio-form__selected-images"
+        >
+          {items.map((image, index) => (
+            <Draggable
+              key={`draggable-${index}`}
+              draggableId={`draggable-${index}`}
+              index={index}
+            >
+              {(provided, snapshot) => (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.draggableProps}
+                  className={`image-uploader__image-item ${
+                    snapshot.isDragging ? "dragging" : ""
+                  }`}
+                  style={{
+                    ...provided.draggableProps.style
+                  }}
+                >
+                  <div className="image-uploader__image-container">
+                    <img
+                      src={image.url}
+                      alt={image.alt || ""}
+                      className="image-uploader__image"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeImage(index)}
+                      className="image-uploader__remove-button"
+                    >
+                      <FaTimes />
+                    </button>
+                  </div>
+
+                  <div className="image-uploader__image-overlay">
+                    <div className="image-uploader__details">
+                      <label>Description</label>
+                      <input
+                        type="text"
+                        placeholder="Description"
+                        value={image.desc || ""}
+                        onChange={(e) =>
+                          updateImageDetails(index, {
+                            ...image,
+                            desc: e.target.value
+                          })
+                        }
+                      />
+                    </div>
+                    <div className="image-uploader__details">
+                      <label>Alt text</label>
+                      <input
+                        type="text"
+                        placeholder="Alt text"
+                        value={image.alt || ""}
+                        onChange={(e) =>
+                          updateImageDetails(index, {
+                            ...image,
+                            alt: e.target.value
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+
+                  <div
+                    {...provided.dragHandleProps}
+                    className="image-uploader__drag-handle"
+                  >
+                    <FaBars size={20} />
+                  </div>
+                </div>
+              )}
+            </Draggable>
+          ))}
+          {provided.placeholder}
+        </div>
+      )}
+    </Droppable>
+  );
+};
+
+const tagsOptions = Object.values(Tags).map((tag) => ({
+  value: tag,
+  label: tag
+}));
+
+const toolsOptions = Object.values(Tools).map((tool) => ({
+  value: tool,
+  label: tool
+}));
 
 interface PortfolioFormProps {
-  onSubmit: (data: PortfolioItem) => Promise<void>;
-  isLoading: boolean;
-  initialData?: PortfolioItem;
-  submitButtonText?: string;
-}
-
-interface FileMetadata {
-  alt: string;
-  desc: string;
+  control: Control<PortfolioFormData>;
+  errors: FieldErrors<PortfolioFormData>;
+  isSubmitting: boolean;
+  onSubmit: (data: PortfolioFormData) => Promise<void>;
+  items: ImageType[];
+  addImages: (images: ImageType[]) => void;
+  removeImage: (index: number) => void;
+  updateImageDetails: (index: number, details: Partial<ImageType>) => void;
+  formState: FormState<PortfolioFormData>;
+  isLoading?: boolean;
+  isEditing?: boolean;
+  initialData?: PortfolioFormData;
 }
 
 export const PortfolioForm = ({
+  control,
+  errors,
+  isSubmitting,
   onSubmit,
-  isLoading,
+  items,
+  addImages,
+  removeImage,
+  updateImageDetails,
+  formState: { isValid },
   initialData,
-  submitButtonText = "Create Project"
+  isLoading = false,
+  isEditing = false
 }: PortfolioFormProps) => {
-  const {
-    errors,
-    register,
-    handleSubmit,
-    setValue,
-    getValues,
-    handleInputChange,
-    handleSelectChange,
-    roleOptions,
-    tagOptions,
-    toolOptions,
-    handleCreate,
-    resetForm
-  } = usePortfolioForm(initialData);
-
-  const {
-    uploadProgress,
-    selectedImages,
-    setSelectedImages,
-    resetUpload,
-    handleUpload
-  } = usePortfolioUpload();
-
-  const [isValid, setIsValid] = useState(false);
-  const [fileMetadata, setFileMetadata] = useState<
-    Record<string, FileMetadata>
-  >({});
+  const { reset } = useForm<PortfolioFormData>();
 
   useEffect(() => {
-    const checkValidity = () => {
-      setIsValid(Object.keys(errors).length === 0);
-    };
-    checkValidity();
-  }, [errors]);
-
-  const handleImagesSelected = useCallback(
-    (images: File[]) => {
-      setSelectedImages(images);
-    },
-    [setSelectedImages]
-  );
-
-  const handleImageDetailsUpdate = useCallback(
-    (index: number, field: "alt" | "desc", value: string) => {
-      const file = selectedImages[index];
-      if (!file) return;
-
-      setFileMetadata((prev) => ({
-        ...prev,
-        [file.name]: {
-          ...prev[file.name],
-          [field]: value
-        }
-      }));
-    },
-    [selectedImages]
-  );
-
-  const submitHandler = handleSubmit(async (data) => {
-    try {
-      if (selectedImages.length === 0) {
-        toast.error("Please select at least one image");
-        return;
-      }
-
-      console.log("Selected images before upload:", selectedImages);
-
-      // Upload images first
-      const uploadedImages = await handleUpload(selectedImages);
-      console.log("Uploaded images:", uploadedImages);
-
-      // Map uploaded images to portfolio item format, including metadata
-      const projectImages = uploadedImages.map((img, index) => {
-        const originalFile = selectedImages[index];
-        const metadata = fileMetadata[originalFile.name] || {
-          alt: "",
-          desc: ""
-        };
-
-        return {
-          url: img.secure_url,
-          desc: metadata.desc || "",
-          alt: metadata.alt || data.projectName
-        };
-      });
-
-      // Create the project payload with first image as the thumbnail
-      const projectPayload = {
-        ...data,
-        items: projectImages,
-        url: projectImages[0].url,
-        alt: projectImages[0].alt || data.projectName
-      };
-
-      await onSubmit(projectPayload);
-      resetForm();
-      resetUpload();
-      setFileMetadata({});
-      toast.success("Project created successfully!");
-    } catch (error) {
-      console.error("Form submission error:", error);
-      toast.error("Submission failed. Please try again.");
+    if (initialData) {
+      reset(initialData);
     }
-  });
+  }, [initialData, reset]);
+
+  if (isLoading) {
+    return <div className="portfolio-form__loading">Loading form data...</div>;
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(
+      formData.entries()
+    ) as unknown as PortfolioFormData;
+    onSubmit(data);
+  };
+
+  const handleDragEnd = (result: DropResult) => {
+    if (!result.destination) return;
+
+    const sourceIndex = result.source.index;
+    const destinationIndex = result.destination.index;
+
+    if (sourceIndex === destinationIndex) return;
+
+    const reorderedItems = Array.from(items);
+    const [removed] = reorderedItems.splice(sourceIndex, 1);
+    reorderedItems.splice(destinationIndex, 0, removed);
+
+    // Update all items with the new order
+    reorderedItems.forEach((item, index) => {
+      updateImageDetails(index, item);
+    });
+  };
 
   return (
-    <form className="portfolio-manager__form" onSubmit={submitHandler}>
-      <div className="form-group">
-        <label>Project Name *</label>
-        <input
-          {...register("projectName", { required: true })}
-          onChange={handleInputChange}
+    <form onSubmit={handleSubmit} className="portfolio-form">
+      {/* Project Name */}
+      <div className="portfolio-form__field">
+        <Controller
+          name="projectName"
+          control={control}
+          render={({ field }) => (
+            <div>
+              <label>Project Name *</label>
+              <input {...field} type="text" />
+              {errors.projectName && (
+                <p className="portfolio-form__error">
+                  {errors.projectName.message}
+                </p>
+              )}
+            </div>
+          )}
         />
-        {errors.projectName && (
-          <span className="error">This field is required</span>
+      </div>
+
+      {/* Title */}
+      <div className="portfolio-form__field">
+        <Controller
+          name="title"
+          control={control}
+          render={({ field }) => (
+            <div>
+              <label>Title *</label>
+              <input {...field} type="text" />
+              {errors.title && (
+                <p className="portfolio-form__error">{errors.title.message}</p>
+              )}
+            </div>
+          )}
+        />
+      </div>
+
+      {/* Category */}
+      <div className="portfolio-form__field">
+        <Controller
+          name="category"
+          control={control}
+          render={({ field }) => (
+            <div>
+              <label>Category *</label>
+              <Select
+                {...field}
+                options={categoryOptions}
+                isSearchable
+                isClearable={false}
+                className="react-select-container"
+                classNamePrefix="react-select"
+              />
+              {errors.category && (
+                <p className="portfolio-form__error">
+                  {errors.category.message}
+                </p>
+              )}
+            </div>
+          )}
+        />
+      </div>
+
+      {/* My Role */}
+      <div className="portfolio-form__field">
+        <Controller
+          name="myRole"
+          control={control}
+          render={({ field }) => (
+            <div>
+              <label>My Role *</label>
+              <CreatableSelect
+                {...field}
+                isMulti
+                options={defaultRoleOptions}
+                placeholder="Select or create roles"
+                className="react-select-container"
+                classNamePrefix="react-select"
+              />
+              {errors.myRole && (
+                <p className="portfolio-form__error">{errors.myRole.message}</p>
+              )}
+            </div>
+          )}
+        />
+      </div>
+
+      {/* Tools Used */}
+      <div className="portfolio-form__field">
+        <Controller
+          name="toolsUsed"
+          control={control}
+          render={({ field }) => (
+            <div>
+              <label>Tools Used *</label>
+              <CreatableSelect
+                {...field}
+                isMulti
+                options={toolsOptions}
+                placeholder="Select or create tools"
+                className="react-select-container"
+                classNamePrefix="react-select"
+              />
+              {errors.toolsUsed && (
+                <p className="portfolio-form__error">
+                  {errors.toolsUsed.message}
+                </p>
+              )}
+            </div>
+          )}
+        />
+      </div>
+
+      {/* Tags */}
+      <div className="portfolio-form__field">
+        <Controller
+          name="tags"
+          control={control}
+          render={({ field }) => (
+            <div>
+              <label>Tags *</label>
+              <CreatableSelect
+                {...field}
+                isMulti
+                options={tagsOptions}
+                placeholder="Select or create tags"
+                className="react-select-container"
+                classNamePrefix="react-select"
+              />
+              {errors.tags && (
+                <p className="portfolio-form__error">{errors.tags.message}</p>
+              )}
+            </div>
+          )}
+        />
+      </div>
+
+      {/* Client & Client URL */}
+      <div className="portfolio-form__field portfolio-form__field--grid">
+        <Controller
+          name="client"
+          control={control}
+          render={({ field }) => (
+            <div>
+              <label>Client</label>
+              <input {...field} type="text" />
+            </div>
+          )}
+        />
+        <Controller
+          name="clientUrl"
+          control={control}
+          render={({ field }) => (
+            <div>
+              <label>Client URL</label>
+              <input {...field} type="url" />
+              {errors.clientUrl && (
+                <p className="portfolio-form__error">
+                  {errors.clientUrl.message}
+                </p>
+              )}
+            </div>
+          )}
+        />
+      </div>
+
+      {/* Description */}
+      <div className="portfolio-form__field">
+        <Controller
+          name="description"
+          control={control}
+          render={({ field }) => (
+            <div>
+              <label>Description</label>
+              <textarea {...field} rows={4} />
+            </div>
+          )}
+        />
+      </div>
+
+      {/* Image Preview with Drag and Drop */}
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <DraggableImageList
+          items={items}
+          removeImage={removeImage}
+          updateImageDetails={updateImageDetails}
+        />
+      </DragDropContext>
+
+      {/* Image Uploader */}
+      <div className="portfolio-form__field">
+        <label>Images *</label>
+        <ImageUploader
+          onImagesUploaded={addImages}
+          isSubmitting={isSubmitting}
+        />
+        {errors.items && (
+          <p className="portfolio-form__error">{errors.items.message}</p>
         )}
       </div>
-
-      <div className="form-group">
-        <label>Title *</label>
-        <input
-          {...register("title", { required: true })}
-          onChange={handleInputChange}
-        />
-        {errors.title && <span className="error">This field is required</span>}
-      </div>
-
-      <div className="form-group">
-        <label>Category *</label>
-        <select
-          {...register("category", { required: true })}
-          onChange={(e) => handleSelectChange("category", [e.target.value])}
-        >
-          <option value="Product Design">Product Design</option>
-          <option value="3D Rendering">3D Rendering</option>
-          <option value="CAD">CAD</option>
-          <option value="Furniture Design">Furniture Design</option>
-        </select>
-        {errors.category && (
-          <span className="error">This field is required</span>
-        )}
-      </div>
-
-      <div className="form-group">
-        <label>Client</label>
-        <input {...register("client")} onChange={handleInputChange} />
-      </div>
-
-      <div className="form-group">
-        <label>Client URL</label>
-        <input {...register("clientUrl")} onChange={handleInputChange} />
-      </div>
-
-      <div className="form-group">
-        <label>My Role *</label>
-        <CreatableSelect
-          isMulti
-          options={roleOptions}
-          className="react-select-container"
-          classNamePrefix="react-select"
-          {...register("myRole", {
-            required: "Please select at least one role"
-          })}
-          onChange={(selected) => {
-            const values = selected
-              ? (selected as SelectOption[]).map(
-                  (option) => option.value as MyRoleType
-                )
-              : [];
-            handleSelectChange("myRole", values);
-          }}
-          onCreateOption={(inputValue) => {
-            try {
-              const result = handleCreate(inputValue, "myRole");
-              if (!result.isValid) {
-                toast.error(result.message);
-                return;
-              }
-              const currentRoles = getValues("myRole") as MyRoleType[];
-              setValue("myRole", [...currentRoles, inputValue as MyRoleType]);
-            } catch (error) {
-              toast.error((error as Error).message);
-            }
-          }}
-          formatOptionLabel={(option: SelectOption) =>
-            `${option.isNew ? `${option.label} (new)` : option.label}`
-          }
-          placeholder="Select or create roles..."
-        />
-        {errors.myRole && (
-          <span className="error">{errors.myRole.message}</span>
-        )}
-      </div>
-
-      <div className="form-group">
-        <label>Tags *</label>
-        <CreatableSelect
-          isMulti
-          options={tagOptions}
-          className="react-select-container"
-          classNamePrefix="react-select"
-          {...register("tags", { required: true })}
-          onChange={(selected) => {
-            const values = selected
-              ? selected.map((option) => option.value)
-              : [];
-            setValue("tags", values);
-          }}
-          onCreateOption={(inputValue) => handleCreate(inputValue, "tags")}
-          placeholder="Select or create tags..."
-        />
-        {errors.tags && (
-          <span className="error">Please select at least one tag</span>
-        )}
-      </div>
-
-      <div className="form-group">
-        <label>Tools Used *</label>
-        <CreatableSelect
-          isMulti
-          options={toolOptions}
-          className="react-select-container"
-          classNamePrefix="react-select"
-          {...register("toolsUsed", { required: true })}
-          onChange={(selected) => {
-            const values = selected
-              ? selected.map((option) => option.value)
-              : [];
-            setValue("toolsUsed", values);
-          }}
-          onCreateOption={(inputValue) => handleCreate(inputValue, "toolsUsed")}
-          placeholder="Select or create tools..."
-        />
-        {errors.toolsUsed && (
-          <span className="error">Please select at least one tool</span>
-        )}
-      </div>
-
-      <div className="form-group">
-        <label>Description</label>
-        <textarea
-          {...register("description")}
-          rows={5}
-          onChange={handleInputChange}
-        />
-      </div>
-
-      {/* Image uploader */}
-      <ImageUploader
-        selectedImages={selectedImages}
-        onImagesSelected={handleImagesSelected}
-        uploadProgress={uploadProgress}
-        onDetailsChange={handleImageDetailsUpdate}
-        metadata={fileMetadata}
-        isUpdateMode={!!initialData}
-      />
 
       <Button
         type="submit"
-        disabled={!isValid}
-        loading={isLoading}
-        className="portfolio-manager__form-button"
+        disabled={isSubmitting || !isValid}
+        className="portfolio-button"
       >
-        {isLoading ? "SAVING..." : submitButtonText}
+        {isSubmitting ? (
+          <>
+            <span className="btn__loader" />
+            <span>Saving...</span>
+          </>
+        ) : isEditing ? (
+          "Update Project"
+        ) : (
+          "Create Project"
+        )}
       </Button>
     </form>
   );

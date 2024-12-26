@@ -1,21 +1,19 @@
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-
-import { setCurrentRoute } from "@/redux/routeSlice";
-
 import Image from "@/components/common/Image";
-
 import gifLogo from "@/assets/images/am-3d-logo.gif";
+import { useRouteName } from "@/context/routeNameContext";
+import { formatRouteName } from "@/utils/routeUtils";
 
 const MainGifLogo: React.FC = () => {
-  const dispatch = useDispatch();
+  const { setRouteName } = useRouteName();
 
-  const handleNavLinkClick = (url: string) => {
-    dispatch(setCurrentRoute(url));
+  const handleClick = (url: string) => {
+    const routeName = formatRouteName(url);
+    setRouteName(routeName);
   };
 
   return (
-    <Link to="/" onClick={() => handleNavLinkClick("/")}>
+    <Link to="/" onClick={() => handleClick("/")}>
       <div className="main-logo__icon-wrapper">
         <Image
           src={gifLogo}

@@ -4,6 +4,7 @@ This is my personal portfolio showcasing my work as a **Furniture Designer Engin
 
 ## Features
 
+- **Content management and user authentication**: Admin portal for managing website content and handling user authentication.
 - **Responsive Design**: Optimized for desktop, tablet, and mobile views.
 - **Project Showcase**: Featuring detailed case studies of my projects with images, videos, and descriptions.
 - **Contact Form**: Clients and visitors can easily reach me through a contact form powered by **Nodemailer**.

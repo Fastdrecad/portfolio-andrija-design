@@ -6,7 +6,7 @@ import RedLine from "@/components/common/RedLine";
 
 const ContactHeader: React.FC = () => {
   const titleRef = useRef<HTMLDivElement>(null);
-  const isTitleInView = useInView(titleRef);
+  const isTitleInView = useInView(titleRef, { once: true });
 
   return (
     <motion.div

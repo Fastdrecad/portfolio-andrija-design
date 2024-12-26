@@ -1,7 +1,7 @@
 import {
   MyRole,
   MyRoleType,
-  PortfolioItem,
+  PortfolioItemProps,
   Tags,
   Tools
 } from "@/types/portfolioTypes";
@@ -28,8 +28,8 @@ type FieldValues = {
 };
 
 export const useSelectOptions = (
-  setValue: UseFormSetValue<PortfolioItem>,
-  getValues: UseFormGetValues<PortfolioItem>
+  setValue: UseFormSetValue<PortfolioItemProps>,
+  getValues: UseFormGetValues<PortfolioItemProps>
 ) => {
   const enumToOptions = useMemo(
     () =>

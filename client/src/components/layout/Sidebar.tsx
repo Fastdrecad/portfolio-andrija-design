@@ -1,18 +1,20 @@
 import { useContext } from "react";
-import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import Socials from "@/components/layout/Socials";
 import { MenuContext } from "@/context/navContext";
-import { setCurrentRoute } from "@/redux/routeSlice";
 import { links } from "@/data";
+import { formatRouteName } from "@/utils/routeUtils";
+import { useRouteName } from "@/context/routeNameContext";
 
 const Sidebar: React.FC = () => {
   const { toggle, menuOpen } = useContext(MenuContext);
-  const dispatch = useDispatch();
+  const { setRouteName } = useRouteName();
 
-  const handleNavLinkClick = (url: string) => {
-    dispatch(setCurrentRoute(url));
+  const handleNavClick = (url: string) => {
+    toggle();
+    const routeName = formatRouteName(url);
+    setRouteName(routeName);
   };
 
   return (
@@ -28,10 +30,7 @@ const Sidebar: React.FC = () => {
                   className={({ isActive }) =>
                     `sidebar__link ${isActive ? "sidebar__link--active" : ""}`
                   }
-                  onClick={() => {
-                    toggle();
-                    handleNavLinkClick(url);
-                  }}
+                  onClick={() => handleNavClick(url)}
                 >
                   {text}
                 </NavLink>

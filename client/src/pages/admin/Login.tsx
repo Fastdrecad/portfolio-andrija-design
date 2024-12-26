@@ -43,7 +43,7 @@ const Login = () => {
   return (
     <div className="admin-login">
       <div className="admin-login__container">
-        <h1>Admin Login</h1>
+        <h1>Login</h1>
 
         <form onSubmit={onSubmit}>
           <FormInput

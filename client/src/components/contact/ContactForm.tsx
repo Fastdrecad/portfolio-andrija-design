@@ -4,8 +4,7 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { setCurrentRoute, setIsFormSubmitted } from "@/redux/routeSlice";
-
+import { setFormSubmitted } from "@/redux/contactSlice";
 import useContactForm from "@/hooks/useContactForm";
 import contactService from "@/services/contactService";
 
@@ -44,13 +43,8 @@ const ContactForm: React.FC = () => {
       await contactService.sendMessage(values);
       setResponseMessage("Your message has been sent successfully!");
 
-      // Ensure state updates complete before navigation
-      await Promise.all([
-        dispatch(setIsFormSubmitted(true)),
-        dispatch(setCurrentRoute("/success"))
-      ]);
-
-      // Navigate after state updates
+      // Set form submitted state and navigate
+      dispatch(setFormSubmitted(true));
       navigate("/success");
     } catch (error) {
       setResponseMessage("There was an error sending your message.");

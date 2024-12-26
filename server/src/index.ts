@@ -2,7 +2,7 @@ import chalk from "chalk";
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-import rateLimit from "express-rate-limit";
+// import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import mongoose from "mongoose";
 import morgan from "morgan";
@@ -51,25 +51,27 @@ app.use(
 );
 
 // Enhanced Rate Limiting
-const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // 5 attempts
-  message: "Too many login attempts, please try again after 15 minutes",
-  standardHeaders: true,
-  legacyHeaders: false
-});
+// const authLimiter = rateLimit({
+//   windowMs: 150 * 60 * 1000, // 150 minutes
+//   max: 5, // 5 attempts
+//   message: "Too many login attempts, please try again after 15 minutes",
+//   standardHeaders: true,
+//   legacyHeaders: false
+// });
 
-const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
-  message: "Too many requests from this IP, please try again later",
-  standardHeaders: true,
-  legacyHeaders: false
-});
+// const apiLimiter = rateLimit({
+//   windowMs: 15 * 60 * 1000, // 15 minutes
+//   max: process.env.NODE_ENV === "production" ? 100 : 1000, // More lenient in development
+//   message: "Too many requests from this IP, please try again later",
+//   standardHeaders: true,
+//   legacyHeaders: false
+// });
 
 // Apply rate limiting
-app.use("/api/auth/login", authLimiter); // Stricter limit for login
-app.use("/api/", apiLimiter); // General API rate limiting
+// app.use("/api/auth/login", authLimiter); // Stricter limit for login
+// if (process.env.NODE_ENV === "production") {
+//   app.use("/api/", apiLimiter); // Only apply general API rate limiting in production
+// }
 
 // Enhanced CORS Configuration
 const allowedOrigins =

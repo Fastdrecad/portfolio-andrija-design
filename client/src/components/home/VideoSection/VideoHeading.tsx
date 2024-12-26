@@ -9,7 +9,7 @@ interface VideoHeadingProps {
 
 const VideoHeading: React.FC<VideoHeadingProps> = ({ title }) => {
   const videoTitleRef = useRef<HTMLDivElement>(null);
-  const isVideoTitleInView = useInView(videoTitleRef);
+  const isVideoTitleInView = useInView(videoTitleRef, { once: true });
 
   return (
     <div className="video__heading">

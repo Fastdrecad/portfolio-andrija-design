@@ -1,9 +1,8 @@
-import React, { ReactNode } from "react";
-
+import React from "react";
 import { motion } from "framer-motion";
 
 interface BackdropProps {
-  children: ReactNode;
+  children: React.ReactNode;
   onClick: () => void;
 }
 

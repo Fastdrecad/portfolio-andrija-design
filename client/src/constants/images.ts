@@ -39,7 +39,7 @@ import ashBucket5 from "@/assets/portfolio-assets/ash-bucket-5.jpg";
 import ashBucket6 from "@/assets/portfolio-assets/ash-bucket-6.jpg";
 import atlantisBed1 from "@/assets/portfolio-assets/atlantis-bed-1.jpg";
 import atlantisBed2 from "@/assets/portfolio-assets/atlantis-bed-2.jpg";
-import atlantisBed3 from "@/assets/portfolio-assets/atlantis-bed-3.png";
+import atlantisBed3 from "@/assets/portfolio-assets/atlantis-bed-3.jpg";
 import atlantisBed4 from "@/assets/portfolio-assets/atlantis-bed-4.png";
 import bootTray1 from "@/assets/portfolio-assets/boot-tray-1.jpg";
 import bootTray2 from "@/assets/portfolio-assets/boot-tray-2.jpg";

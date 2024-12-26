@@ -1,49 +1,79 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface ModalState {
-  calendly: boolean;
-  youtube: boolean;
-  project: number | null; // Store project ID when the modal is open, null when closed
+export type ModalType = "calendly" | "youtube" | "project" | null;
+
+interface ModalData {
+  projectId?: string;
+  [key: string]: string | undefined;
 }
 
-// Define a discriminated union for the payload
-export type ModalPayload =
-  | { modalType: "calendly" | "youtube"; projectId?: never }
-  | { modalType: "project"; projectId: number };
+interface ModalState {
+  type: ModalType;
+  data: ModalData | null;
+  isOpen: boolean;
+  previousLocation?: string;
+  isModalNavigation: boolean;
+}
 
 const initialState: ModalState = {
-  calendly: false,
-  youtube: false,
-  project: null
+  type: null,
+  data: null,
+  isOpen: false,
+  previousLocation: undefined,
+  isModalNavigation: false
 };
+
+interface OpenModalPayload {
+  type: Exclude<ModalType, null>;
+  data?: ModalData;
+  previousLocation?: string;
+}
 
 export const modalSlice = createSlice({
   name: "modal",
   initialState,
   reducers: {
-    openModal: (state, action: PayloadAction<ModalPayload>) => {
-      const { modalType, projectId } = action.payload;
-      if (modalType === "project" && projectId !== undefined) {
-        if (state.project !== projectId) {
-          // Only update if the ID changes
-          state.project = projectId;
-        }
-      } else if (modalType === "calendly") {
-        state.calendly = true;
-      } else if (modalType === "youtube") {
-        state.youtube = true;
-      }
+    openModal: (state, action: PayloadAction<OpenModalPayload>) => {
+      state.type = action.payload.type;
+      state.data = action.payload.data || null;
+      state.isOpen = true;
+      state.previousLocation = action.payload.previousLocation;
+      state.isModalNavigation = true;
     },
-    closeModal: (state, action: PayloadAction<keyof ModalState>) => {
-      // Handle closing of different modals
-      if (action.payload === "project") {
-        state.project = null; // Reset project ID when closing the project modal
-      } else {
-        state[action.payload] = false;
-      }
+    closeModal: (state) => {
+      state.type = null;
+      state.data = null;
+      state.isOpen = false;
+      state.isModalNavigation = false;
+      // Keeping previousLocation for navigation purposes
+    },
+    clearModalHistory: (state) => {
+      state.previousLocation = undefined;
+    },
+    setIsModalNavigation: (state, action: PayloadAction<boolean>) => {
+      state.isModalNavigation = action.payload;
     }
   }
 });
 
-export const { openModal, closeModal } = modalSlice.actions;
+export const {
+  openModal,
+  closeModal,
+  clearModalHistory,
+  setIsModalNavigation
+} = modalSlice.actions;
+
+// Selectors
+export const selectModalState = (state: { modal: ModalState }) => state.modal;
+export const selectIsModalOpen = (state: { modal: ModalState }) =>
+  state.modal.isOpen;
+export const selectModalType = (state: { modal: ModalState }) =>
+  state.modal.type;
+export const selectModalData = (state: { modal: ModalState }) =>
+  state.modal.data;
+export const selectPreviousLocation = (state: { modal: ModalState }) =>
+  state.modal.previousLocation;
+export const selectIsModalNavigation = (state: { modal: ModalState }) =>
+  state.modal.isModalNavigation;
+
 export default modalSlice.reducer;

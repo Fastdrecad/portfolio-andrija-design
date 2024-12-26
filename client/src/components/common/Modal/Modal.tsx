@@ -1,29 +1,19 @@
 import { useCallback, useEffect } from "react";
-
 import { useDispatch } from "react-redux";
-
-import { closeModal, openModal, ModalPayload } from "@/redux/modalSlice";
-
+import { openModal, closeModal } from "@/redux/modalSlice";
 import Backdrop from "@/components/common/Modal/Backdrop";
-import ModalContent from "@/components/common/Modal/ModalContent";
-import YoutubeEmbed from "@/components/common/Modal/YoutubeEmbed";
 import Calendly from "@/components/common/Modal/Calendly";
+import YoutubeEmbed from "@/components/common/Modal/YoutubeEmbed";
 
 interface ModalProps {
   onClose: () => void;
   children?: React.ReactNode;
-  id?: number;
+  id?: string;
   modalType: "project" | "youtube" | "calendly";
   videoId?: string;
 }
 
-const Modal: React.FC<ModalProps> = ({
-  onClose,
-  children,
-  id,
-  modalType,
-  videoId
-}) => {
+const Modal: React.FC<ModalProps> = ({ onClose, id, modalType, videoId }) => {
   const dispatch = useDispatch();
 
   const handleKeyDown = useCallback(
@@ -36,36 +26,37 @@ const Modal: React.FC<ModalProps> = ({
   );
 
   useEffect(() => {
-    // Dispatch openModal only when the modal is first opened
-    if (modalType === "project" && id !== undefined) {
-      dispatch(openModal({ modalType: "project", projectId: id }));
-    } else if (modalType !== "project") {
-      dispatch(openModal({ modalType } as ModalPayload));
+    if (modalType === "youtube" && videoId) {
+      dispatch(
+        openModal({
+          type: "youtube",
+          data: { videoId }
+        })
+      );
+    } else if (modalType === "calendly") {
+      dispatch(
+        openModal({
+          type: "calendly"
+        })
+      );
     }
 
     document.body.style.overflow = "hidden";
-
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      // Dispatch closeModal only when the modal is closed
-      dispatch(closeModal(modalType));
+      dispatch(closeModal());
       window.removeEventListener("keydown", handleKeyDown);
-
       document.body.style.overflow = "auto";
     };
-  }, [dispatch, modalType, id, handleKeyDown]);
+  }, [dispatch, modalType, id, videoId, handleKeyDown]);
 
   return (
     <Backdrop onClick={onClose}>
-      {modalType === "project" && id && (
-        <ModalContent onClose={onClose} projectId={id} />
-      )}
       {modalType === "youtube" && videoId && (
         <YoutubeEmbed videoId={videoId} onClose={onClose} />
       )}
       {modalType === "calendly" && <Calendly onClose={onClose} />}
-      {children && <div className="modal-content">{children}</div>}
     </Backdrop>
   );
 };

@@ -1,8 +1,7 @@
 import RedLine from "@/components/common/RedLine";
-import { setCurrentRoute } from "@/redux/routeSlice";
+import { useRouteName } from "@/context/routeNameContext";
+import { formatRouteName } from "@/utils/routeUtils";
 import { forwardRef } from "react";
-import { useDispatch } from "react-redux";
-
 import { Link } from "react-router-dom";
 
 interface AboutContentProps {
@@ -32,11 +31,11 @@ export const AboutContent = forwardRef<HTMLDivElement, AboutContentProps>(
 );
 
 const ContentBlocks: React.FC = () => {
-  const dispatch = useDispatch();
+  const { setRouteName } = useRouteName();
 
-  // Handler to dispatch current route
-  const handleNavLinkClick = (url: string) => {
-    dispatch(setCurrentRoute(url));
+  const handleClick = (url: string) => {
+    const routeName = formatRouteName(url);
+    setRouteName(routeName);
   };
 
   return (
@@ -104,7 +103,7 @@ const ContentBlocks: React.FC = () => {
 
       <ContentBlock title="Portfolio Highlights">
         <p>
-          I’ve partnered with esteemed clients like StreetForms, ergoCentric,
+          I've partnered with esteemed clients like StreetForms, ergoCentric,
           Holdenart, and Project Direct, showcasing a wide range of successful
           collaborations. Each project highlights my ability to push boundaries
           and exceed expectations in design, functionality, and visual appeal.
@@ -136,7 +135,7 @@ const ContentBlocks: React.FC = () => {
           <Link
             className="underline"
             to="/design-process"
-            onClick={() => handleNavLinkClick("/design-process")}
+            onClick={() => handleClick("/design-process")}
           >
             design process
           </Link>
@@ -144,10 +143,10 @@ const ContentBlocks: React.FC = () => {
         </p>
       </ContentBlock>
 
-      <ContentBlock title="Let’s Elevate Your Vision:">
+      <ContentBlock title="Let's Elevate Your Vision:">
         <p>
           Whether you represent an established company, a startup, or are an
-          individual with a visionary concept, I’m here to bring your furniture
+          individual with a visionary concept, I'm here to bring your furniture
           and product projects to life with stunning 3D visualizations and
           technical drawings. Together, we can achieve breathtaking results.
         </p>

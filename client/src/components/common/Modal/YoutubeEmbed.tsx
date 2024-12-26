@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { BsXLg } from "react-icons/bs";
 
 interface YoutubeEmbedProps {
@@ -7,7 +8,17 @@ interface YoutubeEmbedProps {
 
 const YoutubeEmbed: React.FC<YoutubeEmbedProps> = ({ videoId, onClose }) => {
   return (
-    <div className="youtube-embed__container">
+    <motion.div
+      className="youtube-embed__container"
+      onClick={(e) => e.stopPropagation()}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{
+        duration: 0.2,
+        ease: "easeOut"
+      }}
+    >
       <div className="youtube-embed__close-btn-container">
         <button className="youtube-embed__close-btn" onClick={onClose}>
           <BsXLg />
@@ -21,7 +32,7 @@ const YoutubeEmbed: React.FC<YoutubeEmbedProps> = ({ videoId, onClose }) => {
           className="youtube-embed__video-player"
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

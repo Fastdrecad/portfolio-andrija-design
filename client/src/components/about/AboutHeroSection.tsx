@@ -1,7 +1,7 @@
 import Image from "@/components/common/Image";
 
 import aboutHero from "@/assets/images/about-hero.jpg";
-import aboutProfileImg from "@/assets/images/andrija-about-page.png";
+import aboutProfileImg from "@/assets/images/andrija-about-page.webp";
 
 const AboutHeroSection: React.FC = () => {
   return (
@@ -12,6 +12,8 @@ const AboutHeroSection: React.FC = () => {
             src={aboutProfileImg}
             alt="Andrija Mićunović, Furniture Design Engineer and 3D Modeling Expert"
             loading="eager"
+            useLoader={false}
+            className="about-profile-image"
           />
         </div>
       </div>
@@ -21,6 +23,7 @@ const AboutHeroSection: React.FC = () => {
             src={aboutHero}
             alt="3D CAD drawings and technical modeling of furniture designs, showcasing precision and detail in the design process."
             loading="eager"
+            useLoader={false}
           />
         </div>
       </div>

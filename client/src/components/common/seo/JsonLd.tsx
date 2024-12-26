@@ -1,6 +1,7 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Helmet } from "react-helmet-async";
 
-import { PortfolioItemType } from "@/types/portfolioTypes";
+import { PortfolioItemProps } from "@/types/portfolioTypes";
 import { DesignProcessStep } from "@/types/designProcessTypes";
 import { ContactData } from "@/types/contactTypes";
 
@@ -13,8 +14,8 @@ interface JsonLdProps {
     | "contact"
     | "design-process";
   pageData?:
-    | PortfolioItemType[]
-    | PortfolioItemType
+    | PortfolioItemProps[]
+    | PortfolioItemProps
     | DesignProcessStep[]
     | ContactData
     | null;
@@ -50,15 +51,15 @@ const JsonLd: React.FC<JsonLdProps> = ({ pageType, pageData }) => {
     case "portfolio":
       if (
         Array.isArray(pageData) &&
-        (pageData as PortfolioItemType[])[0]?.projectName
+        (pageData as PortfolioItemProps[])[0]?.projectName
       ) {
         jsonLd = {
           "@context": "https://schema.org",
           "@type": "PortfolioPage",
           "name": "Portfolio of Andrija Mićunović",
           "url": "https://www.portfolio.andrijadesign.com/portfolio",
-          "itemListElement": (pageData as PortfolioItemType[]).map(
-            (item: PortfolioItemType, index: number) => ({
+          "itemListElement": (pageData as PortfolioItemProps[]).map(
+            (item: PortfolioItemProps, index: number) => ({
               "@type": "ListItem",
               "position": index + 1,
               "url": item.url,
@@ -74,7 +75,7 @@ const JsonLd: React.FC<JsonLdProps> = ({ pageType, pageData }) => {
     case "project":
       // Check if pageData has project-specific properties
       if (pageData && "projectName" in pageData && !Array.isArray(pageData)) {
-        const project = pageData as PortfolioItemType;
+        const project = pageData as PortfolioItemProps;
         jsonLd = {
           "@context": "https://schema.org",
           "@type": "CreativeWork",

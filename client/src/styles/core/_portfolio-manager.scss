@@ -1,149 +1,125 @@
 .portfolio-manager {
   @include themify($themes) {
-    h2 {
-      font-size: clamp(1.75rem, 3vw, 2.5rem);
-      color: themed("text-color");
-      font-weight: $font-weight-bold;
-      margin-bottom: 1.5rem;
-      text-align: center;
+    &__header {
+      margin-bottom: 2rem;
 
-      @include media-breakpoint-up(md) {
-        text-align: left;
-        margin-bottom: 2rem;
+      h1 {
+        color: themed("text-color");
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+        font-weight: $font-weight-bold;
       }
     }
 
-    &__form {
-      background: rgba($white, 0.02);
-      padding: 1.5rem;
-      border-radius: $border-radius;
-      border: 1px solid rgba($default-color, 0.5);
-      width: 100%;
+    &__container {
+      max-width: 1200px;
       margin: 0 auto;
-
-      @include media-breakpoint-up(sm) {
-        padding: 2rem;
-      }
-
-      @include media-breakpoint-up(md) {
-        padding: 2.5rem;
-      }
-
-      @include media-breakpoint-up(lg) {
-        max-width: none;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-
-        .form-group:nth-last-child(3),
-        .form-group:nth-last-child(2),
-        .form-group:nth-last-child(1),
-        .image-uploader,
-        .portfolio-manager__form-button {
-          grid-column: 1 / -1;
-        }
-      }
-
-      .form-group {
-        margin-bottom: 1.5rem;
-
-        @include media-breakpoint-up(md) {
-          margin-bottom: 2rem;
-        }
-
-        label {
-          display: block;
-          margin-bottom: 0.5rem;
-          color: themed("text-color");
-          font-weight: $font-weight-medium;
-          font-size: 1.2rem;
-
-          @include media-breakpoint-up(md) {
-            font-size: 1.35rem;
-            margin-bottom: 0.75rem;
-          }
-        }
-
-        input,
-        select,
-        textarea {
-          width: 100%;
-          padding: 0.75rem;
-          border: 1px solid rgba($border-color, 0.1);
-          border-radius: $border-radius;
-          background: themed("background-color");
-          color: themed("text-color");
-          font-size: 1.1rem;
-          transition: all 0.3s ease;
-
-          @include media-breakpoint-up(md) {
-            padding: 1rem;
-            font-size: 1.3rem;
-          }
-
-          &:focus {
-            border-color: $red;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba($red, 0.1);
-          }
-
-          &::placeholder {
-            color: rgba(themed("text-color"), 0.5);
-          }
-        }
-
-        textarea {
-          min-height: 100px;
-
-          @include media-breakpoint-up(md) {
-            min-height: 120px;
-          }
-        }
-
-        .error {
-          color: $red;
-          font-size: 0.75rem;
-          margin-top: 0.25rem;
-
-          @include media-breakpoint-up(md) {
-            font-size: 0.875rem;
-          }
-        }
-
-        select[multiple] {
-          height: auto;
-          min-height: 150px;
-          padding: 0;
-
-          option {
-            padding: 0.5rem 0.75rem;
-
-            &:checked {
-              background: rgba($red, 0.1);
-              color: $red;
-            }
-
-            &:hover {
-              background: rgba($red, 0.05);
-            }
-          }
-        }
-      }
+      padding: 2rem;
+      background-color: themed("background-color");
+      border-radius: 0.5rem;
+      box-shadow: themed("shadowMd");
     }
 
-    &__form-button {
-      margin-top: 1.5rem;
-      width: 100%;
-      padding: 0.75rem 1.5rem;
-      font-size: clamp(1.2rem, 4vw, 1.5rem);
-      letter-spacing: 1px;
+    &__loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      color: themed("text-color");
+      font-size: 1.25rem;
+    }
 
-      @include media-breakpoint-up(lg) {
-        margin-top: 2rem;
-        width: auto;
-        min-width: 200px;
-        padding: 1rem 2rem;
-        justify-self: center;
+    &__error {
+      color: $red;
+      text-align: center;
+      padding: 2rem;
+      background-color: rgba($red, 0.1);
+      border-radius: 0.5rem;
+      margin: 2rem 0;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      will-change: opacity;
+      transform-origin: center center;
+      isolation: isolate;
+
+      .modal {
+        background: themed("background-color");
+        border-radius: $border-radius;
+        padding: 2rem;
+        width: 90%;
+        max-width: 500px;
+        position: relative;
+        border: 1px solid rgba($default-color, 0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        animation: slideIn 0.3s ease-out;
+
+        h2 {
+          color: themed("text-color");
+          font-size: 1.5rem;
+          text-align: center;
+          margin-bottom: 1.5rem;
+          font-weight: $font-weight-bold;
+        }
+
+        .modal-actions {
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+          margin-top: 2rem;
+
+          button {
+            min-width: 120px;
+            padding: 0.75rem 1.5rem;
+            border-radius: $border-radius;
+            font-weight: $font-weight-medium;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+
+            &.btn-danger {
+              background: $red;
+              color: $white;
+              border: none;
+
+              &:hover {
+                background: darken($red, 10%);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba($red, 0.2);
+              }
+
+              &:active {
+                transform: translateY(0);
+              }
+            }
+
+            &.btn-secondary {
+              background: rgba($default-color, 0.1);
+              color: themed("text-color");
+              border: 1px solid rgba($default-color, 0.2);
+
+              &:hover {
+                background: rgba($default-color, 0.2);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba($default-color, 0.1);
+              }
+
+              &:active {
+                transform: translateY(0);
+              }
+            }
+          }
+        }
       }
     }
 
@@ -183,6 +159,14 @@
         flex-direction: column;
         transform-origin: center center;
         will-change: transform;
+        touch-action: none;
+
+        &.is-dragging {
+          z-index: 1;
+          opacity: 0.8;
+          transform: scale(1.02);
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
 
         &:hover {
           transform: translateY(-5px);
@@ -270,68 +254,12 @@
       }
     }
 
-    .upload-progress {
-      margin: 1.5rem 0;
-      grid-column: 1 / -1;
-
-      .progress-item {
-        background: rgba($white, 0.02);
-        padding: 1rem;
-        border-radius: $border-radius;
-        margin-bottom: 0.75rem;
-        display: grid;
-        grid-template-columns: 2fr 3fr auto;
-        align-items: center;
-        gap: 1rem;
-
-        .filename {
-          color: themed("text-color");
-          font-size: 0.875rem;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-
-        .progress-bar {
-          width: 100%;
-          height: 6px;
-          background: rgba($white, 0.1);
-          border-radius: 3px;
-          overflow: hidden;
-
-          &__fill {
-            height: 100%;
-            background: $red;
-            border-radius: 3px;
-            transition: width 0.3s ease;
-          }
-        }
-
-        .progress-text {
-          color: themed("text-color");
-          font-size: 0.875rem;
-          min-width: 3rem;
-          text-align: right;
-        }
-      }
-    }
-
-    .test-upload-button {
-      margin: 2rem auto;
-      display: block;
-      background: #2196f3; // Drugačija boja da se razlikuje od Create Project dugmeta
-
-      &:hover {
-        background: darken(#2196f3, 10%);
-      }
-    }
-
     &__success-message {
       margin-top: 2rem;
       margin-bottom: 2rem;
 
       .success-banner {
-        position: relative; // Za pozicioniranje close buttona
+        position: relative;
         background: rgba($green, 0.1);
         border: 1px solid $green;
         padding: 1.5rem;
@@ -376,195 +304,23 @@
 
         button {
           margin: 0 auto;
-        }
-      }
-    }
-
-    .tags-select,
-    .tools-select {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-
-      .tag-option,
-      .tool-option {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.9rem;
-        color: themed("text-color");
-        cursor: pointer;
-
-        input[type="checkbox"] {
-          width: auto;
-          margin: 0;
-        }
-
-        &:hover {
-          color: $red;
-        }
-      }
-    }
-
-    .react-select-container {
-      .react-select__control {
-        background: themed("background-color");
-        border-color: rgba($border-color, 0.1);
-
-        &:hover {
-          border-color: $red;
-        }
-
-        &--is-focused {
-          border-color: $red;
-          box-shadow: 0 0 0 1px $red;
-        }
-      }
-
-      .react-select__menu {
-        background: themed("background-color");
-        border: 1px solid rgba($border-color, 0.1);
-      }
-
-      .react-select__option {
-        background: themed("background-color");
-        color: themed("text-color");
-
-        &:hover {
-          background: rgba($red, 0.1);
-        }
-
-        &--is-selected {
-          background: $red;
-          color: $white;
-        }
-      }
-
-      .react-select__multi-value {
-        background: rgba($red, 0.1);
-
-        &__label {
-          color: $red;
-        }
-
-        &__remove:hover {
-          background: $red;
-          color: $white;
-        }
-      }
-
-      .react-select__input-container {
-        caret-color: transparent;
-      }
-
-      input {
-        caret-color: transparent !important;
-      }
-    }
-
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      animation: fadeIn 0.2s ease-out;
-
-      .modal {
-        background: themed("background-color");
-        border-radius: $border-radius;
-        padding: 2rem;
-        width: 90%;
-        max-width: 500px;
-        position: relative;
-        border: 1px solid rgba($default-color, 0.1);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        animation: slideIn 0.3s ease-out;
-
-        h2 {
-          color: themed("text-color");
           font-size: 1.5rem;
-          text-align: center;
-          margin-bottom: 1.5rem;
-          font-weight: $font-weight-bold;
-        }
-
-        .modal-actions {
-          display: flex;
-          gap: 1rem;
-          justify-content: center;
-          margin-top: 2rem;
-
-          button {
-            min-width: 120px;
-            padding: 0.75rem 1.5rem;
-            border-radius: $border-radius;
-            font-weight: $font-weight-medium;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-            cursor: pointer;
-
-            &.btn-danger {
-              background: $red;
-              color: $white;
-              border: none;
-
-              &:hover {
-                background: darken($red, 10%);
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba($red, 0.2);
-              }
-
-              &:active {
-                transform: translateY(0);
-              }
-            }
-
-            &.btn-secondary {
-              background: rgba($default-color, 0.1);
-              color: themed("text-color");
-              border: 1px solid rgba($default-color, 0.2);
-
-              &:hover {
-                background: rgba($default-color, 0.2);
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba($default-color, 0.1);
-              }
-
-              &:active {
-                transform: translateY(0);
-              }
-            }
-          }
         }
       }
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .save-indicator {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: rgba($default-color, 0.9);
+      color: $white;
+      padding: 0.75rem 1.5rem;
+      border-radius: $border-radius;
+      font-size: 0.875rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 0.3s ease-out;
+      z-index: 1000;
     }
   }
 }

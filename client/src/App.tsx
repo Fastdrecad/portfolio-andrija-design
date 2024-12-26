@@ -1,4 +1,3 @@
-import { RootState } from "@/redux/store";
 import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -21,6 +20,9 @@ import Sidebar from "@/components/layout/Sidebar";
 import { HelmetProvider } from "react-helmet-async";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuthCheck } from "./hooks/useAuthCheck";
+import { RouteNameProvider } from "@/context/routeNameContext";
+import { selectIsModalOpen } from "@/redux/modalSlice";
 
 const App: React.FC = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -28,13 +30,13 @@ const App: React.FC = () => {
   // 'useLoading' returns true when loading is ongoing
   const loading = useLoading(true, 2000);
 
-  // Use Redux state to track if Calendly modal is open
-  const isCalendlyOpen = useSelector(
-    (state: RootState) => state.modal.calendly
-  );
+  // Use Redux state to track if modal is open
+  const isModalOpen = useSelector(selectIsModalOpen);
 
   // State to manage the extended loading state (for an additional 1000ms)
   const [isLoadingWithDelay, setIsLoadingWithDelay] = useState(true);
+
+  useAuthCheck();
 
   useEffect(() => {
     let delayTimer: NodeJS.Timeout | null = null;
@@ -55,8 +57,8 @@ const App: React.FC = () => {
   }, [loading]);
 
   useEffect(() => {
-    // Disable scrolling during the entire loading period (including additional delay) or when Calendly modal is open
-    if (isLoadingWithDelay || isCalendlyOpen) {
+    // Disable scrolling during the entire loading period (including additional delay) or when modal is open
+    if (isLoadingWithDelay || isModalOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -65,25 +67,27 @@ const App: React.FC = () => {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isLoadingWithDelay, isCalendlyOpen]);
+  }, [isLoadingWithDelay, isModalOpen]);
 
   return (
     <HelmetProvider>
       <div className={`theme-${darkMode ? "dark" : "light"} app`}>
         <BrowserRouter>
-          <AnimatePresence mode="wait">
-            {loading && <Loader active={loading} />}
-          </AnimatePresence>
-          <NavigateToTop />
-          <VisibilityControl>
-            <Header />
-            <Sidebar />
-          </VisibilityControl>
-          <Router />
-          <VisibilityControl>
-            <Footer />
-          </VisibilityControl>
-          <ScrollToTop />
+          <RouteNameProvider>
+            <AnimatePresence mode="wait">
+              {loading && <Loader active={loading} />}
+            </AnimatePresence>
+            <NavigateToTop />
+            <VisibilityControl>
+              <Header />
+              <Sidebar />
+            </VisibilityControl>
+            <Router />
+            <VisibilityControl>
+              <Footer />
+            </VisibilityControl>
+            <ScrollToTop />
+          </RouteNameProvider>
         </BrowserRouter>
         <ToastContainer
           position="top-right"

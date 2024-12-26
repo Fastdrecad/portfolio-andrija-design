@@ -1,20 +1,9 @@
 import { NavLink } from "react-router-dom";
-
-import { useDispatch } from "react-redux";
-import { setCurrentRoute } from "@/redux/routeSlice";
-
 import useDocumentTitle from "@/hooks/useDocumentTitle";
-
 import SEO from "@/components/common/seo/SEO";
 
 const NotFound = () => {
   useDocumentTitle("Page not found");
-
-  const dispatch = useDispatch();
-
-  const handleNavLinkClick = (url: string) => {
-    dispatch(setCurrentRoute(url));
-  };
 
   return (
     <>
@@ -45,24 +34,11 @@ const NotFound = () => {
           <div>
             <h3>
               You can return to the{" "}
-              <NavLink
-                to="/design-process"
-                onClick={() => handleNavLinkClick("/design-process")}
-              >
-                Design Process Page
-              </NavLink>{" "}
-              or explore my{" "}
-              <NavLink
-                to="/portfolio"
-                onClick={() => handleNavLinkClick("/portfolio")}
-              >
-                Portfolio
-              </NavLink>
+              <NavLink to="/design-process">Design Process Page</NavLink> or
+              explore my <NavLink to="/portfolio">Portfolio</NavLink>
             </h3>
             <div className="button-wrapper">
-              <NavLink to="/" onClick={() => handleNavLinkClick("/")}>
-                Go Back
-              </NavLink>
+              <NavLink to="/">Go Back</NavLink>
             </div>
           </div>
         </div>
@@ -70,4 +46,5 @@ const NotFound = () => {
     </>
   );
 };
+
 export default NotFound;

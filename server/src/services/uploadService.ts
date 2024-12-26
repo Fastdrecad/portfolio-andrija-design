@@ -4,7 +4,6 @@ import { CloudinaryResponse } from "../types/cloudinary.types";
 
 dotenv.config();
 
-// Inicijalizacija Cloudinary konfiguracije
 interface CloudinaryConfig {
   cloud_name: string;
   api_key: string;
@@ -38,7 +37,6 @@ cloudinary.config({
 export const uploadToCloudinary = async (
   buffer: Buffer
 ): Promise<CloudinaryResponse> => {
-  // Provera da li su env varijable postavljene
   if (
     !process.env.CLOUDINARY_CLOUD_NAME ||
     !process.env.CLOUDINARY_API_KEY ||

@@ -1598,5 +1598,63 @@ export const portfolio = [
           "3D render showcasing two color variants of the Mikah chair: red and brown leather upholstery."
       }
     ]
+  },
+  {
+    "id": 29,
+    "projectName": "Riversdale Modern Living",
+    "title": "Interior Design & 3D Visualization",
+    "url": "images.riversdaleInterior1",
+    "category": "Interior Design & 3D Rendering",
+    "client": "Private Residence",
+    "clientTitle": "Lead Interior Designer & 3D Artist",
+    "myRole": "Interior Designer, 3D Modeler, Rendering Artist",
+    "description":
+      "The Riversdale Modern Living project showcases a contemporary open-concept living space that seamlessly blends functionality with aesthetic appeal. The design features a minimalist color palette dominated by whites and natural wood tones, creating a bright and airy atmosphere. The space includes a carefully planned layout incorporating a living area, dining space, and kitchen island, all unified by consistent design elements and materials. Special attention was given to incorporating natural light through large windows, while strategic placement of indoor plants brings life to the space. The project demanded precise 3D modeling and rendering to accurately visualize the interior design concepts, materials, and lighting conditions.",
+    "tags": [
+      "Interior Design",
+      "3D Modeling",
+      "Architectural Visualization",
+      "Residential Design",
+      "Modern Interior",
+      "Open Concept",
+      "Material Design",
+      "Lighting Design"
+    ],
+    "toolsUsed": [
+      "3ds Max",
+      "V-Ray",
+      "Corona Renderer",
+      "Photoshop",
+      "AutoCAD"
+    ],
+    "items": [
+      {
+        "url": "images.riversdaleInterior1",
+        "desc":
+          "Open-concept living area featuring white sectional sofa, modern dining set, and floor-to-ceiling windows with abundant natural light.",
+        "alt":
+          "Modern open-concept living room with white furniture and natural lighting"
+      },
+      {
+        "url": "images.riversdaleInterior2",
+        "desc":
+          "Alternative view highlighting the sectional sofa, marble coffee tables, and contemporary artwork, showcasing the cohesive design aesthetic.",
+        "alt":
+          "Contemporary living room with sectional sofa and marble coffee tables"
+      },
+      {
+        "url": "images.riversdaleInterior3",
+        "desc":
+          "Kitchen island and bar seating area, demonstrating the seamless integration of functional spaces with modern design elements.",
+        "alt":
+          "Modern kitchen island with bar seating and contemporary lighting"
+      },
+      {
+        "url": "images.riversdaleInterior4",
+        "desc":
+          "Detailed view of the dining area, featuring black dining chairs and custom lighting fixtures.",
+        "alt": "Modern dining area with black chairs and designer lighting"
+      }
+    ]
   }
 ];

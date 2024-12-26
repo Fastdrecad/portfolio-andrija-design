@@ -51,9 +51,18 @@ const RedLine: React.FC<RedLineProps> = ({
             strokeWidth={strokeWidth}
             strokeMiterlimit={10}
             strokeLinecap="round"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: isVisible ? 1 : 0 }}
-            transition={{ duration: 1, ease: "easeInOut", delay: delay }}
+            initial={{
+              pathLength: 0,
+              opacity: 0
+            }}
+            animate={{
+              pathLength: isVisible ? 1 : 0,
+              opacity: isVisible ? 1 : 0
+            }}
+            transition={{
+              pathLength: { duration: 1, ease: "easeInOut", delay },
+              opacity: { duration: 0.1, delay }
+            }}
           />
         </motion.svg>
       </div>

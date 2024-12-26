@@ -1,38 +1,58 @@
 .edit-portfolio {
   @include themify($themes) {
+    &__container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0;
+
+      @include media-breakpoint-up(md) {
+        padding: 2rem;
+      }
+    }
+
     &__header {
+      margin-bottom: 2rem;
+
+      h1 {
+        color: themed("text-color");
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+        font-weight: $font-weight-bold;
+      }
+    }
+
+    &__loading,
+    &__error {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-      margin-bottom: 2rem;
+      justify-content: center;
+      min-height: 200px;
+      color: themed("text-color");
+      font-size: 1.25rem;
+    }
 
-      .back-button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        padding: 0.75rem 1.5rem;
-        font-size: clamp(1rem, 2.5vw, 1.5rem);
-      }
+    &__error {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      text-align: center;
+      padding: 2rem;
 
       h2 {
-        margin: 0;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #dc3545;
+      }
+
+      p {
+        color: #6c757d;
       }
     }
 
-    .portfolio-manager__form {
-      background: themed("backgroundSecondary");
-      border-radius: 8px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      box-shadow: themed("shadowSm");
-    }
-
-    .image-gallery {
-      background: themed("backgroundSecondary");
-      border-radius: 8px;
-      grid-column: 1 / -1;
+    .portfolio-form {
+      background: themed("background-color");
+      border-radius: $border-radius;
       box-shadow: themed("shadowSm");
     }
   }

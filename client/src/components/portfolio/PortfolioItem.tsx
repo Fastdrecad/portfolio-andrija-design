@@ -1,94 +1,85 @@
+import { motion } from "framer-motion";
 import React, { useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-
-import { RootState } from "@/redux/store";
-import { closeModal, openModal } from "@/redux/modalSlice";
-
+import { useNavigate, useLocation } from "react-router-dom";
 import Image from "@/components/common/Image";
-import Modal from "@/components/common/Modal/Modal";
-
 import { PortfolioItemProps } from "@/types/portfolioTypes";
-// import { generateSlug } from "@/utils/slugUtils";
+import { useModal } from "@/hooks/useModal";
 
-const PortfolioItem: React.FC<PortfolioItemProps> = ({
-  id,
+interface ExtendedPortfolioItemProps extends PortfolioItemProps {
+  fromLatestWorks?: boolean;
+}
+
+const PortfolioItem: React.FC<ExtendedPortfolioItemProps> = ({
+  _id,
   title,
   projectName,
+  slug,
   url,
   className,
   newlyLoadedStartIndex = 0,
   index,
   alt,
-  isModal = false
+  fromLatestWorks
 }) => {
   const navigate = useNavigate();
-
-  const dispatch = useDispatch();
-  const isModalOpen = useSelector(
-    (state: RootState) => state.modal.project === id
-  );
-
-  // console.log(isModalOpen);
-
+  const location = useLocation();
+  const { openModal } = useModal();
   const portfolioItemRef = useRef<HTMLLIElement>(null);
-  const isNewItem = index >= newlyLoadedStartIndex;
 
-  const handleOpenModal = () => {
-    dispatch(openModal({ modalType: "project", projectId: id }));
+  // Early return after hooks
+  if (!_id || !slug) {
+    return null;
+  }
 
-    if (isModal) {
-      navigate(`/`);
-    } else {
-      navigate(`/portfolio`);
-    }
+  const isNewItem =
+    typeof index === "number" && index >= (newlyLoadedStartIndex || 0);
+
+  const getTransitionDelay = () => {
+    if (typeof index !== "number") return "0ms";
+    return isNewItem
+      ? `${(index - (newlyLoadedStartIndex || 0)) * 150 + 200}ms`
+      : `${index * 100 + 100}ms`;
   };
 
-  const handleCloseModal = () => {
-    dispatch(closeModal("project"));
+  const handleClick = () => {
+    // Get the current selected tab from location state
+    const currentTab = location.state?.selectedTab || "all";
 
-    // Navigate based on context (if from LatestWorks or Portfolio)
-    if (isModal) {
-      // Stay on the current page if the modal was opened from LatestWorks
-      navigate("/");
-    } else {
-      // Navigate back to portfolio if opened from the portfolio page
-      navigate("/portfolio");
+    if (fromLatestWorks) {
+      navigate("/portfolio", {
+        state: {
+          isModalNavigation: true,
+          selectedTab: currentTab
+        }
+      });
     }
+
+    openModal("project", { projectId: _id });
+
+    navigate(`/portfolio/${slug}`, {
+      state: {
+        isModalNavigation: true,
+        selectedTab: currentTab
+      }
+    });
   };
 
   return (
-    <>
-      <motion.li
-        id={`portfolioboxxid-${id}`}
-        className={`portfolio ${className}  "fadeInnn" }`}
-        style={{
-          transitionDelay: isNewItem
-            ? `${(index - newlyLoadedStartIndex) * 150 + 200}ms`
-            : `${index * 100 + 100}ms`
-        }}
-        ref={portfolioItemRef}
-        onClick={handleOpenModal}
-      >
-        <Image src={url} loading="lazy" alt={alt || "Portfolio item"} />
-        <div className="portfolio-item__overlay">
-          <h4 className="portfolio-item__project-name">{projectName}</h4>
-          <p className="portfolio-item__title">{title}</p>
-        </div>
-      </motion.li>
-
-      <AnimatePresence initial={false} onExitComplete={() => null} mode="wait">
-        {isModalOpen && (
-          <Modal
-            modalType="project"
-            onClose={handleCloseModal}
-            id={id}
-            key={"modal"}
-          />
-        )}
-      </AnimatePresence>
-    </>
+    <motion.li
+      id={`portfolioboxxid-${_id}`}
+      className={`portfolio ${className || ""} fadeInnn`}
+      style={{
+        transitionDelay: getTransitionDelay()
+      }}
+      ref={portfolioItemRef}
+      onClick={handleClick}
+    >
+      <Image src={url} loading="lazy" alt={alt || "Portfolio item"} />
+      <div className="portfolio-item__overlay">
+        <h4 className="portfolio-item__project-name">{projectName}</h4>
+        <p className="portfolio-item__title">{title}</p>
+      </div>
+    </motion.li>
   );
 };
 

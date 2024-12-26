@@ -75,10 +75,7 @@ export const optimizeImage = async (
 
   const optimizationOptions = {
     ...defaultOptions,
-    ...options,
-    onProgress: (progress: number) => {
-      console.log(`Optimization progress: ${progress}%`);
-    }
+    ...options
   };
 
   try {

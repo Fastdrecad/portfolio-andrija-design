@@ -20,9 +20,19 @@ const portfolioSchema = new mongoose.Schema(
       type: String,
       required: false
     },
+    order: {
+      type: Number,
+      default: 0,
+      index: true
+    },
     alt: {
       type: String,
       default: ""
+    },
+    slug: {
+      type: String,
+      required: true,
+      unique: true
     },
     category: {
       type: [String],

@@ -1,24 +1,12 @@
 import { useEffect, useState } from "react";
-
-import { useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Confetti from "react-confetti";
-
-import { setCurrentRoute } from "@/redux/routeSlice";
-
 import useDocumentTitle from "@/hooks/useDocumentTitle";
-
 import SEO from "@/components/common/seo/SEO";
 
 const Success: React.FC = () => {
-  useDocumentTitle("Congratulation!");
-
+  useDocumentTitle("Congratulations!");
   const [pieces, setPieces] = useState<number>(200);
-  const dispatch = useDispatch();
-
-  const handleNavLinkClick = (url: string) => {
-    dispatch(setCurrentRoute(url));
-  };
 
   const stopConfetti = () => {
     setTimeout(() => {
@@ -45,13 +33,9 @@ const Success: React.FC = () => {
         <div className="success__message">
           <h1 className="success__title">Thank you!</h1>
           <p>Your form submission has been received.</p>
-          <NavLink
-            onClick={() => handleNavLinkClick("/")}
-            to="/"
-            className="underline"
-          >
+          <Link to="/" className="underline">
             <span>&larr;</span> Back to home
-          </NavLink>
+          </Link>
         </div>
 
         <Confetti gravity={0.3} numberOfPieces={pieces} />

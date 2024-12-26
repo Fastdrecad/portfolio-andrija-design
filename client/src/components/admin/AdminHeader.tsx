@@ -1,21 +1,31 @@
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Button from "../common/Button";
 
 const AdminHeader = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // TODO: Implement logout logic
     localStorage.removeItem("token");
     navigate("/admin/login");
+  };
+
+  const handleNavLinkClick = (path: string) => {
+    navigate(path);
   };
 
   return (
     <header className="admin-header">
       <div className="admin-header__container">
+        <NavLink
+          onClick={() => handleNavLinkClick("/")}
+          to="/"
+          className="underline"
+        >
+          <span>&larr;</span> Back to home
+        </NavLink>
         <h1>Admin Dashboard</h1>
         <Button variant="secondary" onClick={handleLogout}>
-          LOGOUT
+          Logout
         </Button>
       </div>
     </header>

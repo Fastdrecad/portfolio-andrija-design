@@ -1,0 +1,21 @@
+.portfolio-page {
+  &__error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    text-align: center;
+    padding: 2rem;
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #dc3545;
+    }
+
+    p {
+      color: #6c757d;
+    }
+  }
+}

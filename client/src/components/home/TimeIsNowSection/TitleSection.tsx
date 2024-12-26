@@ -7,7 +7,7 @@ import RedLine from "@/components/common/RedLine";
 // Title with RedLine animation
 const TitleSection: React.FC = () => {
   const titleRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(titleRef);
+  const isInView = useInView(titleRef, { once: true });
 
   return (
     <div className="time-is-now__title-wrapper" ref={titleRef}>

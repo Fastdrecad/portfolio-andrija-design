@@ -1,16 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
-import { RootState } from "@/redux/store";
 import { MenuContext } from "@/context/navContext";
+import { selectModalType, selectIsModalOpen } from "@/redux/modalSlice";
 
 import { useScrollHandler } from "@/hooks/useNavigationScroll";
+import { useDimension } from "@/hooks/useDimensions";
 
 import DesktopHeader from "@/components/layout/Header/DesktopHeader";
 import MobileHeader from "@/components/layout/Header/MobileHeader";
-import { useLocation } from "react-router-dom";
-import { useDimension } from "@/hooks/useDimensions";
 
 const Header: React.FC = () => {
   const { toggle, isChecked } = useContext(MenuContext);
@@ -18,15 +17,13 @@ const Header: React.FC = () => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
 
-  const { calendly, youtube, project } = useSelector(
-    (state: RootState) => state.modal
-  );
-  const isAnyModalOpen = calendly || youtube || project !== null;
+  const modalType = useSelector(selectModalType);
+  const isModalOpen = useSelector(selectIsModalOpen);
+  const isAnyModalOpen = isModalOpen && modalType !== null;
 
-  const navClass = useScrollHandler(); // Get scroll state from useScrollHandler hook
-  const { width } = useDimension(); // Get viewport width from useDimension hook
+  const navClass = useScrollHandler();
+  const { width } = useDimension();
 
-  // Determine visibility of headers
   const showDesktopHeader = isHomePage && width > 1200;
 
   const [activeHeader, setActiveHeader] = useState<"desktop" | "mobile">(

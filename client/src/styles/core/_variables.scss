@@ -49,8 +49,8 @@ $black: #303236;
 $zinc-950: #09090b;
 
 $backgroundBlack: #1e1e1e;
-
-$border-color: #0048ff;
+$backgroundPage: #232323;
+$border-color: #000000;
 $border-radius: 5px;
 
 $gradient: linear-gradient(to right, #464646, #3b3b3b, #2e2e2e, #000000);
@@ -152,6 +152,8 @@ $box-shadow-primary: 0 1px 2px #00000033;
 $box-shadow-secondary: 0 0 2px #00000033;
 $box-shadow-navigation: 0 1px 1px 0 rgba(65, 69, 73, 0.3),
   0 1px 3px 1px rgba(65, 69, 73, 0.15);
+$box-shadow-navigation-bottom: 0 -1px 1px 0 rgba(65, 69, 73, 0.3),
+  0 -1px 3px 1px rgba(65, 69, 73, 0.15);
 $border-radius-default: 0px;
 $border-radius-primary: 5px;
 $border-radius-circle: 50px;
@@ -215,3 +217,35 @@ $ob-col-dark: $white;
 $ob-hv-col-dark: rgb(237, 32, 36);
 $ob-bshv-col-dark: rgba(255, 255, 255, 0.1);
 $ob-active-col-dark: #d40000;
+
+// Theme CSS Variables
+:root {
+  // Light theme (default)
+  --background-color: #{$white};
+  --text-color: #{$black};
+  --background-page: #{$backgroundPage};
+  --text-color-soft: #585858;
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --header-footer-background: #f6f6f6ba;
+  --header-footer-background-fixed: #f6f6f6;
+  --toggle-background: transparent;
+  --logo-color: #{$theme-black};
+
+  // Transitions
+  --theme-transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Dark theme
+[data-theme="dark"] {
+  --background-color: #{$backgroundBlack};
+  --background-page: #{$white};
+  --text-color: #{$white};
+  --text-color-soft: rgb(139, 138, 138);
+  --primary-color: #{$red};
+  --secondary-color: #{$gray};
+  --header-footer-background: #161616f4;
+  --header-footer-background-fixed: #161616;
+  --toggle-background: #14dc4b;
+  --logo-color: #{$theme-red};
+}

@@ -1,60 +1,21 @@
-import {
-  CSSProperties,
-  forwardRef,
-  MutableRefObject,
-  useEffect,
-  useState
-} from "react";
-
+import { CSSProperties, forwardRef } from "react";
 import Image from "@/components/common/Image";
-
-import { portfolio } from "@/data";
+import { useGetProjectByIdQuery } from "@/redux/services/portfolioApi";
 
 interface GalleryItemProps {
-  projectId: number;
+  projectId: string;
   style?: CSSProperties;
+  effectiveNavbarHeight: number;
 }
 
 const GalleryItem = forwardRef<HTMLDivElement, GalleryItemProps>(
   (props, ref) => {
-    const { projectId, style } = props;
-    const [navClass, setNavClass] = useState("default");
-    const [lastScrollY, setLastScrollY] = useState(0);
+    const { projectId, style, effectiveNavbarHeight } = props;
+    const { data: project } = useGetProjectByIdQuery(projectId);
 
-    useEffect(() => {
-      const handleScroll = () => {
-        const modal = (ref as MutableRefObject<HTMLDivElement | null>).current;
-
-        if (modal) {
-          const currentScrollY = modal.scrollTop;
-          const isScrollingDown = currentScrollY > lastScrollY;
-
-          if (isScrollingDown) {
-            if (navClass !== "up") {
-              setNavClass("up"); // Immediately hide navbar when starting to scroll down
-            }
-          } else {
-            if (currentScrollY <= 100) {
-              if (navClass !== "default") {
-                setNavClass("default"); // Revert to "top" when scrolled back to the very top
-              }
-            } else if (navClass !== "scrolled-up") {
-              setNavClass("scrolled-up"); // Show "scrolled-up" when scrolling up but not yet at the top
-            }
-          }
-          setLastScrollY(currentScrollY); // Update last scroll position for next comparison
-        }
-      };
-
-      const modal = (ref as MutableRefObject<HTMLDivElement | null>).current;
-      modal?.addEventListener("scroll", handleScroll);
-
-      return () => {
-        modal?.removeEventListener("scroll", handleScroll);
-      };
-    }, [lastScrollY, navClass, ref]);
-
-    const project = portfolio.find((p) => p.id === projectId);
+    const formattedUrl = project?.clientUrl
+      ? new URL(project?.clientUrl).host
+      : "";
 
     if (!project) {
       return <div>Project not found</div>;
@@ -67,12 +28,16 @@ const GalleryItem = forwardRef<HTMLDivElement, GalleryItemProps>(
             <div className="gallery-item__details">
               <div className="gallery-item__description">
                 <div
-                  className={`gallery-item__description-content ${navClass}`}
+                  className="gallery-item__description-content"
+                  style={{
+                    top: `${effectiveNavbarHeight + 20}px`,
+                    transition: "top 0.3s ease"
+                  }}
                 >
                   <div className="gallery-item__description-center">
                     <div className="gallery-item__client">
                       <span>My Role: </span>
-                      {project.myRole}
+                      {project.myRole.join(", ")}
                     </div>
                     <div className="gallery-item__outcome">
                       <span>Project Description: </span>
@@ -91,15 +56,24 @@ const GalleryItem = forwardRef<HTMLDivElement, GalleryItemProps>(
                     <div className="gallery-item__skills">
                       <p>Tools: </p>
                       <div className="gallery-item__skills-tags-wrapper">
-                        {project.toolsUsed?.map((tag, i) => (
+                        {project.toolsUsed?.map((tool, i) => (
                           <div key={i} className="gallery-item__skills-tag">
-                            {tag}
+                            {tool}
                           </div>
                         ))}
                       </div>
                     </div>
+                    <div className="gallery-item__client-link">
+                      <a
+                        className="underline"
+                        href={project.clientUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {formattedUrl}
+                      </a>
+                    </div>
                   </div>
-                  <hr />
                 </div>
               </div>
               <div className="gallery-item__images">

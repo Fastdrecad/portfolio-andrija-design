@@ -1,0 +1,37 @@
+.react-select {
+  &-container {
+    width: 100%;
+  }
+
+  &__control {
+    font-size: 1.3rem !important;
+  }
+
+  &__menu {
+    font-size: 1.3rem !important;
+  }
+
+  &__option {
+    font-size: 1.3rem !important;
+  }
+
+  &__single-value {
+    font-size: 1.3rem !important;
+  }
+
+  &__placeholder {
+    font-size: 1.3rem !important;
+  }
+
+  &__input {
+    font-size: 1.3rem !important;
+  }
+
+  &__multi-value {
+    font-size: 1.3rem !important;
+
+    &__label {
+      font-size: 1.3rem !important;
+    }
+  }
+}

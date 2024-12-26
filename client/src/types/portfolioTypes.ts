@@ -20,8 +20,9 @@ export interface Image {
   alt: string;
 }
 
-export interface PortfolioItem {
+export interface PortfolioItemProps {
   _id?: string;
+  slug?: string;
   projectName: string;
   title: string;
   url: string;
@@ -34,6 +35,13 @@ export interface PortfolioItem {
   tags: string[];
   toolsUsed: string[];
   items: Image[];
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: number;
+  index?: number;
+  className?: string;
+  newlyLoadedStartIndex?: number;
+  isModal?: boolean;
 }
 
 export interface ImageFile extends File {
