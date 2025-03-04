@@ -45,7 +45,7 @@ const useDocumentTitle = (defaultTitle: string) => {
     return () => {
       document.title = defaultTitle;
     };
-  }, [location, defaultTitle]);
+  }, [location, defaultTitle, slug]);
 };
 
 export default useDocumentTitle;

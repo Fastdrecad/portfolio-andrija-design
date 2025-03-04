@@ -4,10 +4,9 @@ export const inputs = [
     id: 1,
     name: "firstName",
     type: "text",
-    placeholder: "First Name",
-    errorMessage:
-      "First Name should be between 3-15 characters and shouldn't include any special character.",
-    label: "First Name",
+    placeholder: "John *",
+    errorMessage: "Please enter a valid first name",
+    label: "What's your first name?",
     pattern: "^[A-Za-z]{3,15}$",
     required: true
   },
@@ -15,10 +14,9 @@ export const inputs = [
     id: 2,
     name: "lastName",
     type: "text",
-    placeholder: "Last Name",
-    errorMessage:
-      "Last Name should be between 3-15 characters and shouldn't include any special character.",
-    label: "Last Name",
+    placeholder: "Doe *",
+    errorMessage: "Please enter a valid last name",
+    label: "What's your last name?",
     pattern: "^[A-Za-z]{3,15}$",
     required: true
   },
@@ -26,21 +24,41 @@ export const inputs = [
     id: 3,
     name: "email",
     type: "email",
-    placeholder: "Email",
-    errorMessage: "Please input a valid email.",
-    label: "Email",
+    placeholder: "john@doe.com *",
+    errorMessage: "Please enter a valid email address",
+    label: "What's your email?",
     pattern: "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
     required: true
   },
   {
     id: 4,
+    name: "organization",
+    type: "text",
+    placeholder: "John & Doe ®",
+    errorMessage: "",
+    label: "What's the name of your organization?",
+    pattern: "^[A-Za-z]{3,15}$",
+    required: false
+  },
+  {
+    id: 5,
+    name: "services",
+    type: "text",
+    placeholder: "Cabinetry, Product Design, CAD, Rendering...",
+    errorMessage: "Please specify the services you're looking for.",
+    label: "What services are you looking for?",
+    pattern: "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+    required: false
+  },
+  {
+    id: 6,
     name: "message",
     type: "textarea",
-    placeholder: "Message",
-    errorMessage: "Message must be between 10 and 300 characters.",
-    label: "Message",
+    placeholder: "Hello Andrija, can you help me with...",
+    errorMessage: "Please enter a text between 3 and 3000 characters",
+    label: "Your message",
     minLength: 10,
-    maxLength: 300,
+    maxLength: 3000,
     required: true
   }
 ];

@@ -82,7 +82,11 @@ const FormInput = forwardRef<
     return (
       <div className={classNames("form-input__row", className)}>
         {label && (
-          <label htmlFor={id.toString()} className="form-input__label">
+          <label
+            htmlFor={id.toString()}
+            className="form-input__label"
+            aria-required={required}
+          >
             {label}
           </label>
         )}
