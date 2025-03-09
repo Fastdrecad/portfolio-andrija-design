@@ -83,7 +83,7 @@ const allowedOrigins =
     : ["http://localhost:5173", "http://localhost:3200"];
 
 const corsOptions = {
-  credentials: true,
+  // credentials: true,
   origin: function (
     origin: string | undefined,
     callback: (err: Error | null, allow?: boolean) => void

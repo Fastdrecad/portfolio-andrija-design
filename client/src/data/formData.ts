@@ -35,9 +35,9 @@ export const inputs = [
     name: "organization",
     type: "text",
     placeholder: "John & Doe ®",
-    errorMessage: "",
+    errorMessage: "Please tell us your organization",
     label: "What's the name of your organization?",
-    pattern: "^[A-Za-z]{3,15}$",
+    // pattern: "^[A-Za-z]{3,15}$",
     required: false
   },
   {
@@ -47,7 +47,7 @@ export const inputs = [
     placeholder: "Cabinetry, Product Design, CAD, Rendering...",
     errorMessage: "Please specify the services you're looking for.",
     label: "What services are you looking for?",
-    pattern: "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+    // pattern: "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
     required: false
   },
   {

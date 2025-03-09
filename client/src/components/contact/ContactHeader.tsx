@@ -32,11 +32,27 @@ const ContactHeader: React.FC = () => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
+            color: "inherit",
             marginBottom: "40px"
           }}
+          className="contact-header__title-paragraph"
         >
-          <span style={{ display: "block", fontSize: "4rem", lineHeight: 1 }}>
-            <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+          <span
+            style={{
+              display: "block",
+              fontSize: "4rem",
+              color: "inherit",
+              lineHeight: 1
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                gap: "20px",
+                alignItems: "center",
+                color: "inherit"
+              }}
+            >
               <div
                 style={{
                   width: "50px",
@@ -45,6 +61,7 @@ const ContactHeader: React.FC = () => {
                   flexGrow: 0,
                   alignSelf: "center",
                   borderRadius: "50%",
+                  color: "inherit",
                   overflow: "hidden"
                 }}
               >
@@ -53,7 +70,14 @@ const ContactHeader: React.FC = () => {
               Let's start a
             </div>
           </span>
-          <span style={{ fontSize: "4rem", lineHeight: 1, textAlign: "start" }}>
+          <span
+            style={{
+              fontSize: "4rem",
+              lineHeight: 1,
+              textAlign: "start",
+              color: "inherit"
+            }}
+          >
             project together
           </span>
         </div>
